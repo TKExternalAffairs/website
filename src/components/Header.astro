@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import background from "../assets/header_background.webp";
+import HeaderItem from "./HeaderItem.astro";
+---
+
+<header class="bg-black w-full h-25 fixed">
+    <Image
+        src={background}
+        alt="ヘッダの背景画像"
+        fetchpriority="high"
+        loading="eager"
+        class="absolute w-full h-full -z-10"
+    />
+    <div class="flex flex-row">
+        <a href="/" class="w-30 h-full block z-0">
+            <div class="flex flex-col text-white">
+                <p>筑駒文化祭</p>
+                <p>高三特別班</p>
+            </div>
+        </a>
+        <nav>
+            <ul class="flex flex-row gap-x-2 items-center!">
+                <HeaderItem link="/" title="各班紹介" />
+                <HeaderItem link="/" title="ご協賛について" />
+                <HeaderItem
+                    link="https://tsukukoma.bunkasai.info"
+                    title="公式ホームページ"
+                />
+            </ul>
+        </nav>
+    </div>
+</header>
