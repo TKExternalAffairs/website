@@ -1,12 +1,12 @@
 ---
 interface Props {
-    link: string;
-    title: string;
+  link: string;
+  title: string;
 }
 
 const { link, title } = Astro.props;
 ---
 
 <li>
-    <a href={link} class="text-white text-2xl">{title}</a>
+  <a href={link} class="text-2xl text-white">{title}</a>
 </li>

@@ -5,75 +5,74 @@ import "../styles/global.css";
 
 <!doctype html>
 <html lang="jp">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-		<script>
-			declare const Typekit: {
-				load(config: unknown): void;
-			};
-			(function (d) {
-				var config = {
-						kitId: "hxo7nit",
-						scriptTimeout: 3000,
-						async: true,
-					},
-					h = d.documentElement,
-					t = setTimeout(function () {
-						h.className =
-							h.className.replace(/\bwf-loading\b/g, "") +
-							" wf-inactive";
-					}, config.scriptTimeout),
-					tk = d.createElement("script"),
-					s = d.getElementsByTagName("script")[0];
-				h.className += " wf-loading";
-				tk.src = "https://use.typekit.net/" + config.kitId + ".js";
-				tk.async = true;
-				tk.onload = function () {
-					clearTimeout(t);
-					try {
-						Typekit.load(config);
-					} catch (e) {}
-				};
-				s.parentNode?.insertBefore(tk, s);
-			})(document);
-		</script>
-	</head>
-	<body>
-		<Header />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <script>
+      declare const Typekit: {
+        load(config: unknown): void;
+      };
+      (function (d) {
+        var config = {
+            kitId: "hxo7nit",
+            scriptTimeout: 3000,
+            async: true,
+          },
+          h = d.documentElement,
+          t = setTimeout(function () {
+            h.className =
+              h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+          }, config.scriptTimeout),
+          tk = d.createElement("script"),
+          s = d.getElementsByTagName("script")[0];
+        h.className += " wf-loading";
+        tk.src = "https://use.typekit.net/" + config.kitId + ".js";
+        tk.async = true;
+        tk.onload = function () {
+          clearTimeout(t);
+          try {
+            Typekit.load(config);
+          } catch (e) {}
+        };
+        s.parentNode?.insertBefore(tk, s);
+      })(document);
+    </script>
+  </head>
+  <body>
+    <Header />
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-		background-color: var(--background-primary);
-		font-family: "ah-hakushu-addressing-font", sans-serif;
-		font-weight: 600;
-		font-style: normal;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-primary);
+    font-family: "ah-hakushu-addressing-font", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
 </style>
 
 <script is:inline>
-	const theme = (() => {
-		const localStorageTheme = localStorage?.getItem("theme") ?? "";
-		if (["dark", "light"].includes(localStorageTheme)) {
-			return localStorageTheme;
-		}
-		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			return "dark";
-		}
-		return "light";
-	})();
+  const theme = (() => {
+    const localStorageTheme = localStorage?.getItem("theme") ?? "";
+    if (["dark", "light"].includes(localStorageTheme)) {
+      return localStorageTheme;
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
 
-	document.documentElement.setAttribute("data-theme", "dark"); // TODO: トグルボタン創る
+  document.documentElement.setAttribute("data-theme", "dark"); // TODO: トグルボタン創る
 
-	window.localStorage.setItem("theme", theme);
+  window.localStorage.setItem("theme", theme);
 </script>

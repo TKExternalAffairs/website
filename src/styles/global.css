@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
-:root{
-    --light-background-primary:#FFFFFF;
-    --light-background-secondary:#EEEEEE;
-    --light-primary:#000000;
-    --light-secondary:#111111;
+:root {
+  --light-background-primary: #ffffff;
+  --light-background-secondary: #eeeeee;
+  --light-primary: #000000;
+  --light-secondary: #111111;
 
-    --dark-background-primary:#000000;
-    --dark-background-secondary:#111111;
-    --dark-primary:#FFFFFF;
-    --dark-secondary:#EEEEEE;
+  --dark-background-primary: #000000;
+  --dark-background-secondary: #111111;
+  --dark-primary: #ffffff;
+  --dark-secondary: #eeeeee;
 }
 
-:root[data-theme="light"]{
-    --primary:var(--light-primary);
-    --secondary:var(--light-secondary);
-    --background-primary:var(--light-background-primary);
-    --background-secondary:var(--light-background-secondary);
+:root[data-theme="light"] {
+  --primary: var(--light-primary);
+  --secondary: var(--light-secondary);
+  --background-primary: var(--light-background-primary);
+  --background-secondary: var(--light-background-secondary);
 }
 
-:root[data-theme="dark"]{
-    --primary:var(--dark-primary);
-    --secondary:var(--dark-secondary);
-    --background-primary:var(--dark-background-primary);
-    --background-secondary:var(--dark-background-secondary);
+:root[data-theme="dark"] {
+  --primary: var(--dark-primary);
+  --secondary: var(--dark-secondary);
+  --background-primary: var(--dark-background-primary);
+  --background-secondary: var(--dark-background-secondary);
 }
