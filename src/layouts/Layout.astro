@@ -12,6 +12,9 @@ import "../styles/global.css";
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 		<script>
+			declare const Typekit: {
+				load(config: unknown): void;
+			};
 			(function (d) {
 				var config = {
 						kitId: "hxo7nit",
@@ -25,22 +28,17 @@ import "../styles/global.css";
 							" wf-inactive";
 					}, config.scriptTimeout),
 					tk = d.createElement("script"),
-					f = false,
-					s = d.getElementsByTagName("script")[0],
-					a;
+					s = d.getElementsByTagName("script")[0];
 				h.className += " wf-loading";
 				tk.src = "https://use.typekit.net/" + config.kitId + ".js";
 				tk.async = true;
-				tk.onload = tk.onreadystatechange = function () {
-					a = this.readyState;
-					if (f || (a && a != "complete" && a != "loaded")) return;
-					f = true;
+				tk.onload = function () {
 					clearTimeout(t);
 					try {
 						Typekit.load(config);
 					} catch (e) {}
 				};
-				s.parentNode.insertBefore(tk, s);
+				s.parentNode?.insertBefore(tk, s);
 			})(document);
 		</script>
 	</head>
