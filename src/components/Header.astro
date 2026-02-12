@@ -1,33 +1,95 @@
 ---
 import { Image } from "astro:assets";
-import background from "../assets/header_background.webp";
+import backgroundImage from "../assets/header_background.webp";
+import humburgerImage from "../assets/hamburger.svg";
 import HeaderItem from "./HeaderItem.astro";
+import HumburgerMenu from "./HumburgerMenu.astro";
 ---
 
-<header class="bg-black w-full h-25 fixed">
+<header class="container">
     <Image
-        src={background}
+        src={backgroundImage}
         alt="ヘッダの背景画像"
         fetchpriority="high"
         loading="eager"
-        class="absolute w-full h-full -z-10"
+        class="background"
     />
-    <div class="flex flex-row">
-        <a href="/" class="w-30 h-full block z-0">
+    <div class="inner">
+        <a href="/" class="logo-wrapper">
             <div class="flex flex-col text-white">
                 <p>筑駒文化祭</p>
                 <p>高三特別班</p>
             </div>
         </a>
         <nav>
-            <ul class="flex flex-row gap-x-2 items-center!">
+            <ul class="item-wrapper">
                 <HeaderItem link="/" title="各班紹介" />
                 <HeaderItem link="/" title="ご協賛について" />
                 <HeaderItem
                     link="https://tsukukoma.bunkasai.info"
                     title="公式ホームページ"
                 />
+                <button type="button" id="hamburger-button">
+                    <Image
+                        src={humburgerImage}
+                        alt="ハンバーガーメニュー"
+                        fetchpriority="high"
+                        loading="eager"
+                    />
+                </button>
             </ul>
+
+            <HumburgerMenu />
         </nav>
     </div>
 </header>
+
+<style>
+    .container {
+        background-color: black;
+        width: 100%;
+        height: calc(var(--spacing) * 25);
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -10;
+    }
+
+    .item-wrapper {
+        display: flex;
+        flex-direction: row;
+        column-gap: calc(var(--spacing) * 2);
+        align-items: center;
+    }
+
+    .logo-wrapper {
+        width: calc(var(--spacing) * 30);
+        height: 100%;
+        display: block;
+        z-index: 0;
+    }
+
+    #hamburger-button {
+        cursor: pointer;
+    }
+</style>
+
+<script is:inline>
+    const btn = document.getElementById("humburger-button");
+    btn.onclick(() => {
+        alert("hello");
+    });
+</script>
