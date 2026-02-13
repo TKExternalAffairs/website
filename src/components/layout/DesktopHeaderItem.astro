@@ -1,0 +1,22 @@
+---
+interface Props {
+  link: string;
+  title: string;
+  outlined?: boolean;
+}
+
+const { link, title, outlined = false } = Astro.props;
+---
+
+<li>
+  <a
+    href={link}
+    class:list={[
+      "text-2xl",
+      "text-white",
+      "p-2",
+      "font-hakushu",
+      outlined && "outline",
+    ]}>{title}</a
+  >
+</li>
