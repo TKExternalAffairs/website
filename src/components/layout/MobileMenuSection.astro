@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<li>
+  <p class="font-hakushu text-2xl text-white">{title}</p>
+  {/* TODO: pよりh3とかの方がよい? */}
+  <ul>
+    <slot />
+  </ul>
+</li>
