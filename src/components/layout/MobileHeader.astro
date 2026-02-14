@@ -5,38 +5,37 @@ import backgroundImage from "../../assets/header_background.webp";
 import HomeLogo from "./HomeLogo.astro";
 import MobileMenuSection from "./MobileMenuSection.astro";
 import MobileMenuItem from "./MobileMenuItem.astro";
+import { getImage } from "astro:assets";
+
+const image = await getImage({ src: backgroundImage });
 ---
 
-<header class="relative lg:hidden">
-  <Image
-    src={backgroundImage}
-    alt="ヘッダの背景画像"
-    fetchpriority="high"
-    loading="eager"
-    class="absolute h-full w-full"
-  />
-  <div class="flex justify-between">
-    <HomeLogo />
-    <button
-      type="button"
-      class="z-2"
-      id="hamburger-button"
-      aria-expanded="false"
-      aria-controls="mobile-global-menu"
-    >
-      <Image
-        src={hamburgerImage}
-        ,
-        width={40}
-        ,
-        height={40}
-        ,
-        alt="ハンバーガーメニュー"
-        fetchpriority="high"
-        loading="eager"
-      />
-    </button>
-  </div>
+<header
+  class:list={[
+    "relative flex justify-between bg-repeat lg:hidden",
+    `bg-[url(${image.src})]`,
+  ]}
+>
+  <HomeLogo />
+  <button
+    type="button"
+    class="z-2"
+    id="hamburger-button"
+    aria-expanded="false"
+    aria-controls="mobile-global-menu"
+  >
+    <Image
+      src={hamburgerImage}
+      ,
+      width={40}
+      ,
+      height={40}
+      ,
+      alt="ハンバーガーメニュー"
+      fetchpriority="high"
+      loading="eager"
+    />
+  </button>
 </header>
 <nav id="mobile-global-menu" class="invisible fixed -z-10">
   <ul>
