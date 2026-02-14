@@ -1,10 +1,10 @@
 ---
-import backgroundImageSrc from "../../assets/header_background.webp";
+import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
 import DesktopHeaderItem from "./DesktopHeaderItem.astro";
 import { getImage } from "astro:assets";
 
-const image = await getImage({ src: backgroundImageSrc, format: "webp" });
+const image = await getImage({ src: bgRawImage, format: "svg" });
 ---
 
 <header
