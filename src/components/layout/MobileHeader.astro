@@ -1,0 +1,75 @@
+---
+import hamburgerImage from "../../assets/hamburger.svg";
+import { Image } from "astro:assets";
+import backgroundImage from "../../assets/header_background.webp";
+import HomeLogo from "./HomeLogo.astro";
+import MobileMenuSection from "./MobileMenuSection.astro";
+import MobileMenuItem from "./MobileMenuItem.astro";
+---
+
+<header class="relative lg:hidden">
+  <Image
+    src={backgroundImage}
+    alt="ヘッダの背景画像"
+    fetchpriority="high"
+    loading="eager"
+    class="absolute h-full w-full"
+  />
+  <div class="flex justify-between">
+    <HomeLogo />
+    <button
+      type="button"
+      class="z-2"
+      id="hamburger-button"
+      aria-expanded="false"
+      aria-controls="mobile-global-menu"
+    >
+      <Image
+        src={hamburgerImage}
+        ,
+        width={40}
+        ,
+        height={40}
+        ,
+        alt="ハンバーガーメニュー"
+        fetchpriority="high"
+        loading="eager"
+      />
+    </button>
+  </div>
+</header>
+<nav id="mobile-global-menu" class="invisible fixed -z-10">
+  <ul>
+    {/* TODO: リンクは後で変える */}
+    <MobileMenuSection title="各班紹介">
+      <MobileMenuItem title="ステージ班" link="/kakuhansyoukai/stage" />
+      <MobileMenuItem title="縁日班" link="/kakuhansyoukai/ennichi" />
+    </MobileMenuSection>
+    <MobileMenuSection title="ご協賛について">
+      <MobileMenuItem title="ご協賛のお願い" link="/kyousan/onegai" />
+      <MobileMenuItem title="協賛企業一覧" link="/kyousan/ichiran" />
+    </MobileMenuSection>
+    <MobileMenuSection title="メニュー">
+      <MobileMenuItem title="食品班" link="/menu/syokuhin" />
+      <MobileMenuItem title="喫茶班" link="/menu/kissa" />
+    </MobileMenuSection>
+    <MobileMenuSection title="タイムテーブル">
+      <MobileMenuItem title="ステージ班" link="/timetable/stage" />
+    </MobileMenuSection>
+    <MobileMenuSection title="ご案内">
+      <MobileMenuItem title="マップ" link="/goannai/map" />
+    </MobileMenuSection>
+  </ul>
+</nav>
+
+<script is:inline>
+  const btn = document.getElementById("hamburger-button");
+  const menu = document.getElementById("mobile-global-menu");
+  btn?.addEventListener("click", () => {
+    console.log("clicked");
+    const willOpen = menu?.classList.contains("invisible");
+    menu.classList.toggle("invisible");
+    menu.classList.toggle("-z-10");
+    btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  });
+</script>

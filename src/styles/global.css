@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-hakushu: "ah-hakushu-addressing-font", sans-serif;
+}
+
 :root {
   --light-background-primary: #ffffff;
   --light-background-secondary: #eeeeee;
