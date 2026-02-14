@@ -8,10 +8,8 @@ const image = await getImage({ src: backgroundImageSrc, format: "webp" });
 ---
 
 <header
-  class:list={[
-    "relative hidden min-h-15 items-center justify-between bg-repeat lg:flex",
-    `bg-[url(${image.src})]`,
-  ]}
+  class="relative hidden min-h-15 items-center justify-between bg-repeat lg:flex"
+  style=`background-image: url(${image.src});`
 >
   <HomeLogo />
   <nav>
