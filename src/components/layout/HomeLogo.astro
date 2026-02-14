@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import homeLogoImage from "../../assets/home_logo.webp";
+import logoImage from "../../assets/SVG/logo.svg";
 ---
 
 <a href="/" class="block h-full w-30">
   {/* TODO: widthとheightちゃんと設定する */}
-  <Image src={homeLogoImage} alt={"ホームロゴ"} width={300} height={90} />
+  <Image src={logoImage} alt={"ホームロゴ"} width={300} height={90} />
 </a>

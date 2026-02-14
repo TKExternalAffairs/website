@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import logoImage from "../../assets/SVG/logo.svg";
+import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
+---
+
+{/* FIXME: border-doubleが効いてなさそう */}
+<footer
+  class="fixed bottom-0 mb-5 w-full justify-items-center border-t border-double border-white"
+>
+  <div
+    class="mt-10 mb-15 flex min-w-[50%] flex-wrap justify-center gap-x-[10%]"
+  >
+    <Image src={logoImage} alt="ロゴ" />
+    <address>
+      <p class="text-2xl">第七十五回筑駒文化祭 高三特別班</p>
+      <p>The 75th Tsukukoma School Festival The 12th Grade Special Teams</p>
+      <br />
+      <p>&#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校</p>
+    </address>
+  </div>
+  <p>Designed and Produced by</p>
+  <Image
+    src={shogaiLogoImage}
+    alt="高三特別班 渉外事務局 ロゴ"
+    class="mt-5 mb-15"
+    fetchpriority="low"
+  />
+  <p>
+    &copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS, All
+    rights reserved
+  </p>
+</footer>

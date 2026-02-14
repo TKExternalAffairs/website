@@ -1,44 +1,39 @@
 ---
-import hamburgerImage from "../../assets/hamburger.svg";
-import { Image } from "astro:assets";
-import backgroundImage from "../../assets/header_background.webp";
+import menuOpenImage from "../../assets/SVG/hamburger_open.svg";
+import menuCloseImage from "../../assets/SVG/hamburger_close.svg";
+import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
 import MobileMenuSection from "./MobileMenuSection.astro";
 import MobileMenuItem from "./MobileMenuItem.astro";
+import { getImage } from "astro:assets";
+import MobileHeaderButton from "./MobileHeaderButton.astro";
+
+const bgImage = await getImage({ src: bgRawImage });
 ---
 
-<header class="relative lg:hidden">
-  <Image
-    src={backgroundImage}
-    alt="ヘッダの背景画像"
-    fetchpriority="high"
-    loading="eager"
-    class="absolute h-full w-full"
+<header
+  class="relative flex justify-between bg-repeat lg:hidden"
+  ,
+  style=`background-image: url(${bgImage.src});`
+>
+  <HomeLogo />
+  <MobileHeaderButton
+    id="mobile-global-menu-open"
+    imageSrc={menuOpenImage}
+    ariaControls="mobile-global-menu"
+    ariaExpanded="false"
+    ariaLabel="メニューを開く"
   />
-  <div class="flex justify-between">
-    <HomeLogo />
-    <button
-      type="button"
-      class="z-2"
-      id="hamburger-button"
-      aria-expanded="false"
-      aria-controls="mobile-global-menu"
-    >
-      <Image
-        src={hamburgerImage}
-        ,
-        width={40}
-        ,
-        height={40}
-        ,
-        alt="ハンバーガーメニュー"
-        fetchpriority="high"
-        loading="eager"
-      />
-    </button>
-  </div>
+  <MobileHeaderButton
+    id="mobile-global-menu-close"
+    className="hidden"
+    imageSrc={menuCloseImage}
+    ariaControls="mobile-global-menu"
+    ariaExpanded="true"
+    ariaLabel="メニューを閉じる"
+  />
 </header>
-<nav id="mobile-global-menu" class="invisible fixed -z-10">
+<nav id="mobile-global-menu" class="fixed -z-10 hidden">
   <ul>
     {/* TODO: リンクは後で変える */}
     <MobileMenuSection title="各班紹介">
@@ -63,13 +58,21 @@ import MobileMenuItem from "./MobileMenuItem.astro";
 </nav>
 
 <script is:inline>
-  const btn = document.getElementById("hamburger-button");
+  const openButton = document.getElementById("mobile-global-menu-open");
+  const closeButton = document.getElementById("mobile-global-menu-close");
   const menu = document.getElementById("mobile-global-menu");
-  btn?.addEventListener("click", () => {
-    console.log("clicked");
-    const willOpen = menu?.classList.contains("invisible");
-    menu.classList.toggle("invisible");
-    menu.classList.toggle("-z-10");
-    btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+
+  openButton?.addEventListener("click", () => {
+    menu.classList.remove("hidden");
+    menu.classList.remove("-z-10");
+    openButton.classList.add("hidden");
+    closeButton.classList.remove("hidden");
+  });
+
+  closeButton.addEventListener("click", () => {
+    menu.classList.add("hidden");
+    menu.classList.add("-z-10");
+    closeButton.classList.add("hidden");
+    openButton.classList.remove("hidden");
   });
 </script>
