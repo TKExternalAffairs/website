@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  className?: string;
+  id: string;
+  imageSrc: ImageMetadata;
+  ariaControls: string;
+  ariaExpanded: "true" | "false";
+  ariaLabel: string;
+}
+
+const { className, id, imageSrc, ariaControls, ariaExpanded, ariaLabel } =
+  Astro.props;
+---
+
+{/* TODO: altを変える */}
+<button
+  type="button"
+  class:list={["z-2", className]}
+  id={id}
+  aria-expanded={ariaExpanded}
+  aria-controls={ariaControls}
+  aria-label={ariaLabel}
+>
+  <Image
+    src={imageSrc}
+    ,
+    width={40}
+    ,
+    height={40}
+    ,
+    alt="メニュー"
+    ,
+    fetchpriority="high"
+    loading="eager"
+  />
+</button>

@@ -1,30 +1,26 @@
 ---
-import { Image } from "astro:assets";
-import backgroundImage from "../../assets/header_background.webp";
+import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
 import DesktopHeaderItem from "./DesktopHeaderItem.astro";
+import { getImage } from "astro:assets";
+
+const image = await getImage({ src: bgRawImage, format: "svg" });
 ---
 
-<header class="relative hidden lg:block">
-  <Image
-    src={backgroundImage}
-    alt="ヘッダの背景画像"
-    fetchpriority="high"
-    loading="eager"
-    class="absolute z-1 h-full w-full"
-  />
-  <div class="relative z-2 flex items-center justify-between">
-    <HomeLogo />
-    <nav>
-      <ul class="flex flex-row items-center gap-x-2">
-        <DesktopHeaderItem link="/" title="各班紹介" />
-        <DesktopHeaderItem link="/" title="ご協賛について" />
-        <DesktopHeaderItem
-          link="https://tsukukoma.bunkasai.info"
-          title="公式ホームページ"
-          outlined
-        />
-      </ul>
-    </nav>
-  </div>
+<header
+  class="relative hidden min-h-15 items-center justify-between bg-repeat lg:flex"
+  style=`background-image: url(${image.src});`
+>
+  <HomeLogo />
+  <nav>
+    <ul class="flex flex-row items-center gap-x-2">
+      <DesktopHeaderItem link="/" title="各班紹介" />
+      <DesktopHeaderItem link="/" title="ご協賛について" />
+      <DesktopHeaderItem
+        link="https://tsukukoma.bunkasai.info"
+        title="公式ホームページ"
+        outlined
+      />
+    </ul>
+  </nav>
 </header>
