@@ -23,3 +23,8 @@ jobs:
       - run: npm clean-install
       - run: npm run check
       - run: npm run format
+      - name: autofix.ci
+        uses: autofix-ci/action@v1
+        with:
+          fail-fast: true
+          
