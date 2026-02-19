@@ -1,7 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ConceptSvg from "../assets/SVG/concept.svg";
+import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
 ---
 
 <Layout>
-  <div>Hello</div>
+  <section class="mx-auto w-full px-4 py-32">
+    <div class="grid min-h-2/4 grid-cols-1 gap-12 lg:grid-cols-[45%_1fr]">
+      <div
+        class="flex flex-col items-center justify-center gap-4 text-center whitespace-nowrap"
+      >
+        <ConceptSvg class="w-1/2 max-w-xs fill-white sm:max-w-sm md:max-w-md" />
+        <ConceptLogoSvg
+          class="w-1/2 max-w-xs fill-white sm:max-w-sm md:max-w-md"
+        />
+      </div>
+      <div
+        class="flex flex-col justify-center space-y-8 text-center text-[0.7rem] leading-relaxed text-gray-200 sm:text-base lg:space-y-12 lg:text-left lg:leading-loose"
+      >
+        <p>
+          高三特別班は本校文化祭における中核をなす組織の一つとして、<br />
+          先輩方が守り、受け継いできた筑駒の一つの伝統です。
+        </p>
+        <p>
+          高校生活最後の文化祭。<br />
+          仲間とともに歩み、時に悩み、我々の出した答えが<br />
+          今年度の高三特別班の企画そのものであり、<br />
+          ご来場してくださる皆様への感謝と、我々の未来への誓いを込めた<br />
+          最初で最高の最高傑作です。
+        </p>
+        <p>
+          それでは、我々の熱量の証明をご覧ください。<br />
+          ご来場お待ちしております。
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>
