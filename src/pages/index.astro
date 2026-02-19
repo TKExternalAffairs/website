@@ -5,11 +5,15 @@ import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
 ---
 
 <Layout>
-  <section class="w-full mx-auto px-4 py-32">
-    <div class="min-h-2/4 grid grid-cols-1 lg:grid-cols-[45%_1fr] gap-12">
-      <div class="flex flex-col justify-center items-center gap-4">
-        <ConceptSvg class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md fill-white" />
-        <ConceptLogoSvg class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md fill-white" />
+  <section class="mx-auto w-full px-4 py-32">
+    <div class="grid min-h-2/4 grid-cols-1 gap-12 lg:grid-cols-[45%_1fr]">
+      <div
+        class="flex flex-col items-center justify-center gap-4 text-center whitespace-nowrap"
+      >
+        <ConceptSvg class="w-1/2 max-w-xs fill-white sm:max-w-sm md:max-w-md" />
+        <ConceptLogoSvg
+          class="w-1/2 max-w-xs fill-white sm:max-w-sm md:max-w-md"
+        />
       </div>
       {/* TODO: ここのレスポンシブ汚いので直したい */}
       <div
