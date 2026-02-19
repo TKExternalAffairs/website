@@ -1,15 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ConceptSvg from "../assets/SVG/concept.svg?raw";
-import ConceptLogoSvg from "../assets/SVG/concept_logo.svg?raw";
+import ConceptSvg from "../assets/SVG/concept.svg";
+import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
 ---
 
 <Layout>
   <section class="w-full mx-auto px-4 py-32">
     <div class="min-h-2/4 grid grid-cols-1 lg:grid-cols-[45%_1fr] gap-12">
       <div class="flex flex-col justify-center items-center text-center gap-4 whitespace-nowrap">
-        <div class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md [&>svg]:fill-white" set:html={ConceptSvg} />
-        <div class="w-2/5 max-w-xs sm:max-w-sm md:max-w-md [&>svg]:fill-white" set:html={ConceptLogoSvg} />
+        <ConceptSvg class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md fill-white" />
+        <ConceptLogoSvg class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md fill-white" />
       </div>
       <div class="flex flex-col justify-center text-center lg:text-left space-y-8 lg:space-y-12 leading-relaxed lg:leading-loose text-gray-200 text-[0.7rem] sm:text-base">
         <p>
