@@ -1,56 +1,54 @@
 ---
 interface Props {
-	href?: string;
-	type?: "button" | "submit" | "reset";
-	className?: string;
-	disabled?: boolean;
-	ariaLabel?: string;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
 }
 
-const { href, type = "button", className, disabled = false, ariaLabel } = Astro.props;
+const {
+  href,
+  type = "button",
+  className,
+  disabled = false,
+  ariaLabel,
+} = Astro.props;
 
 const baseClass = [
-	"font-hakushu",
-	"inline-flex items-center justify-center",
-	"rounded-full px-5 py-2",
-	"text-sm tracking-[0.12em] uppercase",
-	"border outline-none",
-	"transition-opacity duration-200",
-	"bg-(--background-secondary) text-(--primary) border-(--secondary)",
-	"hover:opacity-90",
-	"focus-visible:ring-2 focus-visible:ring-(--secondary)",
-	"focus-visible:ring-offset-2 focus-visible:ring-offset-(--background-primary)",
+  "font-hakushu",
+  "inline-flex items-center justify-center",
+  "rounded-full px-5 py-2",
+  "text-sm tracking-[0.12em] uppercase",
+  "border outline-none",
+  "transition-opacity duration-200",
+  "bg-(--background-secondary) text-(--primary) border-(--secondary)",
+  "hover:opacity-90",
+  "focus-visible:ring-2 focus-visible:ring-(--secondary)",
+  "focus-visible:ring-offset-2 focus-visible:ring-offset-(--background-primary)",
 ].join(" ");
 const disabledClass = "pointer-events-none opacity-50";
 ---
 
 {
-	href ? (
-		<a
-			href={href}
-			class:list={[
-				baseClass,
-				className,
-				disabled && disabledClass,
-			]}
-			aria-label={ariaLabel}
-			aria-disabled={disabled ? "true" : undefined}
-			tabindex={disabled ? -1 : undefined}
-		>
-			<slot />
-		</a>
-	) : (
-		<button
-			type={type}
-			class:list={[
-				baseClass,
-				disabled && disabledClass,
-				className,
-			]}
-			disabled={disabled}
-			aria-label={ariaLabel}
-		>
-			<slot />
-		</button>
-	)
+  href ? (
+    <a
+      href={href}
+      class:list={[baseClass, className, disabled && disabledClass]}
+      aria-label={ariaLabel}
+      aria-disabled={disabled ? "true" : undefined}
+      tabindex={disabled ? -1 : undefined}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class:list={[baseClass, disabled && disabledClass, className]}
+      disabled={disabled}
+      aria-label={ariaLabel}
+    >
+      <slot />
+    </button>
+  )
 }
