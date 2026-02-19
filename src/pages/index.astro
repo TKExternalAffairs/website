@@ -6,26 +6,26 @@ import ConceptLogoSvg from "../assets/SVG/concept_logo.svg?raw";
 
 <Layout>
   <section class="w-full mx-auto px-4 py-32">
-    <div class="min-h-2/4 grid grid-cols-1 md:grid-cols-[45%_1fr] gap-12">
+    <div class="min-h-2/4 grid grid-cols-1 lg:grid-cols-[45%_1fr] gap-12">
       <div class="flex flex-col justify-center items-center text-center gap-4 whitespace-nowrap">
-        <div class="w-1/2 [&>svg]:fill-white" set:html={ConceptSvg} />
-        <div class="w-1/2 [&>svg]:fill-white" set:html={ConceptLogoSvg} />
+        <div class="w-1/2 max-w-xs sm:max-w-sm md:max-w-md [&>svg]:fill-white" set:html={ConceptSvg} />
+        <div class="w-2/5 max-w-xs sm:max-w-sm md:max-w-md [&>svg]:fill-white" set:html={ConceptLogoSvg} />
       </div>
-      <div class="flex flex-col justify-center text-center text-small md:text-base md:text-left space-y-12 leading-loose text-gray-200">
+      <div class="flex flex-col justify-center text-center lg:text-left space-y-8 lg:space-y-12 leading-relaxed lg:leading-loose text-gray-200 text-[0.7rem] sm:text-base">
         <p>
-          高三特別班は本校文化祭における中核をなす組織の一つとして、<br>
-          先輩方が守り、受け継いできた筑駒の一つの伝統です。
+          <span class="block">高三特別班は本校文化祭における中核をなす組織の一つとして、</span>
+          <span class="block">先輩方が守り、受け継いできた筑駒の一つの伝統です。</span>
         </p>
         <p>
-          高校生活最後の文化祭。<br>
-          仲間とともに歩み、時に悩み、我々の出した答えが<br>
-          今年度の高三特別班の企画そのものであり、<br>
-          ご来場してくださる皆様への感謝と、我々の未来への誓いを込めた<br>
-          最初で最高の最高傑作です。
+          <span class="block">高校生活最後の文化祭。</span>
+          <span class="block">仲間とともに歩み、時に悩み、我々の出した答えが</span>
+          <span class="block">今年度の高三特別班の企画そのものであり、</span>
+          <span class="block">ご来場してくださる皆様への感謝と、我々の未来への誓いを込めた</span>
+          <span class="block">最初で最高の最高傑作です。</span>
         </p>
         <p>
-          それでは、我々の熱量の証明をご覧ください。<br>
-          ご来場お待ちしております。
+          <span class="block">それでは、我々の熱量の証明をご覧ください。</span>
+          <span class="block">ご来場お待ちしております。</span>
         </p>
       </div>
 
