@@ -1,0 +1,66 @@
+---
+interface Props {
+  targetISO: string;
+  label?: string;
+}
+
+const { targetISO } = Astro.props;
+---
+
+{/* TODO: 装飾 */}
+<div data-countdown data-target={targetISO}>
+  <div
+    class="hidden w-full border-t-[0.5px] border-b-[0.5px] border-white py-1 lg:flex"
+  >
+    <div class="w-full border-t-[0.5px] border-b-[0.5px] border-white px-32">
+      <div class="w-full border-r-[0.5px] border-l-[0.5px] border-white px-1">
+        <div class="w-full border-r-[0.5px] border-l-[0.5px] border-white">
+          <div
+            class="flex items-center justify-center gap-4 px-4 py-10 lg:text-3xl"
+          >
+            <p class="font-hakushu tracking-widest text-white">
+              第七十五回筑駒文化祭まで
+            </p>
+            <p data-days class="text-8xl font-bold">00</p>
+            <p class="font-hakushu tracking-widest text-white">日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex items-center justify-center gap-4 px-4 py-2 text-2xl sm:text-4xl lg:hidden"
+  >
+    <p class="font-hakushu tracking-widest text-white">開催まであと</p>
+    <p data-days class="text-5xl font-bold">00</p>
+    <p class="font-hakushu tracking-widest text-white">日</p>
+  </div>
+
+  <script>
+    const roots = document.querySelectorAll("[data-countdown]");
+
+    const pad = (value: number) => String(value).padStart(2, "0");
+
+    roots.forEach((root) => {
+      const targetText = root.getAttribute("data-target");
+      const target = targetText ? new Date(targetText).getTime() : NaN;
+      const daysEl = root.querySelector("[data-days]");
+
+      if (!Number.isFinite(target) || !daysEl) {
+        return;
+      }
+
+      const render = () => {
+        const now = Date.now();
+        const diff = Math.max(0, target - now);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        daysEl.textContent = pad(days);
+      };
+
+      render();
+      setInterval(render, 1000);
+    });
+  </script>
+</div>
