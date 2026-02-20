@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import ConceptSvg from "../assets/SVG/concept.svg";
 import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
+import Countdown from "../components/Countdown.astro";
+
+const countdownTargetISO = "2026-09-12T09:00:00+09:00";
 ---
 
 <Layout>
@@ -35,5 +38,8 @@ import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
         </p>
       </div>
     </div>
+  </section>
+  <section class="mx-auto w-full px-24 py-12">
+        <Countdown targetISO={countdownTargetISO}/>
   </section>
 </Layout>
