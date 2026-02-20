@@ -10,13 +10,19 @@ const { targetISO } = Astro.props;
 <div
   data-countdown
   data-target={targetISO}
-  class="mx-auto flex w-full items-center gap-2 border border-double border-white px-4 py-3"
+  class="w-full border-t-[0.5px] border-b-[0.5px] border-white py-1"
 >
-  <p class="tracking-widest text-gray-300 font-hakushu">第七十五回筑駒文化祭まで</p>
-  <div class="flex items-end justify-center gap-3 text-center">
-    <p data-days class="text-2xl font-bold sm:text-3xl">00</p>
+  <div class="w-full border-t-[0.5px] border-b-[0.5px] border-white px-32">
+    <div class="w-full border-l-[0.5px] border-r-[0.5px] border-white px-1">
+        <div class="w-full border-l-[0.5px] border-r-[0.5px] border-white">
+      <div class="flex items-center justify-center gap-4 px-4 py-10 lg:text-3xl">
+        <p class="tracking-widest text-gray-300 font-hakushu">第七十五回筑駒文化祭まで</p>
+        <p data-days class="text-8xl font-bold">00</p>
+        <p class="tracking-widest text-gray-300 font-hakushu">日</p>
+      </div>
+      </div>
+    </div>
   </div>
-  <p class="tracking-widest text-gray-300 font-hakushu">日</p>
 </div>
 
 <script>
