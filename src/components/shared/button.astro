@@ -1,18 +1,20 @@
 ---
 interface Props {
+  label: string;
   href?: string;
   type?: "button" | "submit" | "reset";
   className?: string;
   disabled?: boolean;
-  ariaLabel?: string;
+  onClick?: string;
 }
 
 const {
+  label,
   href,
   type = "button",
   className,
   disabled = false,
-  ariaLabel,
+  onClick,
 } = Astro.props;
 
 const baseClass = [
@@ -35,20 +37,42 @@ const disabledClass = "pointer-events-none opacity-50";
     <a
       href={href}
       class:list={[baseClass, className, disabled && disabledClass]}
-      aria-label={ariaLabel}
-      aria-disabled={disabled ? "true" : undefined}
+      aria-disabled={disabled}
       tabindex={disabled ? -1 : undefined}
+      data-button-callback={onClick}
     >
-      <slot />
+      {label}
     </a>
   ) : (
     <button
       type={type}
       class:list={[baseClass, disabled && disabledClass, className]}
       disabled={disabled}
-      aria-label={ariaLabel}
+      data-button-callback={onClick}
     >
-      <slot />
+      {label}
     </button>
   )
 }
+
+<script is:inline>
+  if (!window.__sharedButtonCallbackBound) {
+    window.__sharedButtonCallbackBound = true;
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const trigger = target.closest("[data-button-callback]");
+      if (!(trigger instanceof HTMLElement)) return;
+
+      const callbackName = trigger.dataset.buttonCallback;
+      if (!callbackName) return;
+
+      const callback = window[callbackName];
+      if (typeof callback === "function") {
+        callback(event, trigger);
+      }
+    });
+  }
+</script>
