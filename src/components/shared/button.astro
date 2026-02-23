@@ -1,0 +1,78 @@
+---
+interface Props {
+  label: string;
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+  disabled?: boolean;
+  onClick?: string;
+}
+
+const {
+  label,
+  href,
+  type = "button",
+  className,
+  disabled = false,
+  onClick,
+} = Astro.props;
+
+const baseClass = [
+  "font-hakushu",
+  "inline-flex items-center justify-center",
+  "rounded-full px-5 py-2",
+  "text-sm tracking-[0.12em] uppercase",
+  "border outline-none",
+  "transition-opacity duration-200",
+  "bg-(--background-secondary) text-(--primary) border-(--secondary)",
+  "hover:opacity-90",
+  "focus-visible:ring-2 focus-visible:ring-(--secondary)",
+  "focus-visible:ring-offset-2 focus-visible:ring-offset-(--background-primary)",
+].join(" ");
+const disabledClass = "pointer-events-none opacity-50";
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class:list={[baseClass, className, disabled && disabledClass]}
+      aria-disabled={disabled}
+      tabindex={disabled ? -1 : undefined}
+      data-button-callback={onClick}
+    >
+      {label}
+    </a>
+  ) : (
+    <button
+      type={type}
+      class:list={[baseClass, disabled && disabledClass, className]}
+      disabled={disabled}
+      data-button-callback={onClick}
+    >
+      {label}
+    </button>
+  )
+}
+
+<script is:inline>
+  if (!window.__sharedButtonCallbackBound) {
+    window.__sharedButtonCallbackBound = true;
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const trigger = target.closest("[data-button-callback]");
+      if (!(trigger instanceof HTMLElement)) return;
+
+      const callbackName = trigger.dataset.buttonCallback;
+      if (!callbackName) return;
+
+      const callback = window[callbackName];
+      if (typeof callback === "function") {
+        callback(event, trigger);
+      }
+    });
+  }
+</script>
