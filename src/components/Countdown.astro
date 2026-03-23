@@ -35,52 +35,52 @@ const { targetISO } = Astro.props;
     <p data-days class="text-5xl font-bold">00</p>
     <p class="font-hakushu tracking-widest text-white">日</p>
   </div>
+</div>
 
-  <script>
-    const roots = document.querySelectorAll("[data-countdown]");
+<script>
+  const roots = document.querySelectorAll("[data-countdown]");
 
-    const pad = (value: number) => String(value).padStart(2, "0");
+  const pad = (value: number) => String(value).padStart(2, "0");
 
-    roots.forEach((root) => {
-      const targetText = root.getAttribute("data-target");
-      const target = targetText ? new Date(targetText).getTime() : NaN;
-      const daysEls = root.querySelectorAll("[data-days]");
+  roots.forEach((root) => {
+    const targetText = root.getAttribute("data-target");
+    const target = targetText ? new Date(targetText).getTime() : NaN;
+    const daysEls = root.querySelectorAll("[data-days]");
 
-      if (!Number.isFinite(target) || daysEls.length === 0) {
+    if (!Number.isFinite(target) || daysEls.length === 0) {
+      return;
+    }
+
+    const DAY_MS = 1000 * 60 * 60 * 24;
+
+    const render = () => {
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const days = Math.floor(diff / DAY_MS);
+
+      daysEls.forEach((daysEl) => {
+        daysEl.textContent = pad(days);
+      });
+    };
+
+    const scheduleNextRender = () => {
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+
+      if (diff === 0) {
+        // Countdown has reached the target; no further updates needed.
         return;
       }
 
-      const DAY_MS = 1000 * 60 * 60 * 24;
+      const timeUntilNextDayChange = diff % DAY_MS || DAY_MS;
 
-      const render = () => {
-        const now = Date.now();
-        const diff = Math.max(0, target - now);
-        const days = Math.floor(diff / DAY_MS);
+      setTimeout(() => {
+        render();
+        scheduleNextRender();
+      }, timeUntilNextDayChange);
+    };
 
-        daysEls.forEach((daysEl) => {
-          daysEl.textContent = pad(days);
-        });
-      };
-
-      const scheduleNextRender = () => {
-        const now = Date.now();
-        const diff = Math.max(0, target - now);
-
-        if (diff === 0) {
-          // Countdown has reached the target; no further updates needed.
-          return;
-        }
-
-        const timeUntilNextDayChange = diff % DAY_MS || DAY_MS;
-
-        setTimeout(() => {
-          render();
-          scheduleNextRender();
-        }, timeUntilNextDayChange);
-      };
-
-      render();
-      scheduleNextRender();
-    });
-  </script>
-</div>
+    render();
+    scheduleNextRender();
+  });
+</script>
