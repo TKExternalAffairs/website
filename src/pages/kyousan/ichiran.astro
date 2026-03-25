@@ -1,0 +1,37 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const sponsors = [
+  { name: "株式会社サンプルA", description: "ありがとうございます。" },
+  { name: "株式会社サンプルB", description: "ご協賛ございます。" },
+  { name: "株式会社サンプルC", description: "ご協賛ありがとう" },
+];
+---
+
+<Layout>
+  <section class="mx-auto max-w-5xl px-6 py-16 text-gray-100">
+    <h1 class="mb-8 text-3xl font-bold md:text-4xl">協賛企業一覧</h1>
+
+    <p class="mb-10 leading-8">本企画にご協賛いただいた皆様をご紹介します。</p>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        sponsors.map((sponsor) => (
+          <article class="rounded-2xl border border-white/20 p-6">
+            <h2 class="mb-3 text-xl font-semibold">{sponsor.name}</h2>
+            <p class="leading-7 text-gray-300">{sponsor.description}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10">
+      <a
+        href="/kyousan/onegai"
+        class="inline-block rounded-xl border border-white/20 px-5 py-3 hover:bg-white/10"
+      >
+        ご協賛のお願いへ戻る
+      </a>
+    </div>
+  </section>
+</Layout>
