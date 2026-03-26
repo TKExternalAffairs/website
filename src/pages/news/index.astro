@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import Title from "../../components/layout/Title.astro";
 
 const newsItems = (await getCollection("news")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -8,8 +9,8 @@ const newsItems = (await getCollection("news")).sort(
 ---
 
 <Layout>
+  <Title title="お知らせ" heroImage="../src/assets/sunset.jpeg" />
   <section class="mx-auto w-full max-w-4xl px-4 py-12">
-    <h1 class="mb-8 text-3xl font-bold">お知らせ</h1>
     {
       newsItems.length === 0 ? (
         <p class="text-gray-300">現在、お知らせはありません。</p>
