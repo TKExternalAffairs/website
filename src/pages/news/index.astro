@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
 
@@ -15,15 +16,29 @@ const newsItems = (await getCollection("news")).sort(
       newsItems.length === 0 ? (
         <p class="text-gray-300">現在、お知らせはありません。</p>
       ) : (
-        <ul class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {newsItems.map((item) => (
             <li class="list-none border p-4 transition hover:border-gray-400">
-              <a href={`/news/${item.id}/`} class="block" />
-              <h class="text-lg font-semibold">{item.data.title}</h>
-              <p class="text-gray-400">{item.data.description}</p>
-              <p class="text-sm text-gray-500">
-                {item.data.pubDate.toLocaleDateString("ja-JP")}
-              </p>
+              <a href={`/news/${item.id}/`} class="block">
+                <div class="mb-4 aspect-4/3 w-full overflow-hidden bg-gray-900">
+                  {item.data.heroImage ? (
+                    <Image
+                      src={item.data.heroImage}
+                      alt={item.data.title}
+                      class="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div class="flex h-full w-full items-center justify-center text-sm text-gray-400">
+                      No Image
+                    </div>
+                  )}
+                </div>
+                <h class="text-lg font-semibold">{item.data.title}</h>
+                <p class="text-gray-400">{item.data.description}</p>
+                <p class="text-sm text-gray-500">
+                  {item.data.pubDate.toLocaleDateString("ja-JP")}
+                </p>
+              </a>
             </li>
           ))}
         </ul>
