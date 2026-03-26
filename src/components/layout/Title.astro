@@ -1,5 +1,10 @@
 ---
-const { title, heroImage } = Astro.props;
+interface Props {
+  title: string;
+  heroImage?: string;
+}
+
+const { title, heroImage } = Astro.props as Props;
 ---
 
 <section
