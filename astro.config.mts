@@ -12,6 +12,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  redirects: {
+    "/beforedonation": "/before-donation"
+  }
   /*experimental: {
     fonts: [
       {
