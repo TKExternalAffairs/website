@@ -29,27 +29,27 @@ export const NEWS_TAGS: Record<NewsTagId, NewsTagDefinition> = {
     borderColor: "#4c1d95",
     textColor: "#ede9fe",
   },
-    kissa: {
+  kissa: {
     label: "喫茶班",
     borderColor: "#7c2d12",
     textColor: "#fff7ed",
   },
-    shokuhin: {
+  shokuhin: {
     label: "食品班",
     borderColor: "#166534",
     textColor: "#d1fae5",
   },
-    conte: {
+  conte: {
     label: "コント班",
     borderColor: "#831843",
     textColor: "#fce7f3",
   },
-    engeki: {
+  engeki: {
     label: "演劇班",
     borderColor: "#9d174d",
     textColor: "#fce7f3",
   },
-    taiwa: {
+  taiwa: {
     label: "対話班",
     borderColor: "#4b5563",
     textColor: "#f3f4f6",
