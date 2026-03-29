@@ -37,7 +37,12 @@ const newsItems = (await getCollection("news")).sort(
                 <h class="text-lg font-semibold">{item.data.title}</h>
                 <p class="text-gray-400">{item.data.description}</p>
                 <p class="text-sm text-gray-500">
-                  {item.data.pubDate.toLocaleDateString("ja-JP")}
+                  {item.data.pubDate.toLocaleDateString("ja-JP", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}{" "}
+                  更新
                 </p>
               </a>
             </li>
