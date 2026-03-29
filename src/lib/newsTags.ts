@@ -1,4 +1,14 @@
-export const NEWS_TAG_IDS = ["announcement", "kyosan", "stage", "ennichi", "kissa", "shokuhin", "conte", "engeki", "taiwa"] as const;
+export const NEWS_TAG_IDS = [
+  "announcement",
+  "kyosan",
+  "stage",
+  "ennichi",
+  "kissa",
+  "shokuhin",
+  "conte",
+  "engeki",
+  "taiwa",
+] as const;
 
 export type NewsTagId = (typeof NEWS_TAG_IDS)[number];
 
@@ -53,5 +63,5 @@ export const NEWS_TAGS: Record<NewsTagId, NewsTagDefinition> = {
     label: "対話班",
     borderColor: "#4b5563",
     textColor: "#f3f4f6",
-  }
+  },
 };
