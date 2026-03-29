@@ -19,8 +19,20 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = item.data;
       <h1 class="font-hakushu text-4xl font-bold">{title}</h1>
       <p class="text-gray-400">{description}</p>
       <p class="text-sm text-gray-500">
-        公開日: {pubDate.toLocaleDateString("ja-JP")} / 更新日:{" "}
-        {(updatedDate ?? pubDate).toLocaleDateString("ja-JP")}
+        公開日: {
+          pubDate.toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        } / 更新日:{" "}
+        {
+          (updatedDate ?? pubDate).toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+        }
       </p>
       {
         tags.length > 0 && (
