@@ -2,37 +2,51 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
+import Title from "../components/layout/Title.astro";
+import NewsTag from "../components/news/NewsTag.astro";
 
 type Props = {
   item: CollectionEntry<"news">;
 };
 const { item } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage } = item.data;
+const { title, description, pubDate, updatedDate, heroImage, tags } = item.data;
 ---
 
 <Layout>
   <section class="px-auto mx-auto pt-20 pb-5 lg:pb-20">
     <div
-      class="flex flex-col items-center justify-center gap-4 text-center whitespace-nowrap"
+      class="flex flex-col items-center justify-center gap-4 p-4 text-center whitespace-nowrap"
     >
-      <h1 class="text-3xl font-bold">{title}</h1>
+      <h1 class="font-hakushu text-4xl font-bold">{title}</h1>
       <p class="text-gray-400">{description}</p>
       <p class="text-sm text-gray-500">
         公開日: {pubDate.toLocaleDateString("ja-JP")} / 更新日:{" "}
         {(updatedDate ?? pubDate).toLocaleDateString("ja-JP")}
       </p>
+      {
+        tags.length > 0 && (
+          <ul class="mt-1 flex flex-wrap justify-center gap-2">
+            {tags.map((tagId) => (
+              <li class="list-none">
+                <NewsTag tagId={tagId} />
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {
+        heroImage && (
+          <div class="mt-8 flex justify-center">
+            <Image
+              src={heroImage}
+              alt={title}
+              class="w-full max-w-2xl object-cover"
+            />
+          </div>
+        )
+      }
     </div>
-    {
-      heroImage && (
-        <div class="mt-8 flex justify-center">
-          <Image
-            src={heroImage}
-            alt={title}
-            class="w-full max-w-2xl rounded-lg object-cover"
-          />
-        </div>
-      )
-    }
+
     <slot />
   </section>
 </Layout>
