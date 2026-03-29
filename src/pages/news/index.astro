@@ -5,14 +5,14 @@ import NoImageSVG from "../../assets/SVG/noimage.svg";
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
 import NewsTag from "../../components/news/NewsTag.astro";
-
+import SunsetImage from "../../assets/sunset.jpeg";
 const newsItems = (await getCollection("news")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <Layout>
-  <Title title="お知らせ" heroImage="../src/assets/sunset.jpeg" />
+  <Title title="お知らせ" heroImage={SunsetImage.src} />
   <section class="mx-auto w-full max-w-6xl px-4 py-12">
     {
       newsItems.length === 0 ? (
