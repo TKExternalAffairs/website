@@ -3,6 +3,8 @@ title: テスト3
 description: よい
 pubDate: 2026-03-26
 updatedDate: 2026-03-26
+tags:
+  - ennichi
 heroImage: ../../assets/sunset.jpeg
 ---
 
