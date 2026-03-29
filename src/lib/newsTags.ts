@@ -4,58 +4,58 @@ export type NewsTagId = (typeof NEWS_TAG_IDS)[number];
 
 type NewsTagDefinition = {
   label: string;
-  bgColor: string;
+  borderColor: string;
   textColor: string;
 };
 
 export const NEWS_TAGS: Record<NewsTagId, NewsTagDefinition> = {
   announcement: {
     label: "お知らせ",
-    bgColor: "#1d4ed8",
+    borderColor: "#1d4ed8",
     textColor: "#dbeafe",
   },
   kyosan: {
     label: "協賛関連",
-    bgColor: "#0f766e",
+    borderColor: "#0f766e",
     textColor: "#ccfbf1",
   },
   stage: {
     label: "ステージ班",
-    bgColor: "#9a3412",
+    borderColor: "#9a3412",
     textColor: "#ffedd5",
   },
   ennichi: {
     label: "縁日班",
-    bgColor: "#4c1d95",
+    borderColor: "#4c1d95",
     textColor: "#ede9fe",
   },
     kissa: {
     label: "喫茶班",
-    bgColor: "#7c2d12",
+    borderColor: "#7c2d12",
     textColor: "#fff7ed",
   }
     ,
     shokuhin: {
     label: "食品班",
-    bgColor: "#166534",
+    borderColor: "#166534",
     textColor: "#d1fae5",
   }
     ,
     conte: {
     label: "コント班",
-    bgColor: "#831843",
+    borderColor: "#831843",
     textColor: "#fce7f3",
   }
     ,
     engeki: {
     label: "演劇班",
-    bgColor: "#9d174d",
+    borderColor: "#9d174d",
     textColor: "#fce7f3",
   }
     ,
     taiwa: {
     label: "対話班",
-    bgColor: "#4b5563",
+    borderColor: "#4b5563",
     textColor: "#f3f4f6",
   }
 };
