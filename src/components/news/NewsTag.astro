@@ -1,0 +1,17 @@
+---
+import { NEWS_TAGS, type NewsTagId } from "../../lib/newsTags";
+
+type Props = {
+  tagId: NewsTagId;
+};
+
+const { tagId } = Astro.props;
+const tag = NEWS_TAGS[tagId];
+---
+
+<span
+  class="inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold tracking-wide"
+  style={`background-color: ${tag.bgColor}; color: ${tag.textColor};`}
+>
+  {tag.label}
+</span>
