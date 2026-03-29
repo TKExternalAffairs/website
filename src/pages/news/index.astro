@@ -34,7 +34,7 @@ const newsItems = (await getCollection("news")).sort(
                     </div>
                   )}
                 </div>
-                <h class="text-lg font-semibold">{item.data.title}</h>
+                <h2 class="text-lg font-semibold">{item.data.title}</h2>
                 <p class="text-gray-400">{item.data.description}</p>
                 <p class="text-sm text-gray-500">
                   {item.data.pubDate.toLocaleDateString("ja-JP", {
