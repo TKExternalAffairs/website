@@ -1,4 +1,9 @@
 ---
+interface Props {
+  title: string;
+  heroImage?: string;
+}
+
 const { title, heroImage } = Astro.props;
 ---
 
@@ -9,7 +14,8 @@ const { title, heroImage } = Astro.props;
     heroImage && (
       <img
         src={heroImage}
-        alt={title}
+        alt=""
+        aria-hidden="true"
         class="absolute inset-0 h-full w-full object-cover opacity-40"
       />
     )
