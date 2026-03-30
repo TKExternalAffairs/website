@@ -2,6 +2,9 @@
 interface Props {
 	imageSrc?: string;
 	imageAlt?: string;
+	imageWidth?: string;
+	imageHeight?: string;
+	imagePadding?: string;
 	middleText?: string;
 	detailHref?: string;
 }
@@ -12,9 +15,14 @@ const BOTTOM_TEXT = "詳細はこちら";
 const {
 	imageSrc = "",
 	imageAlt = "",
+	imageWidth = "100%",
+	imageHeight = "auto",
+	imagePadding = "0",
 	middleText = "",
 	detailHref = "#",
 } = Astro.props;
+
+const imageStyle = `display: block; width: ${imageWidth}; height: ${imageHeight}; padding: ${imagePadding}; box-sizing: border-box; object-fit: contain;`;
 ---
 
 <div
@@ -25,36 +33,54 @@ const {
 		class="flex aspect-[5/2] w-full overflow-hidden text-black"
 		style="background-color: white;"
 	>
-		<div class="h-full w-3/5 bg-neutral-100">
+		<div
+			class="flex h-full w-3/5 items-center justify-center"
+			style="background-color: #2d2d2d;"
+		>
 			{
 				imageSrc ? (
 					<img
 						src={imageSrc}
 						alt={imageAlt}
-						class="h-full w-full object-cover"
+						style={imageStyle}
 					/>
 				) : (
-					<div aria-hidden="true" class="h-full w-full bg-neutral-200"></div>
+						<div
+							aria-hidden="true"
+							class="flex h-full w-full items-center justify-center"
+						>
+							<span
+								style="color: #bbc2cc; font-family: var(--font-hakushu); font-size: 1.4cm;"
+							>
+								準備中
+							</span>
+						</div>
 				)
 			}
 		</div>
 
 		<div class="flex w-2/5 flex-col justify-center gap-6 px-6 py-8" style="margin: 3cm;">
-			<p class="min-h-[1.5em] text-base leading-relaxed" style="color: black; font-family: var(--font-hakushu); font-size: 0.8cm;">
+			<p class="min-h-[1.5em] text-base leading-relaxed" style="color: black; font-family: var(--font-hakushu); font-size: 1cm;">
 				{TOP_TEXT}
 			</p>
-			<p class="min-h-[1.5em] text-base leading-relaxed" style="color: black; font-family: var(--font-hakushu); font-size: 1.4cm; margin-bottom: 0.7cm;">
+			<p class="min-h-[1.5em] text-base leading-relaxed" style="color: black; font-family: var(--font-hakushu); font-size: 1.8cm; margin-bottom: 0.7cm;">
 				{middleText || "\u00A0"}
 			</p>
 			<a
 				href={detailHref}
 				class="inline-flex w-fit items-center justify-center text-base leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-				style="color: white; font-family: var(--font-hakushu); font-size: 0.6cm; text-decoration: none;"
+				style="color: white; font-family: var(--font-hakushu); font-size: 0.8cm; text-decoration: none;"
 			>
-				<span style="background-color: black; padding: 0.4em 0.4em; box-decoration-break: clone; -webkit-box-decoration-break: clone;">
+				<span style="background-color: black; padding: 0.8em 0.6em; box-decoration-break: clone; -webkit-box-decoration-break: clone;">
 					{BOTTOM_TEXT}
 				</span>
 			</a>
+			<div style="display: flex; gap: 0.3cm; margin-top: 2.8cm; margin-left: 0.8cm;">
+				<span style="display: block; width: 2.7cm; height: 0.08cm; background-color: black;"></span>
+				<span style="display: block; width: 2.7cm; height: 0.08cm; background-color: rgb(70, 70, 70);"></span>
+				<span style="display: block; width: 2.7cm; height: 0.08cm; background-color: rgb(70, 70, 70);"></span>
+				<span style="display: block; width: 2.7cm; height: 0.08cm; background-color: rgb(70, 70, 70);"></span>
+			</div>
 		</div>
 	</div>
 </div>

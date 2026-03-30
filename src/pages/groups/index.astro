@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import GroupIntroBox from "../../components/GroupIntroBox.astro";
 import stageImage from "./assets/stageImage.png";
 import introDuctImage from "./assets/タイトル画像.png";
-
+import shougaiImage from "./assets/特別班渉外事務局.png";
 const overlayText = "各班紹介";
 ---
 
@@ -16,7 +16,7 @@ const overlayText = "各班紹介";
     </section>
     <GroupIntroBox 
         imageSrc={stageImage.src}
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="ステージ班のイメージ画像"
         middleText="高三ステージ班"
         detailHref="/groups/stage"
     >
@@ -24,7 +24,7 @@ const overlayText = "各班紹介";
     
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="縁日班のイメージ画像"
         middleText="高三縁日班"
         detailHref="/groups/ennichi"
     >
@@ -32,7 +32,7 @@ const overlayText = "各班紹介";
     
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="食品班のイメージ画像"
         middleText="高三食品班"
         detailHref="/groups/shokuhin"
     >
@@ -40,7 +40,7 @@ const overlayText = "各班紹介";
     
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="喫茶班のイメージ画像"
         middleText="高三喫茶班"
         detailHref="/groups/kissa"
     >
@@ -48,7 +48,7 @@ const overlayText = "各班紹介";
     
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="コント班のイメージ画像"
         middleText="高三コント班"
         detailHref="/groups/konto"
     >
@@ -56,15 +56,18 @@ const overlayText = "各班紹介";
 
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="対話班のイメージ画像"
         middleText="高三対話班"
         detailHref="/groups/taiwa"
     >
     </GroupIntroBox>
 
     <GroupIntroBox 
-        imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageSrc= {shougaiImage.src}
+        imageAlt="渉外事務局のイメージ画像"
+        imageWidth="100%"
+        imageHeight="auto"
+        imagePadding="4cm"
         middleText="渉外事務局"
         detailHref="/groups/shougai"
     >
@@ -72,7 +75,7 @@ const overlayText = "各班紹介";
         
     <GroupIntroBox 
         imageSrc= ""
-        imageAlt="ステージ企画のイメージ画像"
+        imageAlt="お土産部門のイメージ画像"
         middleText="お土産部門"
         detailHref="/groups/omiyage"
     >
