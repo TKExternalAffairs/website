@@ -1,0 +1,50 @@
+name: webp-bot
+
+on:
+  push:
+    paths:
+      - "src/assets/Images/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: webp-bot-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-webp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Generate WebP assets
+        run: npm run convert:images
+
+      - name: Commit generated assets
+        shell: bash
+        run: |
+          if [[ -z "$(git status --porcelain -- src/assets/Webp)" ]]; then
+            echo "No generated asset changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/Webp
+          git commit -m "chore: update generated webp assets"
+          git push
