@@ -13,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   redirects: {
-    "/beforedonation": "/before-donation"
+    "/beforedonation": "/before-donating"
   }
   /*experimental: {
     fonts: [
