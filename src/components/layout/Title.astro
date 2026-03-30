@@ -4,11 +4,11 @@ interface Props {
   heroImage?: string;
 }
 
-const { title, heroImage } = Astro.props as Props;
+const { title, heroImage } = Astro.props;
 ---
 
 <section
-  class="relative flex h-[32rem] items-center justify-center overflow-hidden rounded-lg bg-gray-950"
+  class="relative flex h-128 items-center justify-center overflow-hidden rounded-lg bg-gray-950"
 >
   {
     heroImage && (
@@ -16,7 +16,6 @@ const { title, heroImage } = Astro.props as Props;
         src={heroImage}
         alt=""
         aria-hidden="true"
-        role="presentation"
         class="absolute inset-0 h-full w-full object-cover opacity-40"
       />
     )
