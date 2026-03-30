@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="jp" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.1"><title>Astro Basics</title><script type="module">(function(t){var c={kitId:"hxo7nit",scriptTimeout:3e3,async:!0},i=t.documentElement,a=setTimeout(function(){i.className=i.className.replace(/\bwf-loading\b/g,"")+" wf-inactive"},c.scriptTimeout),e=t.createElement("script"),n=t.getElementsByTagName("script")[0];i.className+=" wf-loading",e.src="https://use.typekit.net/"+c.kitId+".js",e.async=!0,e.onload=function(){clearTimeout(a);try{Typekit.load(c)}catch{}},n.parentNode?.insertBefore(e,n)})(document);</script><link rel="stylesheet" href="/_astro/_slug_.CNi1ZPfQ.css"></head> <body data-astro-cid-37fxchfa>  <header class="relative flex justify-between bg-repeat lg:hidden" , style="background-image: url(/_astro/header_background_partial.3cfSDqV__1Snv4h.svg);"> <a href="/" class="block h-full w-30">  <img src="/_astro/logo.nAGNr5Om_13T6U8.svg" alt="ホームロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="90"> </a> <button type="button" class="z-2" id="mobile-global-menu-open" aria-expanded="false" aria-controls="mobile-global-menu" aria-label="メニューを開く"> <img src="/_astro/hamburger_open.C5yNPgc-_Z1HrfeR.svg" ,="true" alt="メニュー" fetchpriority="high" loading="eager" decoding="async" width="40" height="40"> </button> <button type="button" class="z-2 hidden" id="mobile-global-menu-close" aria-expanded="true" aria-controls="mobile-global-menu" aria-label="メニューを閉じる"> <img src="/_astro/hamburger_close.d8jfWset_Z1HrfeR.svg" ,="true" alt="メニュー" fetchpriority="high" loading="eager" decoding="async" width="40" height="40"> </button> </header> <nav id="mobile-global-menu" class="fixed -z-10 hidden"> <ul>  <li> <p class="font-hakushu text-2xl text-white">各班紹介</p>  <ul>  <li> <a href="/kakuhansyoukai/stage" class="font-hakushu text-white">ステージ班</a> </li> <li> <a href="/kakuhansyoukai/ennichi" class="font-hakushu text-white">縁日班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">ご協賛について</p>  <ul>  <li> <a href="/kyousan/onegai" class="font-hakushu text-white">ご協賛のお願い</a> </li> <li> <a href="/kyousan/ichiran" class="font-hakushu text-white">協賛企業一覧</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">メニュー</p>  <ul>  <li> <a href="/menu/syokuhin" class="font-hakushu text-white">食品班</a> </li> <li> <a href="/menu/kissa" class="font-hakushu text-white">喫茶班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">タイムテーブル</p>  <ul>  <li> <a href="/timetable/stage" class="font-hakushu text-white">ステージ班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">ご案内</p>  <ul>  <li> <a href="/goannai/map" class="font-hakushu text-white">マップ</a> </li>  </ul> </li> </ul> </nav> <script>
+  const openButton = document.getElementById("mobile-global-menu-open");
+  const closeButton = document.getElementById("mobile-global-menu-close");
+  const menu = document.getElementById("mobile-global-menu");
+
+  openButton?.addEventListener("click", () => {
+    menu.classList.remove("hidden");
+    menu.classList.remove("-z-10");
+    openButton.classList.add("hidden");
+    closeButton.classList.remove("hidden");
+  });
+
+  closeButton.addEventListener("click", () => {
+    menu.classList.add("hidden");
+    menu.classList.add("-z-10");
+    closeButton.classList.add("hidden");
+    openButton.classList.remove("hidden");
+  });
+</script> <header class="relative hidden min-h-15 items-center justify-between bg-repeat lg:flex" style="background-image: url(/_astro/header_background_partial.3cfSDqV__1Snv4h.svg);"> <a href="/" class="block h-full w-30">  <img src="/_astro/logo.nAGNr5Om_13T6U8.svg" alt="ホームロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="90"> </a> <nav> <ul class="flex flex-row items-center gap-x-2"> <li> <a href="/" class="font-hakushu m-2 p-2 text-2xl text-white">各班紹介</a> </li> <li> <a href="/kyousan/onegai" class="font-hakushu m-2 p-2 text-2xl text-white">ご協賛について</a> </li> <li> <a href="https://tsukukoma.bunkasai.info" class="font-hakushu m-2 p-2 text-2xl text-white outline">公式ホームページ</a> </li> </ul> </nav> </header> <main>  </main> <footer class="mt-auto mb-5 w-full justify-items-center border-t border-double border-white"> <div class="mt-10 mb-15 flex min-w-[50%] flex-wrap justify-center gap-x-[10%]"> <img src="/_astro/logo.nAGNr5Om_2m2tNB.svg" alt="ロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="87"> <address> <p class="text-2xl">第七十五回筑駒文化祭 高三特別班</p> <p>The 75th Tsukukoma School Festival The 12th Grade Special Teams</p> <br> <p>&#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校</p> </address> </div> <p>Designed and Produced by</p> <img src="/_astro/shogai_logo.BGOYueOZ_1fDvj6.svg" alt="高三特別班 渉外事務局 ロゴ" fetchpriority="low" loading="lazy" decoding="async" width="594" height="172" class="mt-5 mb-15"> <p>
+&copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS, All
+    rights reserved
+</p> </footer>   <script>
+  const theme = (() => {
+    const localStorageTheme = localStorage?.getItem("theme") ?? "";
+    if (["dark", "light"].includes(localStorageTheme)) {
+      return localStorageTheme;
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  document.documentElement.setAttribute("data-theme", "dark"); // TODO: トグルボタン創る
+
+  window.localStorage.setItem("theme", theme);
+</script></body></html>

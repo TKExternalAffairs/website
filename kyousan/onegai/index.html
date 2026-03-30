@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="jp" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.1"><title>Astro Basics</title><script type="module">(function(t){var c={kitId:"hxo7nit",scriptTimeout:3e3,async:!0},i=t.documentElement,a=setTimeout(function(){i.className=i.className.replace(/\bwf-loading\b/g,"")+" wf-inactive"},c.scriptTimeout),e=t.createElement("script"),n=t.getElementsByTagName("script")[0];i.className+=" wf-loading",e.src="https://use.typekit.net/"+c.kitId+".js",e.async=!0,e.onload=function(){clearTimeout(a);try{Typekit.load(c)}catch{}},n.parentNode?.insertBefore(e,n)})(document);</script><link rel="stylesheet" href="/_astro/_slug_.CNi1ZPfQ.css"></head> <body data-astro-cid-37fxchfa>  <header class="relative flex justify-between bg-repeat lg:hidden" , style="background-image: url(/_astro/header_background_partial.3cfSDqV__1Snv4h.svg);"> <a href="/" class="block h-full w-30">  <img src="/_astro/logo.nAGNr5Om_13T6U8.svg" alt="ホームロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="90"> </a> <button type="button" class="z-2" id="mobile-global-menu-open" aria-expanded="false" aria-controls="mobile-global-menu" aria-label="メニューを開く"> <img src="/_astro/hamburger_open.C5yNPgc-_Z1HrfeR.svg" ,="true" alt="メニュー" fetchpriority="high" loading="eager" decoding="async" width="40" height="40"> </button> <button type="button" class="z-2 hidden" id="mobile-global-menu-close" aria-expanded="true" aria-controls="mobile-global-menu" aria-label="メニューを閉じる"> <img src="/_astro/hamburger_close.d8jfWset_Z1HrfeR.svg" ,="true" alt="メニュー" fetchpriority="high" loading="eager" decoding="async" width="40" height="40"> </button> </header> <nav id="mobile-global-menu" class="fixed -z-10 hidden"> <ul>  <li> <p class="font-hakushu text-2xl text-white">各班紹介</p>  <ul>  <li> <a href="/kakuhansyoukai/stage" class="font-hakushu text-white">ステージ班</a> </li> <li> <a href="/kakuhansyoukai/ennichi" class="font-hakushu text-white">縁日班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">ご協賛について</p>  <ul>  <li> <a href="/kyousan/onegai" class="font-hakushu text-white">ご協賛のお願い</a> </li> <li> <a href="/kyousan/ichiran" class="font-hakushu text-white">協賛企業一覧</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">メニュー</p>  <ul>  <li> <a href="/menu/syokuhin" class="font-hakushu text-white">食品班</a> </li> <li> <a href="/menu/kissa" class="font-hakushu text-white">喫茶班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">タイムテーブル</p>  <ul>  <li> <a href="/timetable/stage" class="font-hakushu text-white">ステージ班</a> </li>  </ul> </li> <li> <p class="font-hakushu text-2xl text-white">ご案内</p>  <ul>  <li> <a href="/goannai/map" class="font-hakushu text-white">マップ</a> </li>  </ul> </li> </ul> </nav> <script>
+  const openButton = document.getElementById("mobile-global-menu-open");
+  const closeButton = document.getElementById("mobile-global-menu-close");
+  const menu = document.getElementById("mobile-global-menu");
+
+  openButton?.addEventListener("click", () => {
+    menu.classList.remove("hidden");
+    menu.classList.remove("-z-10");
+    openButton.classList.add("hidden");
+    closeButton.classList.remove("hidden");
+  });
+
+  closeButton.addEventListener("click", () => {
+    menu.classList.add("hidden");
+    menu.classList.add("-z-10");
+    closeButton.classList.add("hidden");
+    openButton.classList.remove("hidden");
+  });
+</script> <header class="relative hidden min-h-15 items-center justify-between bg-repeat lg:flex" style="background-image: url(/_astro/header_background_partial.3cfSDqV__1Snv4h.svg);"> <a href="/" class="block h-full w-30">  <img src="/_astro/logo.nAGNr5Om_13T6U8.svg" alt="ホームロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="90"> </a> <nav> <ul class="flex flex-row items-center gap-x-2"> <li> <a href="/" class="font-hakushu m-2 p-2 text-2xl text-white">各班紹介</a> </li> <li> <a href="/kyousan/onegai" class="font-hakushu m-2 p-2 text-2xl text-white">ご協賛について</a> </li> <li> <a href="https://tsukukoma.bunkasai.info" class="font-hakushu m-2 p-2 text-2xl text-white outline">公式ホームページ</a> </li> </ul> </nav> </header> <main>  <section class="relative flex h-128 items-center justify-center overflow-hidden rounded-lg bg-gray-950"> <img src="/images/kyousan-hero.png" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover opacity-40"> <h1 class="font-hakushu relative z-10 text-center text-3xl tracking-[0.2em] [writing-mode:vertical-lr] sm:text-4xl"> ご協賛のお願い </h1> </section> <section class="mx-auto w-full max-w-5xl px-4 py-12 text-sm leading-8 text-gray-100 sm:px-6 sm:text-base lg:px-8"> <div class="space-y-8"> <p>
+平素は筑駒文化祭の運営につきまして、格別のご理解とご協力を賜り、厚く御礼申し上げます。
+</p> <p>
+筑駒文化祭は今年度で75回目を迎え、企画・運営から当日の実施に至るまで、
+        すべて生徒の手によって創り上げられる「生徒主体」の伝統を大切に、準備を進めています。
+        とりわけ、本校文化祭の最大の見どころとなっているのが、高校3年生による特別班「高三特別班」で、
+        ステージや縁日の運営、食品の提供など他学年にはない大規模な企画を実施しており、
+        約15,000名の来場者の皆様に唯一無二の体験を提供しています。
+</p> <p>
+一方で、近年の物価高の影響を受け、食品提供などに使用されるチケットの販売価格が
+        昨年度約1.3倍に引き上げられた他、必要な器材の不足から準備の遅滞が見られる例も少なくありません。
+</p> <p>
+私たちは、物販が過度な営利に走ることを防ぎ、文化祭としての純粋な価値を守り抜きたいと考えています。
+        その一環として、今年度の筑駒文化祭では企業協賛を募集いたします。
+        つきましては、誠に恐縮ではございますが、本文化祭の趣旨にご賛同いただき、
+        何卒ご協賛を賜りたくお願い申し上げる次第です。
+        賜りましたご支援は、文化祭の食品提供や準備費、器材購入に大切に活用させていただきます。
+</p> <p>
+ご支援いただきました折には、ホームページや当日配布する公式パンフレット、
+        文化祭当日に開設する特設掲示板などに貴社名やロゴを掲示・掲載させていただきます。
+</p> <p>
+ご興味を持っていただけましたら、以下のフォームよりお問い合わせください。
+        より詳細な資料（協賛募集要項）を用意しております。
+</p> <p>
+高校生活最後の文化祭を最高傑作に創り上げるため、全力を尽くしてまいります。
+        何卒、温かいご支援を賜りますようお願い申し上げます。
+</p> <div class="pt-4 text-right leading-8"> <p>筑波大学附属駒場中・高等学校 高三特別班 渉外事務局長</p> <p class="font-hakushu text-lg font-bold">中河 颯太</p> </div> <div class="flex justify-center pt-8"> <a href="https://forms.gle/REPLACE_ME" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-white px-10 py-4 text-black transition hover:opacity-80" style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-size: 28px; font-weight: 700; letter-spacing: 0.08em;">
+お問い合わせフォーム
+</a> </div> </div> </section> <section id="sponsors" class="bg-[#e9e9e9] py-20 text-black"> <div class="mx-auto w-full max-w-[1700px] px-6"> <div class="text-center"> <h2 class="text-5xl" style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.12em;">
+協賛企業一覧
+</h2> <p class="mx-auto mt-8 max-w-4xl text-[20px] leading-9">
+以下の企業の皆様より、第75回筑駒文化祭へのご支援を賜りました。ここに深く御礼申し上げます。
+</p> </div> <div class="mt-16 space-y-10"> <div class="flex flex-wrap justify-center gap-x-8 gap-y-8"> <div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white"> <span class="text-center" style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 20px; font-weight: 700;">
+大：300(px)×200(px)
+</span> </div><div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div> </div> <div class="flex flex-wrap justify-center gap-x-8 gap-y-8"> <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white"> <span class="text-center" style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 20px; font-weight: 700;">
+小：300(px)×100(px)
+</span> </div><div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div><div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">  </div> </div> <div class="px-12 pt-12"> <div class="flex flex-wrap items-center gap-x-16 gap-y-6"> <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
+・○○株式会社 </p> <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
+文字のみ：高さ 30px（游ゴシック体）
+</p> </div> </div> </div> </div> </section>  </main> <footer class="mt-auto mb-5 w-full justify-items-center border-t border-double border-white"> <div class="mt-10 mb-15 flex min-w-[50%] flex-wrap justify-center gap-x-[10%]"> <img src="/_astro/logo.nAGNr5Om_2m2tNB.svg" alt="ロゴ" loading="lazy" decoding="async" fetchpriority="auto" width="300" height="87"> <address> <p class="text-2xl">第七十五回筑駒文化祭 高三特別班</p> <p>The 75th Tsukukoma School Festival The 12th Grade Special Teams</p> <br> <p>&#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校</p> </address> </div> <p>Designed and Produced by</p> <img src="/_astro/shogai_logo.BGOYueOZ_1fDvj6.svg" alt="高三特別班 渉外事務局 ロゴ" fetchpriority="low" loading="lazy" decoding="async" width="594" height="172" class="mt-5 mb-15"> <p>
+&copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS, All
+    rights reserved
+</p> </footer>   <script>
+  const theme = (() => {
+    const localStorageTheme = localStorage?.getItem("theme") ?? "";
+    if (["dark", "light"].includes(localStorageTheme)) {
+      return localStorageTheme;
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  document.documentElement.setAttribute("data-theme", "dark"); // TODO: トグルボタン創る
+
+  window.localStorage.setItem("theme", theme);
+</script></body></html>
