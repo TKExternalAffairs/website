@@ -1,0 +1,35 @@
+---
+import Title from "../components/layout/Title.astro";
+import HeroImage from "../assets/hero_desktop.webp";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <main class="pb-8">
+    <Title heroImage={HeroImage.src} title="ご寄付の前に" />
+    <div class="mx-auto w-full max-w-4xl px-12">
+      <h2 class="font-hakushu mt-12 mb-8 text-4xl">学校行事へのご支援</h2>
+      <p class="my-1.5">
+        本校学校行事へのご支援にご興味をお持ちくださいましてありがとうございます。
+        <br />
+        該当する学校行事を以下よりお選びください。
+      </p>
+      <ul class="my-4 text-lg">
+        <li>
+          (1) 第75回筑駒文化祭 高３特別班 企業協賛は<a
+            href="https://example.com"
+            style="color: revert;
+          text-decoration: revert;">こちら</a
+          >
+        </li>
+        <li>
+          (2) その他 学校行事へのご支援は<a
+            href="https://example.com"
+            style="color: revert;
+          text-decoration: revert;">こちら</a
+          >
+        </li>
+      </ul>
+    </div>
+  </main>
+</BaseLayout>
