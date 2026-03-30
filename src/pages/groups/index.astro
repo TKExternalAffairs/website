@@ -1,0 +1,68 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import stageImage from "./assets/stageImage.png";
+import introDuctImage from "./assets/タイトル画像.png";
+import Title from "../../components/layout/Title.astro";
+import shougaiImage from "./assets/特別班渉外事務局.png";
+---
+
+<Layout>
+  <Title heroImage={introDuctImage.src} title="各班紹介" />
+  <GroupIntroBox
+    imageSrc={stageImage.src}
+    imageAlt="ステージ班のイメージ画像"
+    middleText="高三ステージ班"
+    detailHref="/groups/stage"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="縁日班のイメージ画像"
+    middleText="高三縁日班"
+    detailHref="/groups/ennichi"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="食品班のイメージ画像"
+    middleText="高三食品班"
+    detailHref="/groups/shokuhin"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="喫茶班のイメージ画像"
+    middleText="高三喫茶班"
+    detailHref="/groups/kissa"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="コント班のイメージ画像"
+    middleText="高三コント班"
+    detailHref="/groups/konto"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="対話班のイメージ画像"
+    middleText="高三対話班"
+    detailHref="/groups/taiwa"
+  />
+
+  <GroupIntroBox
+    imageSrc={shougaiImage.src}
+    imageAlt="渉外事務局のイメージ画像"
+    imageClass="p-8 sm:p-12 md:p-16"
+    middleText="渉外事務局"
+    detailHref="/groups/shougai"
+  />
+
+  <GroupIntroBox
+    imageSrc=""
+    imageAlt="お土産部門のイメージ画像"
+    middleText="お土産部門"
+    detailHref="/groups/omiyage"
+  />
+</Layout>
