@@ -1,0 +1,24 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import NewsLayout from "../../layouts/News.astro";
+
+export async function getStaticPaths() {
+  const newsItems = await getCollection("news");
+  return newsItems.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+type Props = {
+  item: CollectionEntry<"news">;
+};
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<NewsLayout item={item}>
+  <article class="prose prose-invert mx-auto max-w-3xl px-4 py-8">
+    <Content />
+  </article>
+</NewsLayout>
