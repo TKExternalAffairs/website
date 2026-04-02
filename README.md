@@ -51,3 +51,10 @@ npm run convert:images
 
 - 生成後、`src/assets/Webp` に差分があれば `github-actions[bot]` が同じブランチへコミットします。
 - 生成コミットは `src/assets/Webp` しか変更しないため、このワークフローが無限ループすることはありません。
+
+## デプロイ運用
+
+- `master` へマージされると、GitHub Actions で自動デプロイされます。
+- デプロイ workflow は `.github/workflows/deploy-pages.yaml` です。
+- 手動実行する場合は GitHub Actions の `Deploy to GitHub Pages` を実行し、`source_ref` に対象ブランチ（通常は `master`）を指定します。
+- GitHub Pages の設定は `Settings > Pages > Build and deployment > Source: GitHub Actions` にしてください。
