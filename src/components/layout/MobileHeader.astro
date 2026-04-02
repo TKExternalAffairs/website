@@ -41,8 +41,15 @@ const bgImage = await getImage({ src: bgRawImage });
   <ul>
     {/* TODO: リンクは後で変える */}
     <MobileMenuSection className="my-3" title="各班紹介">
-      <MobileMenuItem title="ステージ班" link="/kakuhansyoukai/stage" />
-      <MobileMenuItem title="縁日班" link="/kakuhansyoukai/ennichi" />
+      <MobileMenuItem title="一覧" link="/groups" />
+      <MobileMenuItem title="ステージ班" link="/groups/stage" />
+      <MobileMenuItem title="縁日班" link="/groups/ennichi" />
+      <MobileMenuItem title="食品班" link="/groups/shokuhin" />
+      <MobileMenuItem title="喫茶班" link="/groups/kissa" />
+      <MobileMenuItem title="コント班" link="/groups/konto" />
+      <MobileMenuItem title="対話班" link="/groups/taiwa" />
+      <MobileMenuItem title="渉外事務局" link="/groups/shogai" />
+      <MobileMenuItem title="お土産部門" link="/groups/omiyage" />
     </MobileMenuSection>
     <MobileMenuSection className="my-3" title="ご協賛について">
       <MobileMenuItem title="ご協賛のお願い" link="/kyousan/onegai" />
@@ -76,6 +83,7 @@ const bgImage = await getImage({ src: bgRawImage });
   closeButton.addEventListener("click", () => {
     menu.style.transform = "translateX(100%)";
     menu.classList.remove("flex");
+    // TODO: closeButtonが消えるときのアニメーションが不自然
     closeButton.classList.add("hidden");
     openButton.classList.remove("hidden");
   });
