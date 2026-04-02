@@ -65,7 +65,7 @@ async function removeEmptyDirectories(directoryPath) {
   const remainingEntries = await fs.readdir(directoryPath);
 
   if (remainingEntries.length === 0 && directoryPath !== outputRoot) {
-    await fs.rmdir(directoryPath);
+    await fs.rm(directoryPath);
   }
 }
 
