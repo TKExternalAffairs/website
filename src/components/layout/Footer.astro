@@ -5,28 +5,35 @@ import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
 ---
 
 {/* FIXME: border-doubleが効いてなさそう */}
+<span class="relative block w-full border-t border-white py-px"></span>
 <footer
-  class="mt-auto mb-5 w-full justify-items-center border-t border-double border-white"
+  class="mt-auto w-full justify-items-center border-t border-double border-white px-4"
 >
   <div
-    class="mt-10 mb-15 flex min-w-[50%] flex-wrap justify-center gap-x-[10%]"
+    class="mt-10 mb-20 flex min-w-[50%] flex-wrap justify-center gap-x-[10%]"
   >
-    <Image src={logoImage} alt="ロゴ" />
-    <address>
-      <p class="text-2xl">第七十五回筑駒文化祭 高三特別班</p>
-      <p>The 75th Tsukukoma School Festival The 12th Grade Special Teams</p>
-      <br />
-      <p>&#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校</p>
+    <Image src={logoImage} alt="ロゴ" class="w-2/3" />
+    <address class="mt-4">
+      <p class="my-1.5 text-center">第七十五回筑駒文化祭 高三特別班</p>
+      <p class="my-0.5 text-center">
+        The 75th Tsukukoma School Festival The 12th Grade Special Teams
+      </p>
+      <p class="my-1.5 text-center">
+        &#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校
+      </p>
     </address>
   </div>
-  <p>Designed and Produced by</p>
-  <Image
-    src={shogaiLogoImage}
-    alt="高三特別班 渉外事務局 ロゴ"
-    class="mt-5 mb-15"
-    fetchpriority="low"
-  />
-  <p>
+  <div class="flex flex-wrap justify-center">
+    <p>Designed and Produced by</p>
+
+    <Image
+      src={shogaiLogoImage}
+      alt="高三特別班 渉外事務局 ロゴ"
+      class="mt-5 mb-15 w-2/3 object-contain"
+      fetchpriority="low"
+    />
+  </div>
+  <p class="px-2 pb-10">
     &copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS, All
     rights reserved
   </p>
