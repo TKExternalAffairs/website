@@ -1,14 +1,25 @@
 // @ts-check
+/// <reference types="node" />
 import { defineConfig } from "astro/config";
+import process from "node:process";
 
 import react from "@astrojs/react";
 
 import tailwindcss from "@tailwindcss/vite";
 
+const siteEnvironment = process.env.SITE_ENV ?? "production";
+const siteUrl =
+  process.env.SITE_URL ??
+  (siteEnvironment === "development"
+    ? "https://specialtest.bunkasai.info"
+    : "https://tkspecial.bunkasai.info");
+
+const siteBase = process.env.SITE_BASE ?? "/";
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://tkexternalaffairs.github.io",
-  base: "/website",
+  site: siteUrl,
+  base: siteBase,
 
   integrations: [react()],
 
@@ -16,8 +27,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   redirects: {
-    "/beforedonation": "/before-donating"
-  }
+    "/beforedonation": "/before-donating",
+  },
   /*experimental: {
     fonts: [
       {
