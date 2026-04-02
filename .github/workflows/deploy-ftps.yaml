@@ -52,23 +52,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Upload to FTPS
-        env:
-          FTP_HOST: ${{ secrets.FTPS_HOST_TKSPECIAL }}
-          FTP_USER: ${{ secrets.FTPS_USER_TKSPECIAL }}
-          FTP_PASS: ${{ secrets.FTPS_PASS_TKSPECIAL }}
-          FTP_PATH: ${{ secrets.FTPS_PATH_TKSPECIAL }}
-        run: |
-          lftp -u "$FTP_USER","$FTP_PASS" "ftps://$FTP_HOST" <<EOF
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ssl:verify-certificate no
-          set net:max-retries 2
-          set net:timeout 20
-          mkdir -p "$FTP_PATH"
-          cd "$FTP_PATH"
-          mirror --reverse --delete --verbose dist .
-          bye
-          EOF
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
+          username: ${{ secrets.FTPS_USER_TKSPECIAL }}
+          password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
+          local-dir: dist
+          server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
 
   deploy-development:
     if: (github.event_name == 'push' && github.ref_name == 'dev') || (github.event_name == 'workflow_dispatch' && inputs.target == 'development')
@@ -99,20 +89,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Upload to FTPS
-        env:
-          FTP_HOST: ${{ secrets.FTPS_HOST_SPECIALTEST }}
-          FTP_USER: ${{ secrets.FTPS_USER_SPECIALTEST }}
-          FTP_PASS: ${{ secrets.FTPS_PASS_SPECIALTEST }}
-          FTP_PATH: ${{ secrets.FTPS_PATH_SPECIALTEST }}
-        run: |
-          lftp -u "$FTP_USER","$FTP_PASS" "ftps://$FTP_HOST" <<EOF
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ssl:verify-certificate no
-          set net:max-retries 2
-          set net:timeout 20
-          mkdir -p "$FTP_PATH"
-          cd "$FTP_PATH"
-          mirror --reverse --delete --verbose dist .
-          bye
-          EOF
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
+          username: ${{ secrets.FTPS_USER_TKSPECIAL }}
+          password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
+          local-dir: dist
+          server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
