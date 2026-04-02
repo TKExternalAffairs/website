@@ -17,7 +17,9 @@ const supportedExtensions = new Set([
 ]);
 
 const parsedQuality = Number.parseInt(process.env.WEBP_QUALITY ?? "80", 10);
-const webpQuality = Number.isNaN(parsedQuality) ? 80 : parsedQuality;
+const webpQuality = Number.isNaN(parsedQuality)
+  ? 80
+  : Math.min(100, Math.max(0, parsedQuality));
 
 async function walkFiles(directoryPath) {
   const entries = await fs.readdir(directoryPath, { withFileTypes: true });
