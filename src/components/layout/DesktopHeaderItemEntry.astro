@@ -6,7 +6,6 @@ interface Props {
 const { title, link } = Astro.props;
 ---
 
-<li>
-  <a href={link} class="font-hakushu mx-10 text-[1.35rem] text-white">{title}</a
-  >
+<li class="px-5">
+  <a href={link} class="text-xl">{title}</a>
 </li>

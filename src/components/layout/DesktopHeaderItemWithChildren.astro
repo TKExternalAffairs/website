@@ -1,0 +1,44 @@
+---
+interface Props {
+  /**  Headerの中で一意であれば良い */
+  id: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<li id=`header-item-${id}__container`>
+  <button
+    id=`header-item-${id}__btn`
+    class="font-hakushu z-200 cursor-pointer text-2xl"
+  >
+    {title}
+  </button>
+  <ul
+    id=`header-item-${id}__entry-container`
+    class="font-hakushu absolute z-10 flex flex-col gap-4 rounded-b-xl border border-white bg-gray-900 opacity-0 transition-opacity duration-1000 ease-in"
+  >
+    <span class="before:py-3"></span>
+    <slot />
+    <span class="after:py-3"></span>
+  </ul>
+</li>
+
+<script define:vars={{ id }} is:inline>
+  // TODO: is:inlineを乱用しすぎているかもしれない
+  const btn = document.getElementById(`header-item-${id}__btn`);
+  const container = document.getElementById(`hedaer-item-${id}__container`);
+  const entryContainer = document.getElementById(
+    `header-item-${id}__entry-container`,
+  );
+
+  btn.addEventListener("mouseenter", () => {
+    entryContainer.classList.remove("opacity-0");
+  });
+
+  // TODO: 当たり判定が微妙かも
+  entryContainer.addEventListener("mouseleave", () => {
+    entryContainer.classList.add("opacity-0");
+  });
+</script>
