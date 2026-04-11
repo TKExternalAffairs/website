@@ -3,6 +3,8 @@ import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
 import DesktopHeaderItem from "./DesktopHeaderItem.astro";
 import { getImage } from "astro:assets";
+import DesktopHeaderItemEntry from "./DesktopHeaderItemEntry.astro";
+import DesktopHeaderItemWithChildren from "./DesktopHeaderItemWithChildren.astro";
 
 const image = await getImage({ src: bgRawImage, format: "svg" });
 ---
@@ -14,7 +16,17 @@ const image = await getImage({ src: bgRawImage, format: "svg" });
   <HomeLogo />
   <nav>
     <ul class="flex flex-row items-center gap-x-2">
-      <DesktopHeaderItem link="/" title="各班紹介" />
+      <DesktopHeaderItemWithChildren id="groups" title="各班紹介">
+        <DesktopHeaderItemEntry title="一覧" link="/groups" />
+        <DesktopHeaderItemEntry title="ステージ班" link="/groups/stage" />
+        <DesktopHeaderItemEntry title="縁日班" link="/groups/ennichi" />
+        <DesktopHeaderItemEntry title="食品班" link="/groups/shokuhin" />
+        <DesktopHeaderItemEntry title="喫茶班" link="/groups/kissa" />
+        <DesktopHeaderItemEntry title="コント班" link="/groups/konto" />
+        <DesktopHeaderItemEntry title="対話班" link="/groups/taiwa" />
+        <DesktopHeaderItemEntry title="渉外事務局" link="/groups/shogai" />
+        <DesktopHeaderItemEntry title="お土産部門" link="/groups/omiyage" />
+      </DesktopHeaderItemWithChildren>
       <DesktopHeaderItem link="/kyousan/onegai" title="ご協賛について" />
       <DesktopHeaderItem
         link="https://tsukukoma.bunkasai.info"
@@ -24,3 +36,5 @@ const image = await getImage({ src: bgRawImage, format: "svg" });
     </ul>
   </nav>
 </header>
+
+<script is:inline></script>
