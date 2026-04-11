@@ -8,12 +8,14 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "format": "prettier ./src --write"
+    "format": "prettier ./src --write",
+    "convert:images": "node ./scripts/convert-images.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/react": "^4.4.2",
     "@astrojs/ts-plugin": "^1.10.6",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.2"
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "sharp": "^0.34.5"
   }
 }

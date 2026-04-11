@@ -7,11 +7,17 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://tkexternalaffairs.github.io",
+  base: "/website",
+
   integrations: [react()],
 
   vite: {
     plugins: [tailwindcss()],
   },
+  redirects: {
+    "/beforedonation": "/before-donating"
+  }
   /*experimental: {
     fonts: [
       {
