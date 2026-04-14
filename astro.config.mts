@@ -28,6 +28,7 @@ export default defineConfig({
   },
   redirects: {
     "/beforedonation": "/before-donating",
+    "/beforedonating": "/before-donating",
   },
   /*experimental: {
     fonts: [
