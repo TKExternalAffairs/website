@@ -1,0 +1,100 @@
+# FTPでアップロードする。
+
+name: Deploy via FTPS
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Deployment target"
+        required: true
+        type: choice
+        options:
+          - production
+          - development
+        default: development
+      source_ref:
+        description: "Branch or tag to build"
+        required: true
+        default: master
+
+permissions: {}
+
+jobs:
+  deploy-production:
+    if: (github.event_name == 'push' && github.ref_name == 'master') || (github.event_name == 'workflow_dispatch' && inputs.target == 'production')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.source_ref || github.ref_name }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          SITE_ENV: production
+          SITE_URL: https://tkspecial.bunkasai.info
+          SITE_BASE: /
+        run: npm run build
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload to FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
+          username: ${{ secrets.FTPS_USER_TKSPECIAL }}
+          password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
+
+  deploy-development:
+    if: (github.event_name == 'push' && github.ref_name == 'dev') || (github.event_name == 'workflow_dispatch' && inputs.target == 'development')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.source_ref || github.ref_name }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          SITE_ENV: development
+          SITE_URL: https://specialtest.bunkasai.info
+          SITE_BASE: /
+        run: npm run build
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload to FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTPS_HOST_SPECIALTEST }}
+          username: ${{ secrets.FTPS_USER_SPECIALTEST }}
+          password: ${{ secrets.FTPS_PASS_SPECIALTEST }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTPS_PATH_SPECIALTEST }}
