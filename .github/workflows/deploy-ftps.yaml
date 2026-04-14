@@ -59,7 +59,7 @@ jobs:
           server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
           username: ${{ secrets.FTPS_USER_TKSPECIAL }}
           password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
-          local-dir: dist
+          local-dir: dist/
           server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
 
   deploy-development:
@@ -96,5 +96,5 @@ jobs:
           server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
           username: ${{ secrets.FTPS_USER_TKSPECIAL }}
           password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
-          local-dir: dist
+          local-dir: dist/
           server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
