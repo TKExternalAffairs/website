@@ -1,3 +1,5 @@
+# FTPでアップロードする。
+
 name: Deploy via FTPS
 
 on:
