@@ -54,7 +54,7 @@ npm run convert:images
 
 ## デプロイ運用
 
-- `master` へマージされると、GitHub Actions で自動デプロイされます。
-- デプロイ workflow は `.github/workflows/deploy-pages.yaml` です。
-- 手動実行する場合は GitHub Actions の `Deploy to GitHub Pages` を実行し、`source_ref` に対象ブランチ（通常は `master`）を指定します。
-- GitHub Pages の設定は `Settings > Pages > Build and deployment > Source: GitHub Actions` にしてください。
+- `master` は本番サイト `tkspecial.bunkasai.info`、`dev` はテストサイト `specialtest.bunkasai.info` に対応します。
+- デプロイ workflow は `.github/workflows/deploy-ftps.yaml` です。
+- push で自動デプロイし、FTPS 経由で各公開先へ `dist/` を同期します。
+- GitHub Secrets に `FTPS_HOST_TKSPECIAL`、`FTPS_USER_TKSPECIAL`、`FTPS_PASS_TKSPECIAL`、`FTPS_PATH_TKSPECIAL`、`FTPS_HOST_SPECIALTEST`、`FTPS_USER_SPECIALTEST`、`FTPS_PASS_SPECIALTEST`、`FTPS_PATH_SPECIALTEST` を登録してください。
