@@ -93,8 +93,8 @@ jobs:
       - name: Upload to FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
-          username: ${{ secrets.FTPS_USER_TKSPECIAL }}
-          password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
+          server: ${{ secrets.FTPS_HOST_SPECIALTEST }}
+          username: ${{ secrets.FTPS_USER_SPECIALTEST }}
+          password: ${{ secrets.FTPS_PASS_SPECIALTEST }}
           local-dir: dist/
-          server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
+          server-dir: ${{ secrets.FTPS_PATH_SPECIALTEST }}
