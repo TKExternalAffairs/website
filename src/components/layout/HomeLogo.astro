@@ -3,7 +3,11 @@ import { Image } from "astro:assets";
 import logoImage from "../../assets/SVG/logo.svg";
 ---
 
-<a href="/" class="block h-full w-30">
+<a href="/" class="inline-block shrink-0 leading-none">
   {/* TODO: widthとheightちゃんと設定する */}
-  <Image src={logoImage} alt={"ホームロゴ"} width={300} height={90} />
+  <Image
+    src={logoImage}
+    alt={"ホームロゴ"}
+    class="block h-[clamp(1.5rem,5vh,4rem)] w-auto"
+  />
 </a>
