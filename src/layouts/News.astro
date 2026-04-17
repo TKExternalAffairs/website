@@ -11,7 +11,7 @@ const { item } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = item.data;
 ---
 
-<Layout>
+<Layout title={title} description={description}>
   <section class="mx-auto pt-20 pb-5 lg:pb-20">
     <div
       class="flex flex-col items-center justify-center gap-4 p-4 text-center sm:whitespace-nowrap"

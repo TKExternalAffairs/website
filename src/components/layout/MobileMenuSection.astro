@@ -1,12 +1,15 @@
 ---
 interface Props {
   title: string;
+  className?: string;
 }
-const { title } = Astro.props;
+const { title, className } = Astro.props;
 ---
 
-<li>
-  <p class="font-hakushu text-2xl text-white">{title}</p>
+<li class:list={[className]}>
+  <p class="font-hakushu mx-6 text-2xl text-white">
+    {title}
+  </p>
   {/* TODO: pよりh3とかの方がよい? */}
   <ul>
     <slot />

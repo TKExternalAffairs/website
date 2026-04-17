@@ -5,16 +5,14 @@ import Title from "../../components/layout/Title.astro";
 type SponsorLogo = {
   image: string;
   alt: string;
-} | null;
+};
 
-const sponsorLarge: SponsorLogo[] = [null, null, null, null, null];
-
-const sponsorSmall: SponsorLogo[] = [null, null, null, null, null];
-
-const sponsorTextOnly = ["○○株式会社"];
+const sponsorLarge: SponsorLogo[] = [];
+const sponsorSmall: SponsorLogo[] = [];
+const sponsorTextOnly: string[] = [];
 ---
 
-<Layout>
+<Layout title="協賛のお願い" description="高三特別班の協賛に関するご案内です。">
   <Title title="ご協賛のお願い" heroImage="/images/kyousan-hero.png" />
 
   <section
@@ -62,13 +60,16 @@ const sponsorTextOnly = ["○○株式会社"];
       </p>
 
       <div class="pt-4 text-right leading-8">
-        <p>筑波大学附属駒場中・高等学校 高三特別班 渉外事務局長</p>
-        <p class="font-hakushu text-lg font-bold">中河 颯太</p>
+        <p class="font-hakushu text-lg font-bold">
+          筑波大学附属駒場中・高等学校 高三特別班 渉外事務局
+        </p>
+        <p class="font-hakushu text-lg font-bold">顧問　早川 和彦</p>
+        <p class="font-hakushu text-lg font-bold">事務局長　中河 颯太</p>
       </div>
 
       <div class="flex justify-center pt-8">
         <a
-          href="https://forms.gle/REPLACE_ME"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center bg-white px-10 py-4 text-black transition hover:opacity-80"
@@ -95,68 +96,35 @@ const sponsorTextOnly = ["○○株式会社"];
       </div>
 
       <div class="mt-16 space-y-10">
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-          {
-            sponsorLarge.map((sponsor, index) => (
-              <div class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
-                {sponsor ? (
+        {
+          sponsorSmall.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+              {sponsorSmall.map((sponsor) => (
+                <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
                   <img
                     src={sponsor.image}
                     alt={sponsor.alt}
                     class="max-h-full max-w-full object-contain p-3"
                   />
-                ) : index === 0 ? (
-                  <span
-                    class="text-center"
-                    style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 20px; font-weight: 700;"
-                  >
-                    大：300(px)×200(px)
-                  </span>
-                ) : null}
-              </div>
-            ))
-          }
-        </div>
+                </div>
+              ))}
+            </div>
+          )
+        }
 
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-          {
-            sponsorSmall.map((sponsor, index) => (
-              <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
-                {sponsor ? (
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.alt}
-                    class="max-h-full max-w-full object-contain p-3"
-                  />
-                ) : index === 0 ? (
-                  <span
-                    class="text-center"
-                    style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 20px; font-weight: 700;"
-                  >
-                    小：300(px)×100(px)
-                  </span>
-                ) : null}
+        {
+          sponsorTextOnly.length > 0 && (
+            <div class="px-12 pt-12">
+              <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
+                {sponsorTextOnly.map((name) => (
+                  <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
+                    ・{name}
+                  </p>
+                ))}
               </div>
-            ))
-          }
-        </div>
-
-        <div class="px-12 pt-12">
-          <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
-            {
-              sponsorTextOnly.map((name) => (
-                <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
-                  ・{name}
-                </p>
-              ))
-            }
-            <p
-              style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;"
-            >
-              文字のみ：高さ 30px（游ゴシック体）
-            </p>
-          </div>
-        </div>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>

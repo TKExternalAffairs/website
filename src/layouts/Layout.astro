@@ -3,9 +3,16 @@ import DesktopHeader from "../components/layout/DesktopHeader.astro";
 import Footer from "../components/layout/Footer.astro";
 import MobileHeader from "../components/layout/MobileHeader.astro";
 import BaseLayout from "./BaseLayout.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  noIndex?: boolean;
+};
 ---
 
-<BaseLayout>
+<BaseLayout {...Astro.props as Props}>
   <MobileHeader />
   <DesktopHeader />
   <main>
