@@ -9,7 +9,9 @@ import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
 <footer
   class="mt-auto w-full justify-items-center border-t border-double border-white px-4"
 >
-  <div class="mx-auto w-full max-w-5xl">
+  <div
+    class="flex flex-wrap items-center justify-center gap-10 md:items-start md:justify-between md:gap-0"
+  >
     <div class="mt-10 mb-20 flex max-w-5xl justify-center gap-x-[10%] px-12">
       <Image src={logoImage} alt="ロゴ" class="w-1/3" />
       <address class="not-italic">
@@ -22,19 +24,19 @@ import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
         </p>
       </address>
     </div>
-    <div class="flex flex-wrap justify-center">
-      <p>Designed and Produced by</p>
-
-      <Image
-        src={shogaiLogoImage}
-        alt="高三特別班 渉外事務局 ロゴ"
-        class="mt-5 mb-15 w-2/3 object-contain"
-        fetchpriority="low"
-      />
-    </div>
-    <p class="px-2 pb-10">
-      &copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS,
-      All rights reserved
-    </p>
   </div>
+  <div class="flex flex-wrap justify-center">
+    <p>Designed and Produced by</p>
+
+    <Image
+      src={shogaiLogoImage}
+      alt="高三特別班 渉外事務局 ロゴ"
+      class="mt-5 mb-15 w-2/3 object-contain"
+      fetchpriority="low"
+    />
+  </div>
+  <p class="px-2 pb-10">
+    &copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS, All
+    rights reserved
+  </p>
 </footer>
