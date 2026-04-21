@@ -7,38 +7,48 @@ import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
 {/* FIXME: border-doubleが効いてなさそう */}
 <span class="relative block w-full border-t border-white py-px"></span>
 <footer
-  class="mt-auto w-full justify-items-center border-t border-double border-white px-4 pt-16"
+  class="mt-auto w-full justify-items-center border-t border-double border-white px-4 pt-5 md:pt-16"
 >
-  <div class="flex flex-col gap-16 md:gap-24">
+  <div class="flex flex-col gap-5 md:gap-18">
     <!-- ロゴと住所 -->
     <div
-      class="flex max-w-5xl flex-col justify-center gap-x-[10%] px-12 md:flex-row"
+      class="flex max-w-5xl flex-col items-center justify-center gap-5 px-12 md:flex-row md:gap-10"
     >
-      <Image src={logoImage} alt="ロゴ" class="w-64" />
-      <address class="text-center whitespace-nowrap not-italic md:text-left">
-        <p class="text-md mb-2">第七十五回筑駒文化祭 高三特別班</p>
-        <p class="mb-3 text-[0.6rem] leading-loose tracking-wide">
+      <Image src={logoImage} alt="ロゴ" class="w-32 md:w-64" />
+      <address
+        class="text-center wrap-break-word whitespace-nowrap not-italic md:text-left"
+      >
+        <p class="md:text-md text-[0.4rem] md:mb-2">
+          第七十五回筑駒文化祭 高三特別班
+        </p>
+        <p
+          class="text-[0.4rem] leading-loose tracking-wide md:mb-3 md:text-[0.6rem]"
+        >
           The 75th Tsukukoma School Festival The 12th Grade Special Teams
         </p>
-        <p class="text-[0.6rem] leading-loose tracking-wide">
+        <p class="text-[0.4rem] leading-loose tracking-wide md:text-[0.6rem]">
           &#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校
         </p>
       </address>
     </div>
     <!-- 設計・制作 -->
-    <div class="flex flex-col items-center">
-      <p class="font-light">Designed and Produced by</p>
+    <div class="flex flex-col items-center gap-3">
+      <p class="text-[0.6rem] font-light md:text-base">
+        Designed and Produced by
+      </p>
 
       <Image
         src={shogaiLogoImage}
         alt="高三特別班 渉外事務局 ロゴ"
-        class="w-64 object-contain md:w-80"
+        class="w-48 object-contain md:w-80"
         fetchpriority="low"
       />
     </div>
-    <p class="px-2 pb-10 text-center text-xs tracking-wide">
+    <p
+      class="mx-auto px-2 pb-10 text-center text-[clamp(0.1rem,1.5vw,0.5rem)] tracking-wide whitespace-nowrap md:text-xs"
+    >
       &copy;THE 75TH TSUKUKOMA SCHOOL FESTIVAL THE 12TH GRADE SPEACIAL TEAMS,
-      All rights reserved
+      All rights reserved.
     </p>
   </div>
 </footer>
