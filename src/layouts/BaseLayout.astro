@@ -38,6 +38,8 @@ const canonical = canonicalUrl(canonicalPath);
       content={noIndex ? "noindex, nofollow" : "index, follow"}
     />
     <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="dns-prefetch" href="https://use.typekit.net" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
