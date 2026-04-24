@@ -1,14 +1,40 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import shutokoLogo from "../../assets/sponsors/shutoko.jpg";
+import blueqatLogo from "../../assets/sponsors/blueqat.png";
+import kinujoLogo from "../../assets/sponsors/Kinujo.png";
 
 type SponsorLogo = {
-  image: string;
+  image: ImageMetadata;
   alt: string;
+  href: string;
 };
 
-const sponsorLarge: SponsorLogo[] = [];
-const sponsorSmall: SponsorLogo[] = [];
+const sponsorLarge: SponsorLogo[] = [
+  {
+    image: shutokoLogo,
+    alt: "首都高速道路株式会社",
+    href: "https://www.shutoko.co.jp/",
+  },
+];
+
+const sponsorSmall: SponsorLogo[] = [
+  {
+    image: blueqatLogo,
+    alt: "blueqat株式会社",
+    href: "https://blueqat.co.jp/",
+  },
+  {
+    image: kinujoLogo,
+    alt: "KINUJO",
+    href: "https://kinujo.jp/",
+  },
+];
+
 const sponsorTextOnly: string[] = [];
 ---
 
@@ -110,16 +136,42 @@ const sponsorTextOnly: string[] = [];
 
       <div class="mt-16 space-y-10">
         {
+          sponsorLarge.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+              {sponsorLarge.map((sponsor) => (
+                <a
+                  href={sponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                >
+                  <Image
+                    src={sponsor.image}
+                    alt={sponsor.alt}
+                    class="block max-h-full max-w-full object-contain object-center"
+                  />
+                </a>
+              ))}
+            </div>
+          )
+        }
+
+        {
           sponsorSmall.length > 0 && (
             <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
               {sponsorSmall.map((sponsor) => (
-                <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
-                  <img
+                <a
+                  href={sponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                >
+                  <Image
                     src={sponsor.image}
                     alt={sponsor.alt}
-                    class="max-h-full max-w-full object-contain p-3"
+                    class="block max-h-full max-w-full object-contain object-center"
                   />
-                </div>
+                </a>
               ))}
             </div>
           )
