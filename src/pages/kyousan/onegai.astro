@@ -5,10 +5,30 @@ import Title from "../../components/layout/Title.astro";
 type SponsorLogo = {
   image: string;
   alt: string;
+  href: string;
 };
 
-const sponsorLarge: SponsorLogo[] = [];
-const sponsorSmall: SponsorLogo[] = [];
+const sponsorLarge: SponsorLogo[] = [
+  {
+    image: "/images/sponsors/shutoko.jpg",
+    alt: "首都高速道路株式会社",
+    href: "https://www.shutoko.co.jp/",
+  },
+];
+
+const sponsorSmall: SponsorLogo[] = [
+  {
+    image: "/images/sponsors/blueqat.png",
+    alt: "blueqat株式会社",
+    href: "https://blueqat.co.jp/",
+  },
+  {
+    image: "/images/sponsors/kinujo.png",
+    alt: "KINUJO",
+    href: "https://kinujo.jp/",
+  },
+];
+
 const sponsorTextOnly: string[] = [];
 ---
 
@@ -63,19 +83,13 @@ const sponsorTextOnly: string[] = [];
         <p class="font-hakushu text-base font-bold sm:text-lg">
           筑波大学附属駒場中・高等学校
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           高三特別班　渉外事務局
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           顧問　早川 和彦
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           事務局長　中河 颯太
         </p>
       </div>
@@ -85,7 +99,7 @@ const sponsorTextOnly: string[] = [];
           href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex w-full max-w-[320px] items-center justify-center bg-white px-4 py-3 text-center text-base whitespace-nowrap text-black transition hover:opacity-80 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-2xl md:px-10 md:text-[28px]"
+          class="inline-flex w-full max-w-[320px] items-center justify-center whitespace-nowrap bg-white px-4 py-3 text-center text-base text-black transition hover:opacity-80 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-2xl md:px-10 md:text-[28px]"
           style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.08em;"
         >
           お問い合わせフォーム
@@ -110,16 +124,42 @@ const sponsorTextOnly: string[] = [];
 
       <div class="mt-16 space-y-10">
         {
-          sponsorSmall.length > 0 && (
+          sponsorLarge.length > 0 && (
             <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-              {sponsorSmall.map((sponsor) => (
-                <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
+              {sponsorLarge.map((sponsor) => (
+                <a
+                  href={sponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                >
                   <img
                     src={sponsor.image}
                     alt={sponsor.alt}
-                    class="max-h-full max-w-full object-contain p-3"
+                    class="max-h-full max-w-full object-contain"
                   />
-                </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          sponsorSmall.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+              {sponsorSmall.map((sponsor) => (
+                <a
+                  href={sponsor.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                >
+                  <img
+                    src={sponsor.image}
+                    alt={sponsor.alt}
+                    class="max-h-full max-w-full object-contain"
+                  />
+                </a>
               ))}
             </div>
           )
