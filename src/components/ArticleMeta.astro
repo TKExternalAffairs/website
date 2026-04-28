@@ -33,17 +33,17 @@ const { articleProp } = Astro.props;
           />
         );
       case "author":
-        return articleProp.content.map((author) => {
-          <meta property="article:author" content={author} />;
-        });
+        return articleProp.content.map((author) => (
+          <meta property="article:author" content={author} />
+        ));
       case "section":
         return (
           <meta property="article:section" content={articleProp.content} />
         );
       case "tag":
-        return articleProp.content.map((tag) => {
-          <meta property="article:tag" content={tag} />;
-        });
+        return articleProp.content.map((tag) => (
+          <meta property="article:tag" content={tag} />
+        ));
     }
   }
 }
