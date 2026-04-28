@@ -1,23 +1,38 @@
 ---
-import DesktopHeader from "../components/layout/DesktopHeader.astro";
-import Footer from "../components/layout/Footer.astro";
-import MobileHeader from "../components/layout/MobileHeader.astro";
 import { SITE_NAME, canonicalUrl, siteIndexingEnabled } from "../lib/site";
 import "../styles/global.css";
+import defaultOgpImageRaw from "../assets/hero_desktop.webp";
+import { getImage } from "astro:assets";
+import type { ArticleProp } from "../lib/ogp-types";
+import ArticleMeta from "../components/ArticleMeta.astro";
 
-type Props = {
+interface Props {
   title?: string;
   description?: string;
+  ogpImageUrl?: string;
+  ogpType?: string;
+  /**
+   * og:typeがarticleのときのみ有効
+   */
+  articleProperties?: [ArticleProp];
   canonicalPath?: string;
   noIndex?: boolean;
-};
+}
+
+const defaultOgpImage = await getImage({
+  src: defaultOgpImageRaw,
+  format: "webp",
+});
 
 const {
   title,
   description,
+  ogpImageUrl = defaultOgpImage.src,
+  ogpType = "website",
+  articleProperties,
   canonicalPath = Astro.url.pathname,
   noIndex = !siteIndexingEnabled,
-} = Astro.props satisfies Props;
+} = Astro.props as Props;
 
 const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 const pageDescription = description ?? title ?? SITE_NAME;
@@ -41,8 +56,15 @@ const canonical = canonicalUrl(canonicalPath);
     <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="dns-prefetch" href="https://use.typekit.net" />
     <meta property="og:title" content={pageTitle} />
+    <meta property="og:image" content={ogpImageUrl} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogpType} />
+    {
+      articleProperties?.map((prop) => {
+        <ArticleMeta articleProp={prop} />;
+      })
+    }
     <meta property="twitter:url" content={canonical} />
     <script>
       // Adobe FontsからAH白洲をフェッチする

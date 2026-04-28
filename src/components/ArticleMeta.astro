@@ -1,0 +1,49 @@
+---
+import type { ArticleProp } from "../lib/ogp-types";
+
+interface Props {
+  articleProp: ArticleProp;
+}
+
+const { articleProp } = Astro.props;
+---
+
+{
+  () => {
+    switch (articleProp.type) {
+      case "published_time":
+        return (
+          <meta
+            property="article:published_time"
+            content={articleProp.content.toISOString()}
+          />
+        );
+      case "modified_time":
+        return (
+          <meta
+            property="article:modified_time"
+            content={articleProp.content.toISOString()}
+          />
+        );
+      case "expiration_time":
+        return (
+          <meta
+            property="article:expiration_time"
+            content={articleProp.content.toISOString()}
+          />
+        );
+      case "author":
+        return articleProp.content.map((author) => {
+          <meta property="article:author" content={author} />;
+        });
+      case "section":
+        return (
+          <meta property="article:section" content={articleProp.content} />
+        );
+      case "tag":
+        return articleProp.content.map((tag) => {
+          <meta property="article:tag" content={tag} />;
+        });
+    }
+  }
+}
