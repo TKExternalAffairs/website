@@ -2,10 +2,9 @@
 /// <reference types="node" />
 import { defineConfig } from "astro/config";
 import process from "node:process";
-
 import react from "@astrojs/react";
-
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 
 const siteEnvironment = process.env.SITE_ENV ?? "production";
 const siteUrl =
@@ -21,7 +20,7 @@ export default defineConfig({
   site: siteUrl,
   base: siteBase,
 
-  integrations: [react()],
+  integrations: [react(), sitemap()],
 
   vite: {
     plugins: [tailwindcss()],
