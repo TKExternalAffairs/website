@@ -11,4 +11,7 @@ export type ArticleProp =
   | { type: "section"; content: string }
   | { type: "tag"; content: [string] };
 
+/**
+ * @see https://ogp.me/#types
+ */
 export type OgpType = "website" | "article";
