@@ -21,10 +21,9 @@ jobs:
           node-version: 22.x
           cache: "npm"
       - run: npm clean-install
-      - run: npm run check
+      - run: npm run build
       - run: npm run format
       - name: autofix.ci
         uses: autofix-ci/action@v1
         with:
           fail-fast: true
-          
