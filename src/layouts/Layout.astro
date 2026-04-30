@@ -2,7 +2,7 @@
 import DesktopHeader from "../components/layout/DesktopHeader.astro";
 import Footer from "../components/layout/Footer.astro";
 import MobileHeader from "../components/layout/MobileHeader.astro";
-import type { ArticleProp } from "../lib/ogp-types";
+import type { ArticleProp, OgpType } from "../lib/ogp-types";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   ogpImageUrl?: string;
-  ogpType?: string;
-  articleProperties?: [ArticleProp];
+  ogpType?: OgpType;
+  articleProperties?: ArticleProp[];
   noIndex?: boolean;
 }
 ---
 
-<BaseLayout {...Astro.props as Props}>
+<BaseLayout {...Astro.props satisfies Props}>
   <MobileHeader />
   <DesktopHeader />
   <main>

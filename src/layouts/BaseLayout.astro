@@ -3,18 +3,18 @@ import { SITE_NAME, canonicalUrl, siteIndexingEnabled } from "../lib/site";
 import "../styles/global.css";
 import defaultOgpImageRaw from "../assets/hero_desktop.webp";
 import { getImage } from "astro:assets";
-import type { ArticleProp } from "../lib/ogp-types";
+import type { ArticleProp, OgpType } from "../lib/ogp-types";
 import ArticleMeta from "../components/ArticleMeta.astro";
 
 interface Props {
   title?: string;
   description?: string;
   ogpImageUrl?: string;
-  ogpType?: string;
+  ogpType?: OgpType;
   /**
    * og:typeがarticleのときのみ有効
    */
-  articleProperties?: [ArticleProp];
+  articleProperties?: ArticleProp[];
   canonicalPath?: string;
   noIndex?: boolean;
 }
@@ -27,12 +27,12 @@ const defaultOgpImage = await getImage({
 const {
   title,
   description,
-  ogpImageUrl = defaultOgpImage.src,
+  ogpImageUrl = new URL(defaultOgpImage.src, Astro.site),
   ogpType = "website",
   articleProperties,
   canonicalPath = Astro.url.pathname,
   noIndex = !siteIndexingEnabled,
-} = Astro.props as Props;
+} = Astro.props satisfies Props;
 
 const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 const pageDescription = description ?? title ?? SITE_NAME;
@@ -60,11 +60,7 @@ const canonical = canonicalUrl(canonicalPath);
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={ogpType} />
-    {
-      articleProperties?.map((prop) => {
-        <ArticleMeta articleProp={prop} />;
-      })
-    }
+    {articleProperties?.map((prop) => <ArticleMeta articleProp={prop} />)}
     <meta property="twitter:url" content={canonical} />
     <script>
       // Adobe FontsからAH白洲をフェッチする

@@ -11,7 +11,7 @@ type Props = {
 const { item } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = item.data;
 
-const articleProps: [ArticleProp] = [
+const articleProps: ArticleProp[] = [
   { type: "published_time", content: pubDate },
 ];
 if (updatedDate) {
