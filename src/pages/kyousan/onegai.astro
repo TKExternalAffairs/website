@@ -6,7 +6,12 @@ import type { ImageMetadata } from "astro";
 
 import shutokoLogo from "../../assets/sponsors/shutoko.jpg";
 import blueqatLogo from "../../assets/sponsors/blueqat.png";
-import kinujoLogo from "../../assets/sponsors/kinujo.png";
+import kinujoLogo from "../../assets/sponsors/Kinujo.png";
+
+import cloLogo from "../../assets/sponsors/clo.png";
+import musashikyoujyoLogo from "../../assets/sponsors/musashikyoujyo.jpg";
+import blackdeckerLogo from "../../assets/sponsors/blackdecker.jpg";
+import wakaiLogo from "../../assets/sponsors/wakai.jpg";
 
 type SponsorLogo = {
   image: ImageMetadata;
@@ -20,6 +25,11 @@ const sponsorLarge: SponsorLogo[] = [
     alt: "首都高速道路株式会社",
     href: "https://www.shutoko.co.jp/",
   },
+  {
+    image: blackdeckerLogo,
+    alt: "BLACK+DECKER",
+    href: "https://blackanddecker-jp.com/",
+  },
 ];
 
 const sponsorSmall: SponsorLogo[] = [
@@ -32,6 +42,21 @@ const sponsorSmall: SponsorLogo[] = [
     image: kinujoLogo,
     alt: "KINUJO",
     href: "https://kinujo.jp/",
+  },
+  {
+    image: wakaiLogo,
+    alt: "WAKAI",
+    href: "https://www.wakaisangyo.co.jp/",
+  },
+  {
+    image: musashikyoujyoLogo,
+    alt: "東京武蔵境教習所",
+    href: "https://musasisakai-ds.co.jp/",
+  },
+  {
+    image: cloLogo,
+    alt: "CIO co., ltd.",
+    href: "https://connectinternationalone.co.jp/",
   },
 ];
 
@@ -89,19 +114,13 @@ const sponsorTextOnly: string[] = [];
         <p class="font-hakushu text-base font-bold sm:text-lg">
           筑波大学附属駒場中・高等学校
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           高三特別班　渉外事務局
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           顧問　早川 和彦
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu whitespace-nowrap text-base font-bold sm:text-lg">
           事務局長　中河 颯太
         </p>
       </div>
@@ -110,7 +129,8 @@ const sponsorTextOnly: string[] = [];
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform"
           target="_blank"
-          class="inline-flex w-full max-w-[320px] items-center justify-center bg-white px-4 py-3 text-center text-base whitespace-nowrap text-black transition hover:opacity-80 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-2xl md:px-10 md:text-[28px]"
+          rel="noopener noreferrer"
+          class="inline-flex w-full max-w-[320px] items-center justify-center whitespace-nowrap bg-white px-4 py-3 text-center text-base text-black transition hover:opacity-80 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-2xl md:px-10 md:text-[28px]"
           style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.08em;"
         >
           お問い合わせフォーム
