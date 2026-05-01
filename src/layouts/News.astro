@@ -3,15 +3,28 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import NewsTag from "../components/news/NewsTag.astro";
+import type { ArticleProp } from "../lib/ogp-types";
 
 type Props = {
   item: CollectionEntry<"news">;
 };
 const { item } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = item.data;
+
+const articleProps: ArticleProp[] = [
+  { type: "published_time", content: pubDate },
+];
+if (updatedDate) {
+  articleProps.push({ type: "modified_time", content: updatedDate });
+}
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  ogpType="article"
+  articleProperties={articleProps}
+>
   <section class="mx-auto pt-20 pb-5 lg:pb-20">
     <div
       class="flex flex-col items-center justify-center gap-4 p-4 text-center sm:whitespace-nowrap"
