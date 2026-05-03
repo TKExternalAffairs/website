@@ -8,6 +8,11 @@ import shutokoLogo from "../../assets/sponsors/shutoko.jpg";
 import blueqatLogo from "../../assets/sponsors/blueqat.png";
 import kinujoLogo from "../../assets/sponsors/kinujo.png";
 
+import cloLogo from "../../assets/sponsors/cio.png";
+import musashikyoujyoLogo from "../../assets/sponsors/musashikyoujyo.jpg";
+import blackdeckerLogo from "../../assets/sponsors/blackdecker.jpg";
+import wakaiLogo from "../../assets/sponsors/wakai.jpg";
+
 type SponsorLogo = {
   image: ImageMetadata;
   alt: string;
@@ -19,6 +24,11 @@ const sponsorLarge: SponsorLogo[] = [
     image: shutokoLogo,
     alt: "首都高速道路株式会社",
     href: "https://www.shutoko.co.jp/",
+  },
+  {
+    image: blackdeckerLogo,
+    alt: "BLACK+DECKER",
+    href: "https://blackanddecker-jp.com/",
   },
 ];
 
@@ -32,6 +42,21 @@ const sponsorSmall: SponsorLogo[] = [
     image: kinujoLogo,
     alt: "KINUJO",
     href: "https://kinujo.jp/",
+  },
+  {
+    image: wakaiLogo,
+    alt: "WAKAI",
+    href: "https://www.wakaisangyo.co.jp/",
+  },
+  {
+    image: musashikyoujyoLogo,
+    alt: "東京武蔵境教習所",
+    href: "https://musasisakai-ds.co.jp/",
+  },
+  {
+    image: cloLogo,
+    alt: "CIO co., ltd.",
+    href: "https://connectinternationalone.co.jp/",
   },
 ];
 
@@ -110,6 +135,7 @@ const sponsorTextOnly: string[] = [];
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform"
           target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex w-full max-w-[320px] items-center justify-center bg-white px-4 py-3 text-center text-base whitespace-nowrap text-black transition hover:opacity-80 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-2xl md:px-10 md:text-[28px]"
           style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.08em;"
         >
@@ -122,10 +148,7 @@ const sponsorTextOnly: string[] = [];
   <section id="sponsors" class="bg-[#e9e9e9] py-20 text-black">
     <div class="mx-auto w-full max-w-[1700px] px-6">
       <div class="text-center">
-        <h2
-          class="text-5xl"
-          style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.12em;"
-        >
+        <h2 class="font-hakushu text-5xl font-bold tracking-widest">
           協賛企業一覧
         </h2>
         <p class="mx-auto mt-8 max-w-4xl text-[20px] leading-9">
