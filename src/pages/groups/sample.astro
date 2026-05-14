@@ -1,9 +1,39 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import introDuctImage from "../../assets/Webp/groups/タイトル画像.webp";
 ---
 
 <Layout title="縁日班" description="高三特別班の縁日班を紹介する">
-    <Title heroImage={introDuctImage.src} title="縁日班" />
+  <Title heroImage={introDuctImage.src} title="縁日班" />
+  <GroupDetailBox
+    title="使命"
+    imageSrc={introDuctImage.src}
+    imageAlt="縁日班のイメージ画像"
+    paragraphs={[
+      "縁日班は、文化祭での模擬店を担当する特別班です。毎年、様々な種類の模擬店を企画・運営し、来場者に楽しんでもらえるよう努めています。",
+      "この班では、模擬店の企画から材料の調達、当日の運営までを行います。メンバーは協力してアイデアを出し合い、楽しいお店を作り上げることが求められます。",
+      "文化祭当日は、多くの来場者が訪れるため、忙しいですが、その分やりがいも大きいです。縁日班での経験は、チームワークや企画力を養う良い機会となります。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="価値観"
+    imageSrc={introDuctImage.src}
+    imageAlt="縁日班のイメージ画像"
+    paragraphs={[
+        "縁日班の価値観は、楽しさと協力です。私たちは、来場者に楽しんでもらうことを最優先に考えています。そのためには、メンバー同士が協力し合い、アイデアを出し合うことが重要です。",
+        "また、縁日班では、創造性も大切にしています。毎年新しい模擬店を企画するためには、独創的なアイデアが必要です。私たちは、自由な発想を歓迎し、メンバーが自分のアイデアを形にできるようサポートします。",
+    ]}
+  />
+  <GroupDetailBox
+    title="事業"
+    imageSrc={introDuctImage.src}
+    imageAlt="縁日班のイメージ画像"
+    paragraphs={[
+        "縁日班の主な活動内容は、模擬店の企画・運営です。毎年、文化祭のテーマに合わせた模擬店を企画し、材料の調達や当日の運営を行います。",
+        "また、文化祭前には、模擬店の準備や練習も行います。これには、メニューの試作や販売方法の練習などが含まれます。文化祭当日は、多くの来場者が訪れるため、忙しいですが、その分やりがいも大きいです。",
+    ]}
+    />
 </Layout>

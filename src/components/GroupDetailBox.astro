@@ -1,0 +1,103 @@
+---
+interface Props {
+	title: string;
+	imageSrc: string;
+	imageAlt?: string;
+	paragraphs: string[];
+}
+
+const { title, imageSrc, imageAlt = "", paragraphs } = Astro.props;
+---
+
+<section class="group-detail-box">
+	<div class="group-detail-box__title font-hakushu relative z-10 text-left text-3xl tracking-[0.2em] sm:text-4xl">{title}</div>
+
+	<div class="group-detail-box__image-area">
+		<img src={imageSrc} alt={imageAlt} class="group-detail-box__image" loading="lazy" />
+	</div>
+
+	<div class="group-detail-box__text-area">
+		{paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+	</div>
+</section>
+
+<style>
+	.group-detail-box {
+		width: 80%;
+		margin: 2rem auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem;
+		align-items: stretch;
+	}
+
+	.group-detail-box__title {
+		grid-column: 1 / 2;
+		margin-bottom: -1rem;
+		margin-left: 1.4rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+	}
+
+	.group-detail-box__title::before {
+		content: "";
+		display: inline-block;
+		width: 0.4em;
+		height: 1.1em;
+		background-color: currentColor;
+		flex-shrink: 0;
+	}
+
+	.group-detail-box__image-area {
+		grid-column: 2 / 3;
+		grid-row: 2;
+		width: 100%;
+	}
+
+	.group-detail-box__image {
+		display: block;
+		width: 100%;
+		aspect-ratio: 2 / 1;
+		object-fit: contain;
+		object-position: center;
+	}
+
+	.group-detail-box__text-area {
+		grid-column: 1 / 2;
+		grid-row: 2;
+		align-self: stretch;
+	}
+
+	.group-detail-box__text-area p {
+		margin: 0;
+		line-height: 1.8;
+	}
+
+	.group-detail-box__text-area p + p {
+		margin-top: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		.group-detail-box {
+			width: 90%;
+			margin: 1.5rem auto;
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.group-detail-box__title {
+			font-size: 1.5rem;
+		}
+
+		.group-detail-box__image-area {
+			grid-column: auto;
+			grid-row: auto;
+		}
+
+		.group-detail-box__text-area {
+			grid-column: auto;
+			grid-row: auto;
+		}
+	}
+</style>
