@@ -33,7 +33,11 @@ const newsItems = (await getCollection("news"))
                     />
                   ) : (
                     <div class="flex h-full w-full items-center justify-center text-sm text-gray-400 transition-transform duration-600 group-hover:scale-120">
-                      <Image src={NoImageSVG} alt="No Image" />
+                      <Image
+                        src={NoImageSVG}
+                        alt="No Image"
+                        class="h-full w-full"
+                      />
                     </div>
                   )}
                 </div>
