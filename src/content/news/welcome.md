@@ -1,6 +1,5 @@
 ---
 title: 高3特別班HP開設のお知らせ
-description: あ
 pubDate: 2026-05-13
 updatedDate: 2026-05-13
 tags:
