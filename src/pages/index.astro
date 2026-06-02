@@ -55,7 +55,34 @@ const countdownTargetISO = "2026-10-30T09:00:00+09:00";
       />
     </GeneralBox>
   </section>
+
   <section class="my-8 w-full lg:my-12">
     <Countdown targetISO={countdownTargetISO} />
+  </section>
+
+  {/* あくまで応急的にやっています。あとで改善する */}
+  {/* TODO: スクロールする一覧に対応させる */}
+  <section>
+    <GeneralBox
+      topText="特別班紹介"
+      middleText="特別班紹介"
+      bottomText="詳細はこちら"
+      detailHref="/groups/"
+    />
+  </section>
+  <section>
+    {/* あくまで応急的にやっています。あとで改善する */}
+    {/* TODO: スクロールする一覧に対応させる */}
+    <GeneralBox
+      topText="お知らせ"
+      middleText="最新情報をチェック"
+      bottomText="一覧へ"
+      detailHref="/news/"
+    >
+      <LogoWithExternalAffairs
+        class="mx-auto w-full fill-white sm:w-3/4 md:w-2/5"
+        slot="image"
+      />
+    </GeneralBox>
   </section>
 </Layout>
