@@ -56,13 +56,26 @@ const countdownTargetISO = "2026-10-30T09:00:00+09:00";
     </GeneralBox>
   </section>
 
-  <section class="my-8 w-full lg:my-12">
+  <section class="mt-8 w-full lg:mt-12">
     <Countdown targetISO={countdownTargetISO} />
   </section>
 
   {/* あくまで応急的にやっています。あとで改善する */}
   {/* TODO: スクロールする一覧に対応させる */}
-  <section>
+  <section class="mx-auto py-16">
+    <div class="mb-8 flex items-center">
+      <h1
+        class="font-hakushu px-4 text-left text-4xl font-bold md:px-16 lg:text-4xl"
+      >
+        各班紹介
+      </h1>
+      <a
+        href="/groups/"
+        class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
+      >
+        もっと見る
+      </a>
+    </div>
     <GeneralBox
       topText="特別班紹介"
       middleText="特別班紹介"
@@ -70,14 +83,29 @@ const countdownTargetISO = "2026-10-30T09:00:00+09:00";
       detailHref="/groups/"
     />
   </section>
-  <section>
+  <hr class="mx-auto my-0.5 w-full border-gray-400" />
+  <hr class="mx-auto w-full border-gray-400" />
+  <section class="mx-auto py-16">
+    <div class="mb-8 flex items-center">
+      <h1
+        class="font-hakushu px-4 text-left text-4xl font-bold md:px-16 lg:text-4xl"
+      >
+        お知らせ
+      </h1>
+      <a
+        href="/news/"
+        class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
+      >
+        もっと見る
+      </a>
+    </div>
     {/* あくまで応急的にやっています。あとで改善する */}
     {/* TODO: スクロールする一覧に対応させる */}
     <GeneralBox
-      topText="お知らせ"
-      middleText="最新情報をチェック"
-      bottomText="一覧へ"
-      detailHref="/news/"
+      topText="情報システム部門より"
+      middleText="公式HP開設！"
+      bottomText="詳細はこちら"
+      detailHref="/news/welcome"
     >
       <LogoWithExternalAffairs
         class="mx-auto w-full fill-white sm:w-3/4 md:w-2/5"
