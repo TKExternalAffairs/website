@@ -4,6 +4,7 @@ interface Props {
   bottomText?: string;
   middleText?: string;
   detailHref?: string;
+  containerClass?: string;
 }
 
 const {
@@ -11,10 +12,13 @@ const {
   bottomText = "",
   middleText = "",
   detailHref = "#",
+  containerClass = "",
 } = Astro.props;
 ---
 
-<div class="mx-auto w-full max-w-7xl px-4 py-4 sm:px-8 sm:py-6 lg:px-16">
+<div
+  class={`mx-auto w-full max-w-7xl px-4 py-4 sm:px-8 sm:py-6 lg:px-16 ${containerClass}`}
+>
   <div
     class="flex w-full flex-col overflow-hidden bg-white text-black md:aspect-5/2 md:flex-row"
   >
