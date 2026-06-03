@@ -62,29 +62,43 @@ const countdownTargetISO = "2026-10-30T09:00:00+09:00";
 
   {/* あくまで応急的にやっています。あとで改善する */}
   {/* TODO: スクロールする一覧に対応させる */}
-  <section class="mx-auto py-16">
-    <div class="mb-8 flex items-center">
-      <h1
-        class="font-hakushu px-4 text-left text-4xl font-bold md:px-16 lg:text-4xl"
-      >
-        各班紹介
-      </h1>
-      <a
-        href="/groups/"
-        class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
-      >
-        もっと見る
-      </a>
+  <section class="relative mx-auto py-16">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 opacity-15"
+      style={`background-image:
+      linear-gradient(to right, rgba(255,255,255) 0.5px, transparent 0.5px),
+      linear-gradient(to bottom, rgba(255,255,255) 0.5px, transparent 0.5px);
+      background-size: 0.5625rem 0.5625rem;`}
+    >
     </div>
-    <GeneralBox
-      topText="特別班紹介"
-      middleText="特別班紹介"
-      bottomText="詳細はこちら"
-      detailHref="/groups/"
-    />
+
+    <div class="relative z-10">
+      <div class="mb-8 flex items-center">
+        <h1
+          class="font-hakushu px-4 text-left text-4xl font-bold md:px-16 lg:text-4xl"
+        >
+          各班紹介
+        </h1>
+        <a
+          href="/groups/"
+          class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
+        >
+          もっと見る
+        </a>
+      </div>
+      <GeneralBox
+        topText="特別班紹介"
+        middleText="特別班紹介"
+        bottomText="詳細はこちら"
+        detailHref="/groups/"
+      />
+    </div>
   </section>
+
   <hr class="mx-auto my-0.5 w-full border-gray-400" />
   <hr class="mx-auto w-full border-gray-400" />
+
   <section class="mx-auto py-16">
     <div class="mb-8 flex items-center">
       <h1
