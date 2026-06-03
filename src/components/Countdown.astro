@@ -28,12 +28,16 @@ const { targetISO } = Astro.props;
     </div>
   </div>
 
-  <div
-    class="flex items-center justify-center gap-4 px-4 py-2 text-2xl sm:text-4xl lg:hidden"
-  >
-    <p class="font-hakushu tracking-widest">開催まであと</p>
-    <p data-days class="text-5xl font-bold">00</p>
-    <p class="font-hakushu tracking-widest text-white">日</p>
+  <div class="flex w-full border-[0.5px] border-white p-0.5 lg:hidden">
+    <div class="w-full border-[0.5px] border-white">
+      <div
+        class="flex items-center justify-center gap-4 px-4 py-2 text-2xl sm:text-4xl"
+      >
+        <p class="font-hakushu tracking-widest">開催まであと</p>
+        <p data-days class="text-5xl font-bold">00</p>
+        <p class="font-hakushu tracking-widest text-white">日</p>
+      </div>
+    </div>
   </div>
 </div>
 
