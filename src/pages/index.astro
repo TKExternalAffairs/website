@@ -1,45 +1,147 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import bgCircleImage from "../assets/SVG/circles.svg";
 import ConceptSvg from "../assets/SVG/concept.svg";
 import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
 import Countdown from "../components/Countdown.astro";
+import LogoWithExternalAffairs from "../assets/SVG/logo_with_externalaffairs.svg";
+import GeneralBox from "../components/GeneralBox.astro";
+
+import { getImage } from "astro:assets";
 
 const countdownTargetISO = "2026-10-30T09:00:00+09:00";
+
+const image = await getImage({ src: bgCircleImage, format: "svg" });
 ---
 
 <Layout title="トップ" description="高三特別班の公式サイトです。">
-  <section class="px-auto mx-auto pt-20 pb-5 lg:pb-20">
-    <div class="grid min-h-2/4 grid-cols-1 gap-12 lg:grid-cols-[50%_1fr]">
-      <div
-        class="flex flex-col items-center justify-center gap-4 text-center whitespace-nowrap"
-      >
-        <ConceptSvg class="w-2/5 max-w-xs fill-white sm:max-w-sm md:max-w-md" />
-        <ConceptLogoSvg
-          class="w-2/5 max-w-xs fill-white sm:max-w-sm md:max-w-md"
-        />
+  <div class="relative">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-repeat opacity-20"
+      style={`background-image: url('${image.src}'); background-size: 10rem 10rem; background-position: 0 0;`}
+    >
+    </div>
+
+    <div class="relative z-10">
+      <section class="mx-auto pt-20 pb-5 lg:pb-20">
+        <div class="grid min-h-2/4 grid-cols-1 gap-12 lg:grid-cols-[50%_1fr]">
+          <div
+            class="flex flex-col items-center justify-center gap-4 text-center whitespace-nowrap"
+          >
+            <ConceptSvg
+              class="w-2/5 max-w-xs fill-white sm:max-w-sm md:max-w-md"
+            />
+            <ConceptLogoSvg
+              class="w-2/5 max-w-xs fill-white sm:max-w-sm md:max-w-md"
+            />
+          </div>
+          <div
+            class="flex flex-col justify-center space-y-8 text-center text-[0.7rem] leading-relaxed text-gray-200 sm:text-base lg:space-y-12 lg:text-left lg:leading-loose"
+          >
+            <p>
+              高三特別班は本校文化祭における中核をなす組織の一つとして、<br />
+              先輩方が守り、受け継いできた筑駒の一つの伝統です。
+            </p>
+            <p>
+              高校生活最後の文化祭。<br />
+              仲間とともに歩み、時に悩み、我々の出した答えが<br />
+              今年度の高三特別班の企画そのものであり、<br />
+              ご来場してくださる皆様への感謝と、我々の未来への誓いを込めた<br />
+              最初で最高の最高傑作です。
+            </p>
+            <p>
+              それでは、我々の熱量の証明をご覧ください。<br />
+              ご来場お待ちしております。
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="mx-auto py-20">
+        <GeneralBox
+          topText="渉外事務局より"
+          middleText="ご協賛のお願い"
+          bottomText="詳細はこちら"
+          detailHref="/kyousan/onegai"
+        >
+          <LogoWithExternalAffairs
+            class="mx-auto h-auto max-h-[60%] max-w-[40%] fill-white"
+            slot="image"
+          />
+        </GeneralBox>
+      </section>
+    </div>
+  </div>
+
+  <section class="w-full">
+    <Countdown targetISO={countdownTargetISO} />
+  </section>
+
+  {/* あくまで応急的にやっています。あとで改善する */}
+  {/* TODO: スクロールする一覧に対応させる */}
+  <section class="relative mx-auto py-16">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 opacity-15"
+      style={`background-image:
+      linear-gradient(to right, rgba(255,255,255) 0.5px, transparent 0.5px),
+      linear-gradient(to bottom, rgba(255,255,255) 0.5px, transparent 0.5px);
+      background-size: 0.5625rem 0.5625rem;`}
+    >
+    </div>
+
+    <div class="relative z-10">
+      <div class="mb-8 flex items-center">
+        <h1
+          class="font-hakushu px-4 text-left text-4xl font-bold md:px-16 lg:text-4xl"
+        >
+          各班紹介
+        </h1>
+        <a
+          href="/groups/"
+          class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
+        >
+          もっと見る
+        </a>
       </div>
-      <div
-        class="flex flex-col justify-center space-y-8 text-center text-[0.7rem] leading-relaxed text-gray-200 sm:text-base lg:space-y-12 lg:text-left lg:leading-loose"
-      >
-        <p>
-          高三特別班は本校文化祭における中核をなす組織の一つとして、<br />
-          先輩方が守り、受け継いできた筑駒の一つの伝統です。
-        </p>
-        <p>
-          高校生活最後の文化祭。<br />
-          仲間とともに歩み、時に悩み、我々の出した答えが<br />
-          今年度の高三特別班の企画そのものであり、<br />
-          ご来場してくださる皆様への感謝と、我々の未来への誓いを込めた<br />
-          最初で最高の最高傑作です。
-        </p>
-        <p>
-          それでは、我々の熱量の証明をご覧ください。<br />
-          ご来場お待ちしております。
-        </p>
-      </div>
+      <GeneralBox
+        topText="特別班紹介"
+        middleText="特別班紹介"
+        bottomText="詳細はこちら"
+        detailHref="/groups/"
+      />
     </div>
   </section>
-  <section class="my-8 w-full lg:my-12">
-    <Countdown targetISO={countdownTargetISO} />
+
+  <hr class="mx-auto my-0.5 w-full border-gray-400" />
+  <hr class="mx-auto w-full border-gray-400" />
+
+  <section class="mx-auto py-16">
+    <div class="mb-8 flex items-center">
+      <h1
+        class="font-hakushu px-8 text-left text-4xl font-bold md:px-16 lg:text-4xl"
+      >
+        お知らせ
+      </h1>
+      <a
+        href="/news/"
+        class="font-hakushu border border-white px-4 py-2 text-xl hover:bg-gray-600 sm:text-2xl"
+      >
+        もっと見る
+      </a>
+    </div>
+    {/* あくまで応急的にやっています。あとで改善する */}
+    {/* TODO: スクロールする一覧に対応させる */}
+    <GeneralBox
+      topText="情報システム部門より"
+      middleText="公式HP開設！"
+      bottomText="詳細はこちら"
+      detailHref="/news/welcome"
+    >
+      <LogoWithExternalAffairs
+        class="mx-auto my-auto h-auto max-h-3/5 max-w-2/5 fill-white"
+        slot="image"
+      />
+    </GeneralBox>
   </section>
 </Layout>

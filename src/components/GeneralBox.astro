@@ -1,0 +1,71 @@
+---
+interface Props {
+  topText?: string;
+  bottomText?: string;
+  middleText?: string;
+  detailHref?: string;
+  containerClass?: string;
+}
+
+const {
+  topText = "",
+  bottomText = "",
+  middleText = "",
+  detailHref = "#",
+  containerClass = "",
+} = Astro.props;
+---
+
+<div
+  class={`mx-auto w-full max-w-7xl py-4 px-8 sm:py-6 lg:px-16 ${containerClass}`}
+>
+  <div
+    class="flex w-full flex-col overflow-hidden bg-white text-black md:aspect-5/2 md:flex-row"
+  >
+    <div
+      class="flex min-h-56 w-full items-center justify-center bg-neutral-800 md:min-h-0 md:w-3/5"
+    >
+      <slot name="image">
+        <div
+          aria-hidden="true"
+          class="flex h-full w-full items-center justify-center"
+        >
+          <span
+            class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300"
+          >
+            準備中
+          </span>
+        </div>
+      </slot>
+    </div>
+
+    <div
+      class="font-hakushu flex w-full flex-col justify-center gap-4 px-8 py-6 md:w-2/5 md:gap-6 md:pt-16 md:pb-8 md:pl-12"
+    >
+      <p class="min-h-[1.5em] text-base leading-relaxed text-black sm:text-lg">
+        {topText}
+      </p>
+      <p
+        class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
+      >
+        {middleText || "\u00A0"}
+      </p>
+      <a
+        href={detailHref}
+        class="inline-flex w-fit items-center justify-center text-base leading-none text-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      >
+        <span
+          class="bg-black [box-decoration-break:clone] px-3 py-3 [-webkit-box-decoration-break:clone]"
+        >
+          {bottomText}
+        </span>
+      </a>
+      <div class="mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8">
+        <span class="block h-px w-12 bg-black sm:w-16 md:w-20"></span>
+        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
+        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
+        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
+      </div>
+    </div>
+  </div>
+</div>
