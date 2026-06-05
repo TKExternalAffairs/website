@@ -6,6 +6,9 @@ import ConceptLogoSvg from "../assets/SVG/concept_logo.svg";
 import Countdown from "../components/Countdown.astro";
 import LogoWithExternalAffairs from "../assets/SVG/logo_with_externalaffairs.svg";
 import GeneralBox from "../components/GeneralBox.astro";
+import stageImage from "../assets/Webp/groups/stageImage.webp";
+import groupTitleImage from "../assets/Webp/groups/タイトル画像.webp";
+import shogaiOfficeImage from "../assets/Webp/groups/特別班渉外事務局.webp";
 
 import { getImage } from "astro:assets";
 
@@ -109,6 +112,21 @@ const image = await getImage({ src: bgCircleImage, format: "svg" });
         middleText="特別班紹介"
         bottomText="詳細はこちら"
         detailHref="/groups/"
+        images={[
+          {
+            src: stageImage.src,
+            alt: "特別班紹介の画像1",
+          },
+          {
+            src: groupTitleImage.src,
+            alt: "特別班紹介の画像2",
+          },
+          {
+            src: shogaiOfficeImage.src,
+            class: "p-8 sm:p-12 md:p-16",
+            alt: "特別班紹介の画像3",
+          },
+        ]}
       />
     </div>
   </section>
