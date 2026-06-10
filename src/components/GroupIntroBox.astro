@@ -1,6 +1,8 @@
 ---
+type GroupIntroImageSource = string | { src: string };
+
 interface GroupIntroImage {
-  src: string;
+  src: GroupIntroImageSource;
   alt?: string;
   class?: string;
 }

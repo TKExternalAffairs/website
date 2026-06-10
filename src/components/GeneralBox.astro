@@ -1,6 +1,8 @@
 ---
+type GeneralBoxImageSource = string | { src: string };
+
 interface GeneralBoxImage {
-  src: string;
+  src: GeneralBoxImageSource;
   alt?: string;
   class?: string;
 }
@@ -25,7 +27,15 @@ const {
   imageIntervalSeconds = 4,
 } = Astro.props;
 
-const carouselImages = images.filter((image) => image.src).slice(0, 4);
+const getImageSrc = (src: GeneralBoxImageSource) =>
+  typeof src === "string" ? src : src.src;
+const carouselImages = images
+  .map((image) => ({
+    ...image,
+    src: getImageSrc(image.src),
+  }))
+  .filter((image) => image.src)
+  .slice(0, 4);
 const imageCount = carouselImages.length;
 const hasCarousel = imageCount > 0;
 const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
