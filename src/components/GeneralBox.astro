@@ -5,12 +5,14 @@ interface GeneralBoxImage {
   src: GeneralBoxImageSource;
   alt?: string;
   class?: string;
+  middleText?: string;
 }
 
 interface Props {
   topText?: string;
   bottomText?: string;
   middleText?: string;
+  middleTexts?: string[];
   detailHref?: string;
   containerClass?: string;
   images?: GeneralBoxImage[];
@@ -21,6 +23,7 @@ const {
   topText = "",
   bottomText = "",
   middleText = "",
+  middleTexts = [],
   detailHref = "#",
   containerClass = "",
   images = [],
@@ -30,14 +33,18 @@ const {
 const getImageSrc = (src: GeneralBoxImageSource) =>
   typeof src === "string" ? src : src.src;
 const carouselImages = images
-  .map((image) => ({
+  .map((image, index) => ({
     ...image,
     src: getImageSrc(image.src),
+    middleText: image.middleText ?? middleTexts[index] ?? middleText,
   }))
   .filter((image) => image.src)
   .slice(0, 4);
 const imageCount = carouselImages.length;
 const hasCarousel = imageCount > 0;
+const carouselMiddleTexts = carouselImages.map(
+  (image) => image.middleText ?? "",
+);
 const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
 ---
 
@@ -88,11 +95,26 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
       <p class="min-h-[1.5em] text-base leading-relaxed text-black sm:text-lg">
         {topText}
       </p>
-      <p
-        class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
-      >
-        {middleText || "\u00A0"}
-      </p>
+      {
+        hasCarousel ? (
+          <div class="general-box-middle-texts min-h-[1.5em]">
+            {carouselMiddleTexts.map((text, index) => (
+              <p
+                class="general-box-middle-text text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
+                aria-hidden={index === 0 ? "false" : "true"}
+                data-active={index === 0 ? "true" : "false"}
+                data-carousel-middle-text
+              >
+                {text || "\u00A0"}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl">
+            {middleText || "\u00A0"}
+          </p>
+        )
+      }
       <a
         href={detailHref}
         class="inline-flex w-fit items-center justify-center text-base leading-none text-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -146,6 +168,11 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
         .closest(".general-box-root")
         ?.querySelectorAll<HTMLElement>("[data-carousel-bar]") ?? [],
     );
+    const middleTexts = Array.from(
+      carousel
+        .closest(".general-box-root")
+        ?.querySelectorAll<HTMLElement>("[data-carousel-middle-text]") ?? [],
+    );
     const interval = Number(carousel.dataset.imageInterval) || 4000;
 
     if (images.length <= 1) {
@@ -163,6 +190,10 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
       images[previousIndex]?.setAttribute("data-leaving", "true");
       images[activeIndex]?.setAttribute("data-active", "true");
       images[activeIndex]?.setAttribute("aria-hidden", "false");
+      middleTexts[previousIndex]?.setAttribute("data-active", "false");
+      middleTexts[previousIndex]?.setAttribute("aria-hidden", "true");
+      middleTexts[activeIndex]?.setAttribute("data-active", "true");
+      middleTexts[activeIndex]?.setAttribute("aria-hidden", "false");
 
       bars.forEach((bar, index) => {
         bar.setAttribute(
@@ -214,6 +245,20 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
     z-index: 1;
   }
 
+  .general-box-middle-texts {
+    display: grid;
+  }
+
+  .general-box-middle-text {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  .general-box-middle-text[data-active="true"] {
+    opacity: 1;
+  }
+
   .general-box-bar {
     background-color: rgb(82 82 82);
     height: 1px;
@@ -237,6 +282,7 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
 
   @media (prefers-reduced-motion: reduce) {
     .general-box-carousel-image,
+    .general-box-middle-text,
     .general-box-bar {
       transition: none;
     }

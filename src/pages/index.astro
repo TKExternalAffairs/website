@@ -114,17 +114,20 @@ const image = await getImage({ src: bgCircleImage, format: "svg" });
         detailHref="/groups/"
         images={[
           {
-            src: stageImage.src,
+            src: groupTitleImage.src,
             alt: "特別班紹介の画像1",
+            middleText: "各班紹介",
           },
           {
-            src: groupTitleImage.src,
+            src: stageImage.src,
             alt: "特別班紹介の画像2",
+            middleText: "ステージ班",
           },
           {
             src: shogaiOfficeImage.src,
             class: "p-8 sm:p-12 md:p-16",
             alt: "特別班紹介の画像3",
+            middleText: "渉外事務局",
           },
         ]}
       />

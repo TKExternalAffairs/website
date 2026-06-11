@@ -5,6 +5,7 @@ interface GroupIntroImage {
   src: GroupIntroImageSource;
   alt?: string;
   class?: string;
+  middleText?: string;
 }
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   topText?: string;
   bottomText?: string;
   middleText?: string;
+  middleTexts?: string[];
   detailHref?: string;
   imageIntervalSeconds?: number;
 }
@@ -32,6 +34,7 @@ const {
   topText = TOP_TEXT,
   bottomText = BOTTOM_TEXT,
   middleText = "",
+  middleTexts = [],
   detailHref = "#",
   imageIntervalSeconds = 4,
 } = Astro.props;
@@ -47,6 +50,7 @@ const carouselImages = images.map((image) => ({
   topText={topText}
   bottomText={bottomText}
   middleText={middleText}
+  middleTexts={middleTexts}
   detailHref={detailHref}
   images={carouselImages}
   imageIntervalSeconds={imageIntervalSeconds}
