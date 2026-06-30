@@ -1,6 +1,45 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import coffeeImage from "../../assets/Webp/groups/kissa/kissa_1.webp";
+import foodImage from "../../assets/Webp/groups/kissa/kissa_2.webp";
+import titleImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
 ---
 
-<Layout title="喫茶班" description="高三喫茶班の紹介ページです。" />
+<Layout title="喫茶班" description="高三特別班 喫茶班の紹介ページです。">
+  <Title heroImage={titleImage.src} title="喫茶班" />
+
+  <GroupDetailBox
+    title="喫茶班とは"
+    imageSrc={titleImage.src}
+    imageAlt="喫茶班の会場"
+    paragraphs={[
+      "喫茶班は、正門入って右にある50周年記念会館にてドリンクや軽食の販売を行います。",
+      "味は勿論のこと、接客の所作や雰囲気作りにも力を入れて皆様のことをお待ちしております。",
+      "文化祭巡りに疲れた時には、喫茶でほっとできるひとときをどうぞ。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="こだわりのコーヒー"
+    imageSrc={coffeeImage.src}
+    imageAlt="喫茶班が提供するコーヒー"
+    paragraphs={[
+      "喫茶班が特に力を入れているものの一つが、コーヒーです。",
+      "茨城県を中心に展開するサザコーヒー様の協力のもと豆のブレンドを行い、こだわりの一杯を提供します。",
+      "班員が一杯一杯丁寧にドリップした最高の一杯を、ぜひご賞味あれ。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="軽食"
+    imageSrc={foodImage.src}
+    imageAlt="喫茶班が提供する軽食"
+    paragraphs={[
+      "喫茶班の軽食は、本当に美味しいと思ったものしか提供していません。",
+      "試作を重ね、どの素材・どの工程にすればより美味しくなるのか日夜研究した成果が一品一品に詰まっています。",
+      "試行錯誤の末出来上がった、努力の結晶をご提供します。",
+    ]}
+  />
+</Layout>

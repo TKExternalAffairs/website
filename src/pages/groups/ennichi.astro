@@ -1,6 +1,52 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import attractionImage from "../../assets/Webp/groups/ennichi/ennichi_atrk.webp";
+import dagashiImage from "../../assets/Webp/groups/ennichi/ennichi_dgs.webp";
+import titleImage from "../../assets/Webp/groups/ennichi/ennichi_title.webp";
+import yaguraImage from "../../assets/Webp/groups/ennichi/ennichi_ygr.webp";
 ---
 
-<Layout title="縁日班" description="高三縁日班の紹介ページです。" />
+<Layout title="縁日班" description="高三特別班 縁日班の紹介ページです。">
+  <Title heroImage={titleImage.src} title="縁日班" />
+
+  <GroupDetailBox
+    title="Welcome to Ennichi!"
+    imageSrc={titleImage.src}
+    imageAlt="縁日班の班員たち"
+    paragraphs={[
+      "高3特別班 縁日班 にようこそ！",
+      "縁日班は「人と人と」をテーマに、「ヤグラ部門」「アトラク部門」「駄菓子部門」「ガラ古部門」の四部門に分かれて、それぞれで多彩な企画や物販をご用意しています。",
+      "校舎に入ってすぐ、ピロティ下にて皆様のご来場をお待ちしております！",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="ヤグラ部門"
+    imageSrc={yaguraImage.src}
+    imageAlt="ヤグラ部門のステージ"
+    paragraphs={[
+      "縁日班のヤグラ部門では、来場者の方々が気軽に楽しめるような、相互型の台上企画を多数開催予定です。人気のクイズ企画「筑駒生の壁」や、ヤグラ部門の伝統「駒場記念」に加えて、今年度から新たにスタートする新企画の「駒場五番勝負」や「Bad Communicationを救え！」も要チェック！",
+      "ピロティ入って右手側のブースにて皆さんをお待ちしています！",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="アトラク部門"
+    imageSrc={attractionImage.src}
+    imageAlt="アトラク部門のゲーム"
+    paragraphs={[
+      "縁日班アトラク部門では、入り口から入ってすぐのスペースにて、班員が製作した様々なゲームをプレイすることができます！ 毎年恒例の音ゲーに加え、弾幕ゲームやレースゲームといったビデオゲームだけでなく、カードゲームやピンボールなどのアナログゲームも制作予定です！ また今年は、歴代最強のじゃんけんまんもあなた方を待ち構えています！ チケットブースにて購入していただいたチケットを持って、是非足をお運びください！！",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="駄菓子部門"
+    imageSrc={dagashiImage.src}
+    imageAlt="駄菓子部門のポップコーン"
+    paragraphs={[
+      "縁日班駄菓子部門では、昨年に引き続き今年もポップコーンを販売予定です！！味は当日のお楽しみ！チケット1枚で、出来立てのポップコーンはいかが？",
+    ]}
+  />
+</Layout>

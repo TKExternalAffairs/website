@@ -1,6 +1,46 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import titleImage from "../../assets/Webp/groups/konto/konto_title.webp";
 ---
 
-<Layout title="コント班" description="高三コント班の紹介ページです。" />
+<Layout
+  title="漫才・コント班"
+  description="高三特別班 漫才・コント班の紹介ページです。"
+>
+  <Title heroImage={titleImage.src} title="漫才・コント班" />
+
+  <GroupDetailBox
+    title="活動内容"
+    imageSrc={titleImage.src}
+    imageAlt="漫才・コント班の公演"
+    paragraphs={[
+      "私たちは、OSで一日に四回公演を行い、漫才やコント、落語、フリップ、座談、舞踊など、様々なコメディを披露する漫才・コント班です！最終日には、特に好評だったネタだけを集めたファイナル公演も開催されます。",
+      "興味を引かれた方はぜひ、漫才・コント班の公演を見に来てください！",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="漫才・コント班から皆様へ！"
+    imageSrc={titleImage.src}
+    imageAlt="漫才・コント班の公演"
+    paragraphs={[
+      "漫才・コント班の今年のテーマは、「レジェンダリーパラダイス」です。",
+      "なんのことかさっぱりわからない方向けに説明させていただきます。直訳すると、「伝説の（笑い）の楽園（にようこそ）」です。",
+      "私たちは、1つ1つのコント、漫才を財宝と捉えています。南の島に眠る沢山の財宝たちを、笑い声で呼び覚ましてくれないでしょうか？",
+      "ぜひ、OS（南の島）へ足を運んでください！！！",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="アクセス"
+    imageSrc={titleImage.src}
+    imageAlt="漫才・コント班の公演"
+    paragraphs={[
+      "公演場所：OS（7号館3階）",
+      "入口：BLUE館3階 3-1の脇／ORANGE館3階 1-Cの脇",
+      "メールアドレス：tkf-conte-2026@tsukukoma-gafe.org",
+    ]}
+  />
+</Layout>

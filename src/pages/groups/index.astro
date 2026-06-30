@@ -1,6 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import ennichiImage from "../../assets/Webp/groups/ennichi/ennichi_title.webp";
+import kissaImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
+import kontoImage from "../../assets/Webp/groups/konto/konto_title.webp";
 import stageImage from "../../assets/Webp/groups/stageImage.webp";
 import introDuctImage from "../../assets/Webp/groups/タイトル画像.webp";
 import Title from "../../components/layout/Title.astro";
@@ -17,7 +20,7 @@ import shougaiImage from "../../assets/Webp/groups/特別班渉外事務局.webp
   />
 
   <GroupIntroBox
-    imageSrc=""
+    imageSrc={ennichiImage.src}
     imageAlt="縁日班のイメージ画像"
     middleText="高三縁日班"
     detailHref="/groups/ennichi"
@@ -31,14 +34,14 @@ import shougaiImage from "../../assets/Webp/groups/特別班渉外事務局.webp
   />
 
   <GroupIntroBox
-    imageSrc=""
+    imageSrc={kissaImage.src}
     imageAlt="喫茶班のイメージ画像"
     middleText="高三喫茶班"
     detailHref="/groups/kissa"
   />
 
   <GroupIntroBox
-    imageSrc=""
+    imageSrc={kontoImage.src}
     imageAlt="コント班のイメージ画像"
     middleText="高三コント班"
     detailHref="/groups/konto"
