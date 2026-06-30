@@ -1,42 +1,92 @@
 ---
+type GeneralBoxImageSource = string | { src: string };
+
+interface GeneralBoxImage {
+  src: GeneralBoxImageSource;
+  alt?: string;
+  class?: string;
+  middleText?: string;
+}
+
 interface Props {
   topText?: string;
   bottomText?: string;
   middleText?: string;
+  middleTexts?: string[];
   detailHref?: string;
   containerClass?: string;
+  images?: GeneralBoxImage[];
+  imageIntervalSeconds?: number;
 }
 
 const {
   topText = "",
   bottomText = "",
   middleText = "",
+  middleTexts = [],
   detailHref = "#",
   containerClass = "",
+  images = [],
+  imageIntervalSeconds = 4,
 } = Astro.props;
+
+const getImageSrc = (src: GeneralBoxImageSource) =>
+  typeof src === "string" ? src : src.src;
+const carouselImages = images
+  .map((image, index) => ({
+    ...image,
+    src: getImageSrc(image.src),
+    middleText: image.middleText ?? middleTexts[index] ?? middleText,
+  }))
+  .filter((image) => image.src)
+  .slice(0, 4);
+const imageCount = carouselImages.length;
+const hasCarousel = imageCount > 0;
+const carouselMiddleTexts = carouselImages.map(
+  (image) => image.middleText ?? "",
+);
+const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
 ---
 
 <div
-  class={`mx-auto w-full max-w-7xl py-4 px-8 sm:py-6 lg:px-16 ${containerClass}`}
+  class={`general-box-root mx-auto w-full max-w-7xl py-4 px-8 sm:py-6 lg:px-16 ${containerClass}`}
 >
   <div
     class="flex w-full flex-col overflow-hidden bg-white text-black md:aspect-5/2 md:flex-row"
   >
     <div
-      class="flex min-h-56 w-full items-center justify-center bg-neutral-800 md:min-h-0 md:w-3/5"
+      class="general-box-image-frame flex min-h-56 w-full items-center justify-center bg-neutral-800 md:min-h-0 md:w-3/5"
+      data-general-box-carousel={hasCarousel ? "true" : undefined}
+      data-image-count={hasCarousel ? imageCount : undefined}
+      data-image-interval={hasCarousel ? safeIntervalSeconds * 1000 : undefined}
     >
-      <slot name="image">
-        <div
-          aria-hidden="true"
-          class="flex h-full w-full items-center justify-center"
-        >
-          <span
-            class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300"
-          >
-            準備中
-          </span>
-        </div>
-      </slot>
+      {
+        hasCarousel ? (
+          <div class="general-box-carousel h-full w-full">
+            {carouselImages.map((image, index) => (
+              <img
+                src={image.src}
+                alt={image.alt ?? ""}
+                class={`general-box-carousel-image box-border h-full w-full object-contain ${image.class ?? ""}`}
+                aria-hidden={index === 0 ? "false" : "true"}
+                data-carousel-image
+                data-active={index === 0 ? "true" : "false"}
+              />
+            ))}
+          </div>
+        ) : (
+          <slot name="image">
+            <div
+              aria-hidden="true"
+              class="flex h-full w-full items-center justify-center"
+            >
+              <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
+                準備中
+              </span>
+            </div>
+          </slot>
+        )
+      }
     </div>
 
     <div
@@ -45,11 +95,26 @@ const {
       <p class="min-h-[1.5em] text-base leading-relaxed text-black sm:text-lg">
         {topText}
       </p>
-      <p
-        class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
-      >
-        {middleText || "\u00A0"}
-      </p>
+      {
+        hasCarousel ? (
+          <div class="general-box-middle-texts min-h-[1.5em]">
+            {carouselMiddleTexts.map((text, index) => (
+              <p
+                class="general-box-middle-text text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
+                aria-hidden={index === 0 ? "false" : "true"}
+                data-active={index === 0 ? "true" : "false"}
+                data-carousel-middle-text
+              >
+                {text || "\u00A0"}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl">
+            {middleText || "\u00A0"}
+          </p>
+        )
+      }
       <a
         href={detailHref}
         class="inline-flex w-fit items-center justify-center text-base leading-none text-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -60,12 +125,166 @@ const {
           {bottomText}
         </span>
       </a>
-      <div class="mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8">
-        <span class="block h-px w-12 bg-black sm:w-16 md:w-20"></span>
-        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
-        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
-        <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20"></span>
-      </div>
+      {
+        hasCarousel ? (
+          <div
+            class="general-box-bars mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8"
+            data-general-box-bars="true"
+            data-image-count={imageCount}
+          >
+            {Array.from({ length: 4 }).map((_, index) => (
+              <span
+                class="general-box-bar block w-12 sm:w-16 md:w-20"
+                data-carousel-bar={index}
+                data-active={index === 0 ? "true" : "false"}
+                data-empty={index >= imageCount ? "true" : "false"}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8">
+            <span class="block h-px w-12 bg-black sm:w-16 md:w-20" />
+            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+          </div>
+        )
+      }
     </div>
   </div>
 </div>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>(
+    "[data-general-box-carousel='true']",
+  );
+
+  carousels.forEach((carousel) => {
+    const images = Array.from(
+      carousel.querySelectorAll<HTMLElement>("[data-carousel-image]"),
+    );
+    const bars = Array.from(
+      carousel
+        .closest(".general-box-root")
+        ?.querySelectorAll<HTMLElement>("[data-carousel-bar]") ?? [],
+    );
+    const middleTexts = Array.from(
+      carousel
+        .closest(".general-box-root")
+        ?.querySelectorAll<HTMLElement>("[data-carousel-middle-text]") ?? [],
+    );
+    const interval = Number(carousel.dataset.imageInterval) || 4000;
+
+    if (images.length <= 1) {
+      return;
+    }
+
+    let activeIndex = 0;
+
+    window.setInterval(() => {
+      const previousIndex = activeIndex;
+      activeIndex = (activeIndex + 1) % images.length;
+
+      images[previousIndex]?.setAttribute("data-active", "false");
+      images[previousIndex]?.setAttribute("aria-hidden", "true");
+      images[previousIndex]?.setAttribute("data-leaving", "true");
+      images[activeIndex]?.setAttribute("data-active", "true");
+      images[activeIndex]?.setAttribute("aria-hidden", "false");
+      middleTexts[previousIndex]?.setAttribute("data-active", "false");
+      middleTexts[previousIndex]?.setAttribute("aria-hidden", "true");
+      middleTexts[activeIndex]?.setAttribute("data-active", "true");
+      middleTexts[activeIndex]?.setAttribute("aria-hidden", "false");
+
+      bars.forEach((bar, index) => {
+        bar.setAttribute(
+          "data-active",
+          index === activeIndex ? "true" : "false",
+        );
+      });
+
+      window.setTimeout(() => {
+        images[previousIndex]?.removeAttribute("data-leaving");
+      }, 800);
+    }, interval);
+  });
+</script>
+
+<style>
+  .general-box-root {
+    isolation: isolate;
+  }
+
+  .general-box-image-frame {
+    position: relative;
+  }
+
+  .general-box-carousel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .general-box-carousel-image {
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+    transform: translateX(100%);
+    transition:
+      opacity 800ms ease,
+      transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .general-box-carousel-image[data-active="true"] {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 2;
+  }
+
+  .general-box-carousel-image[data-leaving="true"] {
+    opacity: 0;
+    transform: translateX(-100%);
+    z-index: 1;
+  }
+
+  .general-box-middle-texts {
+    display: grid;
+  }
+
+  .general-box-middle-text {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  .general-box-middle-text[data-active="true"] {
+    opacity: 1;
+  }
+
+  .general-box-bar {
+    background-color: rgb(82 82 82);
+    height: 1px;
+    opacity: 0.75;
+    transform-origin: center center;
+    transition:
+      background-color 500ms ease,
+      opacity 500ms ease,
+      transform 500ms ease;
+  }
+
+  .general-box-bar[data-active="true"] {
+    background-color: rgb(0 0 0);
+    opacity: 1;
+    transform: scale(1.08, 4);
+  }
+
+  .general-box-bar[data-empty="true"] {
+    opacity: 0.25;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .general-box-carousel-image,
+    .general-box-middle-text,
+    .general-box-bar {
+      transition: none;
+    }
+  }
+</style>

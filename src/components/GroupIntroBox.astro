@@ -1,12 +1,24 @@
 ---
+type GroupIntroImageSource = string | { src: string };
+
+interface GroupIntroImage {
+  src: GroupIntroImageSource;
+  alt?: string;
+  class?: string;
+  middleText?: string;
+}
+
 interface Props {
   imageSrc?: string;
   imageAlt?: string;
   imageClass?: string;
+  images?: GroupIntroImage[];
   topText?: string;
   bottomText?: string;
   middleText?: string;
+  middleTexts?: string[];
   detailHref?: string;
+  imageIntervalSeconds?: number;
 }
 
 import GeneralBox from "./GeneralBox.astro";
@@ -18,33 +30,50 @@ const {
   imageSrc = "",
   imageAlt = "",
   imageClass = "",
+  images = [],
   topText = TOP_TEXT,
   bottomText = BOTTOM_TEXT,
   middleText = "",
+  middleTexts = [],
   detailHref = "#",
+  imageIntervalSeconds = 4,
 } = Astro.props;
+
 const imageClassName = `box-border h-full w-full object-contain ${imageClass}`;
+const carouselImages = images.map((image) => ({
+  ...image,
+  class: `object-contain ${imageClass} ${image.class ?? ""}`,
+}));
 ---
 
 <GeneralBox
   topText={topText}
   bottomText={bottomText}
   middleText={middleText}
+  middleTexts={middleTexts}
   detailHref={detailHref}
+  images={carouselImages}
+  imageIntervalSeconds={imageIntervalSeconds}
 >
   {
-    imageSrc ? (
-      <img slot="image" src={imageSrc} alt={imageAlt} class={imageClassName} />
-    ) : (
-      <div
-        slot="image"
-        aria-hidden="true"
-        class="flex h-full w-full items-center justify-center"
-      >
-        <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
-          準備中
-        </span>
-      </div>
-    )
+    carouselImages.length === 0 &&
+      (imageSrc ? (
+        <img
+          slot="image"
+          src={imageSrc}
+          alt={imageAlt}
+          class={imageClassName}
+        />
+      ) : (
+        <div
+          slot="image"
+          aria-hidden="true"
+          class="flex h-full w-full items-center justify-center"
+        >
+          <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
+            準備中
+          </span>
+        </div>
+      ))
   }
 </GeneralBox>
