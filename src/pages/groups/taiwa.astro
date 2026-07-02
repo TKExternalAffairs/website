@@ -1,6 +1,32 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import titleImage from "../../assets/Webp/groups/タイトル画像.webp";
 ---
 
-<Layout title="対話班" description="高三対話班の紹介ページです。" />
+<Layout title="対話班" description="高三特別班 対話班の紹介ページです。">
+  <Title heroImage={titleImage.src} title="対話班" />
+
+  <GroupDetailBox
+    title="コンセプト"
+    imageSrc={titleImage.src}
+    imageAlt="筑駒文化祭の校舎装飾"
+    paragraphs={[
+      "あなたは、今年の文化祭をどんなふうに楽しみたいですか？",
+      "話すことが苦手でも、おしゃべりさんでも、みなさんひとりひとりの考えや経験を、聞かせてください。",
+      "対話班では、身近なのにはっきりと答えは見えないようなテーマについて、来場者同士で問いかけあい、考えを深めていく「対話イベント」を実施いたします。初めまして同士でも、むしろそうだからこそ、普段あんまり考えることのないようなテーマについて一緒に考えることができると信じています。きっと、考えや経験は様々だけれど、そのちがいこそを楽しめるような場をつくりあげます。",
+      "たくさんの、それぞれの「熱意」があふれる場所で、素敵な出会いがありますように。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="アクセス"
+    imageSrc={titleImage.src}
+    imageAlt="筑駒文化祭の会場"
+    paragraphs={[
+      "コント班と同会場で実施いたします。",
+      "詳細なタイムテーブル、および企画内容は更新をお待ちください。",
+    ]}
+  />
+</Layout>
