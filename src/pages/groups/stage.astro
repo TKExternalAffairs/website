@@ -1,6 +1,44 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import stageImage from "../../assets/Webp/groups/stageImage.webp";
 ---
 
-<Layout title="ステージ班" description="高三ステージ班の紹介ページです。" />
+<Layout title="ステージ班" description="高三特別班 ステージ班の紹介ページです。">
+  <Title heroImage={stageImage.src} title="ステージ班" />
+
+  <GroupDetailBox
+    title="ステージ班とは"
+    imageSrc={stageImage.src}
+    imageAlt="筑駒文化祭のステージ"
+    paragraphs={[
+      "ステージ班は文化祭3日間で、Mr.筑駒、コロシアムなど、約20個の企画を行う特別班です。",
+      "筑駒文化祭を筑駒文化祭たらしめる、一番の盛り上げ役という自負を持って班員一同、活動に取り組んでいます。",
+      "各企画のディレクターが約一年、魂をこめて作り上げた企画をぜひお楽しみください。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="企画のご紹介"
+    imageSrc={stageImage.src}
+    imageAlt="ステージ班の企画会場"
+    paragraphs={[
+      "【コロシアム】筑駒一の身体の強さを持つ最強人間を決める企画。2時間超の激闘を勝ち抜く今年の最強は誰なのか。お見逃しなく！！！",
+      "【開成VS筑駒】今年も日本一の高校を決める時がやってきました。それぞれの高校のプライドをかけて、今、頭脳の頂上決戦が幕をあける！！！",
+      "【ツクロック】文化祭と言えば、もちろんバンド。今年も多くのバンドが文化祭を華やかなものにしてくれます。",
+      "【STAGE FINAL】ステージ班最後の企画。青春の全てはここにおいていく。俺たちの最後の文化祭、最後の企画。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="最後に"
+    imageSrc={stageImage.src}
+    imageAlt="筑駒文化祭のステージ装飾"
+    paragraphs={[
+      "各企画には、数行では説明しきれないほどの魅力があります。",
+      "それぞれの企画に私たちの全てをかけ、作り上げました。",
+      "文化祭当日は、ぜひ本校へお越しいただき、ステージ班の企画をご観覧いただけますと幸いです。",
+    ]}
+  />
+</Layout>
