@@ -3,17 +3,79 @@ import menuOpenImage from "../../assets/SVG/hamburger_open.svg";
 import menuCloseImage from "../../assets/SVG/hamburger_close.svg";
 import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
-import MobileMenuSection from "./MobileMenuSection.astro";
-import MobileMenuItem from "./MobileMenuItem.astro";
 import { getImage } from "astro:assets";
 import MobileHeaderButton from "./MobileHeaderButton.astro";
 
 const bgImage = await getImage({ src: bgRawImage });
+
+type MenuLink = {
+  title: string;
+  link: string;
+};
+
+type MenuCategory = {
+  id: string;
+  title: string;
+  items: MenuLink[];
+};
+
+const categories: MenuCategory[] = [
+  {
+    id: "groups",
+    title: "各班紹介",
+    items: [
+      { title: "ステージ班", link: "/groups/stage" },
+      { title: "縁日班", link: "/groups/ennichi" },
+      { title: "食品班", link: "/groups/shokuhin" },
+      { title: "喫茶班", link: "/groups/kissa" },
+      { title: "コント班", link: "/groups/konto" },
+      { title: "対話班", link: "/groups/taiwa" },
+      { title: "渉外事務局", link: "/groups/shogai" },
+      { title: "お土産部門", link: "/groups/omiyage" },
+    ],
+  },
+  {
+    id: "kyousan",
+    title: "ご協賛について",
+    items: [
+      { title: "ご協賛のお願い", link: "/kyousan/onegai" },
+      { title: "協賛企業一覧", link: "/kyousan/ichiran" },
+    ],
+  },
+  {
+    id: "menu",
+    title: "メニュー",
+    items: [
+      { title: "食品班", link: "/menu/syokuhin" },
+      { title: "喫茶班", link: "/menu/kissa" },
+    ],
+  },
+  {
+    id: "timetable",
+    title: "タイムテーブル",
+    items: [{ title: "ステージ班", link: "/timetable/stage" }],
+  },
+  {
+    id: "goannai",
+    title: "ご案内",
+    items: [{ title: "マップ", link: "/goannai/map" }],
+  },
+];
+
+const externalLinks: MenuLink[] = [
+  {
+    title: "お問い合わせ",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform",
+  },
+  {
+    title: "公式ホームページ",
+    link: "https://tsukukoma.bunkasai.info",
+  },
+];
 ---
 
 <header
   class="relative flex min-h-13 items-center justify-between bg-repeat p-4 lg:hidden"
-  ,
   style=`background-image: url(${bgImage.src});`
 >
   <HomeLogo />
@@ -27,64 +89,170 @@ const bgImage = await getImage({ src: bgRawImage });
 </header>
 <nav
   id="mobile-global-menu"
-  class="fixed top-0 right-0 z-100 h-full w-[75%] transform flex-col overflow-y-auto bg-gray-900"
+  class="fixed inset-0 z-100 flex flex-col bg-black lg:hidden"
   style="transition: transform 300ms ease-in-out; transform: translateX(100%);"
 >
-  <MobileHeaderButton
-    id="mobile-global-menu-close"
-    className="hidden self-end"
-    imageSrc={menuCloseImage}
-    ariaControls="mobile-global-menu"
-    ariaExpanded="true"
-    ariaLabel="メニューを閉じる"
-  />
-  <ul>
-    {/* TODO: リンクは後で変える */}
-    <MobileMenuSection className="my-3" title="各班紹介">
-      <MobileMenuItem title="一覧" link="/groups" />
-      <MobileMenuItem title="ステージ班" link="/groups/stage" />
-      <MobileMenuItem title="縁日班" link="/groups/ennichi" />
-      <MobileMenuItem title="食品班" link="/groups/shokuhin" />
-      <MobileMenuItem title="喫茶班" link="/groups/kissa" />
-      <MobileMenuItem title="コント班" link="/groups/konto" />
-      <MobileMenuItem title="対話班" link="/groups/taiwa" />
-      <MobileMenuItem title="渉外事務局" link="/groups/shogai" />
-      <MobileMenuItem title="お土産部門" link="/groups/omiyage" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="ご協賛について">
-      <MobileMenuItem title="ご協賛のお願い" link="/kyousan/onegai" />
-      <MobileMenuItem title="協賛企業一覧" link="/kyousan/ichiran" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="メニュー">
-      <MobileMenuItem title="食品班" link="/menu/syokuhin" />
-      <MobileMenuItem title="喫茶班" link="/menu/kissa" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="タイムテーブル">
-      <MobileMenuItem title="ステージ班" link="/timetable/stage" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="ご案内">
-      <MobileMenuItem title="マップ" link="/goannai/map" />
-    </MobileMenuSection>
-  </ul>
+  <div
+    class="flex min-h-13 shrink-0 items-center justify-between bg-repeat p-4"
+    style=`background-image: url(${bgImage.src});`
+  >
+    <HomeLogo />
+    <MobileHeaderButton
+      id="mobile-global-menu-close"
+      imageSrc={menuCloseImage}
+      ariaControls="mobile-global-menu"
+      ariaExpanded="true"
+      ariaLabel="メニューを閉じる"
+    />
+  </div>
+  <div class="relative flex-1 overflow-hidden">
+    <div
+      id="mobile-menu-main"
+      class="absolute inset-0 overflow-y-auto px-12 py-12"
+      style="transition: transform 300ms ease-in-out;"
+    >
+      <ul class="flex flex-col gap-y-8">
+        {
+          categories.map((category) => (
+            <li>
+              <button
+                type="button"
+                class="font-hakushu text-[1.75rem] text-white"
+                data-submenu-open
+                aria-controls={`mobile-menu-sub-${category.id}`}
+                aria-expanded="false"
+              >
+                {category.title}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="mt-14 flex flex-col gap-y-8">
+        {
+          externalLinks.map((external) => (
+            <li>
+              <a
+                href={external.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-hakushu inline-flex items-center gap-x-3 text-[1.75rem] text-white"
+              >
+                {external.title}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="h-[0.65em] w-[0.65em]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  />
+                </svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    {
+      categories.map((category) => (
+        <div
+          id={`mobile-menu-sub-${category.id}`}
+          class="absolute inset-0 overflow-y-auto px-6 py-12"
+          style="transition: transform 300ms ease-in-out; transform: translateX(100%);"
+          data-submenu
+        >
+          <button
+            type="button"
+            class="font-hakushu flex items-center gap-x-4 text-[1.75rem] text-white"
+            data-submenu-back
+            aria-label={`${category.title}のメニューを閉じる`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              aria-hidden="true"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+            {category.title}
+          </button>
+          <ul class="mt-10 flex flex-col gap-y-7 pl-18">
+            {category.items.map((item) => (
+              <li>
+                <a href={item.link} class="font-hakushu text-2xl text-white">
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
 </nav>
 
 <script is:inline>
   const openButton = document.getElementById("mobile-global-menu-open");
   const closeButton = document.getElementById("mobile-global-menu-close");
   const menu = document.getElementById("mobile-global-menu");
+  const mainPanel = document.getElementById("mobile-menu-main");
+  const submenus = document.querySelectorAll("[data-submenu]");
+  const submenuOpenButtons = document.querySelectorAll("[data-submenu-open]");
+  const submenuBackButtons = document.querySelectorAll("[data-submenu-back]");
+
+  function resetPanels() {
+    mainPanel.style.transform = "translateX(0%)";
+    submenus.forEach((submenu) => {
+      submenu.style.transform = "translateX(100%)";
+    });
+    submenuOpenButtons.forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+    });
+  }
 
   openButton.addEventListener("click", () => {
-    menu.classList.add("flex");
     menu.style.transform = "translateX(0%)";
-    openButton.classList.add("hidden");
-    closeButton.classList.remove("hidden");
+    openButton.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
   });
 
   closeButton.addEventListener("click", () => {
     menu.style.transform = "translateX(100%)";
-    menu.classList.remove("flex");
-    // TODO: closeButtonが消えるときのアニメーションが不自然
-    closeButton.classList.add("hidden");
-    openButton.classList.remove("hidden");
+    openButton.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    // スライドアウトが終わってから第1階層に戻す
+    setTimeout(resetPanels, 300);
+  });
+
+  submenuOpenButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const submenu = document.getElementById(
+        button.getAttribute("aria-controls"),
+      );
+      mainPanel.style.transform = "translateX(-100%)";
+      submenu.style.transform = "translateX(0%)";
+      button.setAttribute("aria-expanded", "true");
+    });
+  });
+
+  submenuBackButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      resetPanels();
+    });
   });
 </script>
