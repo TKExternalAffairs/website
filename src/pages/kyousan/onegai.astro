@@ -145,6 +145,37 @@ const sponsorSmall: SponsorLogo[] = [
 ];
 
 const sponsorTextOnly: string[] = [];
+
+const sponsorCashOnly: string[] = [
+  "blueqat株式会社",
+  "武蔵境自動車教習所",
+  "ケンブリッジ・テクノロジー・パートナーズ株式会社",
+  "株式会社Yondemy",
+  "Finatextホールディングス",
+  "AtCoder株式会社",
+  "株式会社ストライク",
+  "株式会社Preferred Networks",
+  "株式会社キャリア・ナビゲーション",
+  "池尻大橋せらクリニック",
+];
+
+const sponsorGoodsOnly: string[] = [
+  "スタンレーブラックアンドデッカー",
+  "若井産業株式会社",
+  "玉鳥産業株式会社",
+  "株式会社ワコム",
+  "首都高速道路株式会社",
+  "株式会社リップス",
+  "株式会社KINUJO",
+  "株式会社ジャノメ",
+  "株式会社CIO",
+  "日本エー・アイ・シー株式会社",
+  "株式会社城山ホールディングス",
+  "ヒノデワシ株式会社",
+  "株式会社LIHIT LAB.",
+  "e-カフェサプライ株式会社",
+  "スリーエム ジャパン株式会社",
+];
 ---
 
 <Layout title="協賛のお願い" description="高三特別班の協賛に関するご案内です。">
@@ -230,7 +261,7 @@ const sponsorTextOnly: string[] = [];
   </section>
 
   <section id="sponsors" class="bg-[#e9e9e9] py-20 text-black">
-    <div class="mx-auto w-full max-w-[1700px] px-6">
+    <div class="mx-auto w-full max-w-425 px-6">
       <div class="text-center">
         <h2 class="font-hakushu text-5xl font-bold tracking-widest">
           協賛企業一覧
@@ -250,7 +281,7 @@ const sponsorTextOnly: string[] = [];
                   href={sponsor.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-[200px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                  class="flex h-50 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
                 >
                   <Image
                     src={sponsor.image}
@@ -271,7 +302,7 @@ const sponsorTextOnly: string[] = [];
                   href={sponsor.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white p-3 transition hover:opacity-80"
+                  class="flex h-25 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
                 >
                   <Image
                     src={sponsor.image}
@@ -297,6 +328,41 @@ const sponsorTextOnly: string[] = [];
             </div>
           )
         }
+      </div>
+    </div>
+  </section>
+  <section class="bg-[#e9e9e9] py-20 text-black">
+    <div class="mx-auto w-full max-w-5xl border-4 bg-white px-12">
+      <div class="my-14 grid gap-12 lg:grid-cols-2">
+        <section>
+          <h3 class="font-hakushu text-3xl font-bold tracking-widest">
+            協賛金協賛
+          </h3>
+          <ul class="mt-6 grid gap-x-8 gap-y-2">
+            {
+              sponsorCashOnly.map((name) => (
+                <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                  {name}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="font-hakushu text-3xl font-bold tracking-widest">
+            物品協賛
+          </h3>
+          <ul class="mt-6 grid gap-x-8 gap-y-2">
+            {
+              sponsorGoodsOnly.map((name) => (
+                <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                  {name}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
       </div>
     </div>
   </section>
