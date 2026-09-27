@@ -13,15 +13,40 @@ type MenuLink = {
   link: string;
 };
 
-type MenuCategory = {
+type MenuCategoryBase = {
   id: string;
   title: string;
+};
+
+type MenuCategoryWithSubmenu = MenuCategoryBase & {
+  kind: "submenu";
   items: MenuLink[];
 };
+
+type MenuCategoryWithLink = MenuCategoryBase & {
+  kind: "link";
+  link: string;
+};
+
+type MenuCategoryHidden = MenuCategoryBase & {
+  kind: "hidden";
+};
+
+type MenuCategory =
+  | MenuCategoryWithSubmenu
+  | MenuCategoryWithLink
+  | MenuCategoryHidden;
+
+function isSubmenuCategory(
+  category: MenuCategory,
+): category is MenuCategoryWithSubmenu {
+  return category.kind === "submenu";
+}
 
 const categories: MenuCategory[] = [
   {
     id: "groups",
+    kind: "submenu",
     title: "各班紹介",
     items: [
       { title: "ステージ班", link: "/groups/stage" },
@@ -35,7 +60,14 @@ const categories: MenuCategory[] = [
     ],
   },
   {
+    id: "news",
+    kind: "link",
+    title: "お知らせ",
+    link: "/news",
+  },
+  {
     id: "kyousan",
+    kind: "submenu",
     title: "ご協賛について",
     items: [
       { title: "ご協賛のお願い", link: "/kyousan/onegai" },
@@ -44,21 +76,18 @@ const categories: MenuCategory[] = [
   },
   {
     id: "menu",
+    kind: "hidden",
     title: "メニュー",
-    items: [
-      { title: "食品班", link: "/menu/syokuhin" },
-      { title: "喫茶班", link: "/menu/kissa" },
-    ],
   },
   {
     id: "timetable",
+    kind: "hidden",
     title: "タイムテーブル",
-    items: [{ title: "ステージ班", link: "/timetable/stage" }],
   },
   {
     id: "goannai",
+    kind: "hidden",
     title: "ご案内",
-    items: [{ title: "マップ", link: "/goannai/map" }],
   },
 ];
 
@@ -113,19 +142,30 @@ const externalLinks: MenuLink[] = [
     >
       <ul class="flex flex-col gap-y-8">
         {
-          categories.map((category) => (
-            <li>
-              <button
-                type="button"
-                class="font-hakushu text-[1.75rem] text-white"
-                data-submenu-open
-                aria-controls={`mobile-menu-sub-${category.id}`}
-                aria-expanded="false"
-              >
-                {category.title}
-              </button>
-            </li>
-          ))
+          categories
+            .filter((category) => category.kind !== "hidden")
+            .map((category) => (
+              <li>
+                {isSubmenuCategory(category) ? (
+                  <button
+                    type="button"
+                    class="font-hakushu text-[1.75rem] text-white"
+                    data-submenu-open
+                    aria-controls={`mobile-menu-sub-${category.id}`}
+                    aria-expanded="false"
+                  >
+                    {category.title}
+                  </button>
+                ) : (
+                  <a
+                    href={category.link}
+                    class="font-hakushu text-[1.75rem] text-white"
+                  >
+                    {category.title}
+                  </a>
+                )}
+              </li>
+            ))
         }
       </ul>
       <ul class="mt-14 flex flex-col gap-y-8">
@@ -161,7 +201,7 @@ const externalLinks: MenuLink[] = [
       </ul>
     </div>
     {
-      categories.map((category) => (
+      categories.filter(isSubmenuCategory).map((category) => (
         <div
           id={`mobile-menu-sub-${category.id}`}
           class="absolute inset-0 overflow-y-auto px-6 py-12"
@@ -244,6 +284,9 @@ const externalLinks: MenuLink[] = [
       const submenu = document.getElementById(
         button.getAttribute("aria-controls"),
       );
+      if (!submenu) {
+        return;
+      }
       mainPanel.style.transform = "translateX(-100%)";
       submenu.style.transform = "translateX(0%)";
       button.setAttribute("aria-expanded", "true");
