@@ -184,9 +184,7 @@ const sponsorGoodsOnly: string[] = [
 <Layout title="協賛のお願い" description="高三特別班の協賛に関するご案内です。">
   <Title title="ご協賛のお願い" heroImage="/images/kyousan-hero.png" />
 
-  <section
-    class="mx-auto w-full max-w-5xl px-4 py-12 text-sm leading-8 text-gray-100 sm:px-6 sm:text-base lg:px-8"
-  >
+  <section class="mx-auto w-full max-w-5xl px-4 py-12 text-sm leading-8 text-gray-100 sm:px-6 sm:text-base lg:px-8">
     <div class="space-y-8">
       <p>
         平素は筑駒文化祭の運営につきまして、格別のご理解とご協力を賜り、厚く御礼申し上げます。
@@ -232,19 +230,13 @@ const sponsorGoodsOnly: string[] = [
         <p class="font-hakushu text-base font-bold sm:text-lg">
           筑波大学附属駒場中・高等学校
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           高三特別班　渉外事務局
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           顧問　早川 和彦
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           事務局長　中河 颯太
         </p>
       </div>
@@ -270,67 +262,62 @@ const sponsorGoodsOnly: string[] = [
           協賛企業一覧
         </h2>
         <p class="mx-auto mt-8 max-w-4xl text-[20px] leading-9">
-          以下の企業の皆様より、第75回筑駒文化祭へのご支援を賜りました。<br
-          />ここに深く御礼申し上げます。
+          以下の企業の皆様より、第75回筑駒文化祭へのご支援を賜りました。
+          <br />
+          ここに深く御礼申し上げます。
         </p>
       </div>
 
       <div class="mt-16 space-y-10">
-        {
-          sponsorLarge.length > 0 && (
-            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-              {sponsorLarge.map((sponsor) => (
-                <a
-                  href={sponsor.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex h-50 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
-                >
-                  <Image
-                    src={sponsor.image}
-                    alt={sponsor.alt}
-                    class="block max-h-full max-w-full object-contain object-center"
-                  />
-                </a>
+        {sponsorLarge.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+            {sponsorLarge.map((sponsor) => (
+              <a
+                href={sponsor.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-50 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
+              >
+                <Image
+                  src={sponsor.image}
+                  alt={sponsor.alt}
+                  class="block max-h-full max-w-full object-contain object-center"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+
+        {sponsorSmall.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+            {sponsorSmall.map((sponsor) => (
+              <a
+                href={sponsor.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-25 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
+              >
+                <Image
+                  src={sponsor.image}
+                  alt={sponsor.alt}
+                  class="block max-h-full max-w-full object-contain object-center"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+
+        {sponsorTextOnly.length > 0 && (
+          <div class="px-12 pt-12">
+            <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
+              {sponsorTextOnly.map((name) => (
+                <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
+                  ・{name}
+                </p>
               ))}
             </div>
-          )
-        }
-
-        {
-          sponsorSmall.length > 0 && (
-            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-              {sponsorSmall.map((sponsor) => (
-                <a
-                  href={sponsor.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex h-25 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
-                >
-                  <Image
-                    src={sponsor.image}
-                    alt={sponsor.alt}
-                    class="block max-h-full max-w-full object-contain object-center"
-                  />
-                </a>
-              ))}
-            </div>
-          )
-        }
-
-        {
-          sponsorTextOnly.length > 0 && (
-            <div class="px-12 pt-12">
-              <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
-                {sponsorTextOnly.map((name) => (
-                  <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
-                    ・{name}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )
-        }
+          </div>
+        )}
       </div>
     </div>
   </section>
@@ -342,13 +329,11 @@ const sponsorGoodsOnly: string[] = [
             協賛金協賛
           </h3>
           <ul class="mt-6 grid gap-x-8 gap-y-2">
-            {
-              sponsorCashOnly.map((name) => (
-                <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
-                  {name}
-                </li>
-              ))
-            }
+            {sponsorCashOnly.map((name) => (
+              <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                {name}
+              </li>
+            ))}
           </ul>
         </section>
 
@@ -357,13 +342,11 @@ const sponsorGoodsOnly: string[] = [
             物品協賛
           </h3>
           <ul class="mt-6 grid gap-x-8 gap-y-2">
-            {
-              sponsorGoodsOnly.map((name) => (
-                <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
-                  {name}
-                </li>
-              ))
-            }
+            {sponsorGoodsOnly.map((name) => (
+              <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                {name}
+              </li>
+            ))}
           </ul>
         </section>
       </div>

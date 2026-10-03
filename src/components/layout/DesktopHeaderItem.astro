@@ -14,6 +14,8 @@ const { link, title, outlined = false } = Astro.props;
     class:list={[
       "font-hakushu m-2 p-3 text-xl text-white",
       outlined && "outline",
-    ]}>{title}</a
+    ]}
   >
+    {title}
+  </a>
 </li>
