@@ -55,25 +55,18 @@ const carouselImages = images.map((image) => ({
   images={carouselImages}
   imageIntervalSeconds={imageIntervalSeconds}
 >
-  {
-    carouselImages.length === 0 &&
-      (imageSrc ? (
-        <img
-          slot="image"
-          src={imageSrc}
-          alt={imageAlt}
-          class={imageClassName}
-        />
-      ) : (
-        <div
-          slot="image"
-          aria-hidden="true"
-          class="flex h-full w-full items-center justify-center"
-        >
-          <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
-            準備中
-          </span>
-        </div>
-      ))
-  }
+  {carouselImages.length === 0 &&
+    (imageSrc ? (
+      <img slot="image" src={imageSrc} alt={imageAlt} class={imageClassName} />
+    ) : (
+      <div
+        slot="image"
+        aria-hidden="true"
+        class="flex h-full w-full items-center justify-center"
+      >
+        <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
+          準備中
+        </span>
+      </div>
+    ))}
 </GeneralBox>

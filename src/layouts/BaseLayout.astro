@@ -60,7 +60,9 @@ const canonical = canonicalUrl(canonicalPath);
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content={ogpType} />
-    {articleProperties?.map((prop) => <ArticleMeta articleProp={prop} />)}
+    {articleProperties?.map((prop) => (
+      <ArticleMeta articleProp={prop} />
+    ))}
     <meta property="twitter:url" content={canonical} />
     <script>
       // Adobe FontsからAH白洲をフェッチする
@@ -100,7 +102,8 @@ const canonical = canonicalUrl(canonicalPath);
   <script
     defer
     src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token": "61cfec07a7804d62b0ba9e1ca20da31a"}'></script>
+    data-cf-beacon='{"token": "61cfec07a7804d62b0ba9e1ca20da31a"}'
+  ></script>
   <!-- End Cloudflare Web Analytics -->
 </html>
 

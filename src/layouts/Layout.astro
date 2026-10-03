@@ -16,7 +16,7 @@ interface Props {
 }
 ---
 
-<BaseLayout {...Astro.props satisfies Props}>
+<BaseLayout {...(Astro.props satisfies Props)}>
   <MobileHeader />
   <DesktopHeader />
   <main>

@@ -51,105 +51,93 @@ const safeIntervalSeconds = Math.max(1.5, imageIntervalSeconds);
 <div
   class={`general-box-root mx-auto w-full max-w-7xl py-4 px-8 sm:py-6 lg:px-16 ${containerClass}`}
 >
-  <div
-    class="flex w-full flex-col overflow-hidden bg-white text-black md:aspect-5/2 md:flex-row"
-  >
+  <div class="flex w-full flex-col overflow-hidden bg-white text-black md:aspect-5/2 md:flex-row">
     <div
       class="general-box-image-frame flex min-h-56 w-full items-center justify-center bg-neutral-800 md:min-h-0 md:w-3/5"
       data-general-box-carousel={hasCarousel ? "true" : undefined}
       data-image-count={hasCarousel ? imageCount : undefined}
       data-image-interval={hasCarousel ? safeIntervalSeconds * 1000 : undefined}
     >
-      {
-        hasCarousel ? (
-          <div class="general-box-carousel h-full w-full">
-            {carouselImages.map((image, index) => (
-              <img
-                src={image.src}
-                alt={image.alt ?? ""}
-                class={`general-box-carousel-image box-border h-full w-full object-contain ${image.class ?? ""}`}
-                aria-hidden={index === 0 ? "false" : "true"}
-                data-carousel-image
-                data-active={index === 0 ? "true" : "false"}
-              />
-            ))}
+      {hasCarousel ? (
+        <div class="general-box-carousel h-full w-full">
+          {carouselImages.map((image, index) => (
+            <img
+              src={image.src}
+              alt={image.alt ?? ""}
+              class={`general-box-carousel-image box-border h-full w-full object-contain ${image.class ?? ""}`}
+              aria-hidden={index === 0 ? "false" : "true"}
+              data-carousel-image
+              data-active={index === 0 ? "true" : "false"}
+            />
+          ))}
+        </div>
+      ) : (
+        <slot name="image">
+          <div
+            aria-hidden="true"
+            class="flex h-full w-full items-center justify-center"
+          >
+            <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
+              準備中
+            </span>
           </div>
-        ) : (
-          <slot name="image">
-            <div
-              aria-hidden="true"
-              class="flex h-full w-full items-center justify-center"
-            >
-              <span class="font-hakushu text-[clamp(1.5rem,4vw,2.5rem)] text-slate-300">
-                準備中
-              </span>
-            </div>
-          </slot>
-        )
-      }
+        </slot>
+      )}
     </div>
 
-    <div
-      class="font-hakushu flex w-full flex-col justify-center gap-4 px-8 py-6 md:w-2/5 md:gap-6 md:pt-16 md:pb-8 md:pl-12"
-    >
+    <div class="font-hakushu flex w-full flex-col justify-center gap-4 px-8 py-6 md:w-2/5 md:gap-6 md:pt-16 md:pb-8 md:pl-12">
       <p class="min-h-[1.5em] text-base leading-relaxed text-black sm:text-lg">
         {topText}
       </p>
-      {
-        hasCarousel ? (
-          <div class="general-box-middle-texts min-h-[1.5em]">
-            {carouselMiddleTexts.map((text, index) => (
-              <p
-                class="general-box-middle-text text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
-                aria-hidden={index === 0 ? "false" : "true"}
-                data-active={index === 0 ? "true" : "false"}
-                data-carousel-middle-text
-              >
-                {text || "\u00A0"}
-              </p>
-            ))}
-          </div>
-        ) : (
-          <p class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl">
-            {middleText || "\u00A0"}
-          </p>
-        )
-      }
+      {hasCarousel ? (
+        <div class="general-box-middle-texts min-h-[1.5em]">
+          {carouselMiddleTexts.map((text, index) => (
+            <p
+              class="general-box-middle-text text-2xl leading-tight text-black sm:text-3xl md:text-4xl"
+              aria-hidden={index === 0 ? "false" : "true"}
+              data-active={index === 0 ? "true" : "false"}
+              data-carousel-middle-text
+            >
+              {text || "\u00A0"}
+            </p>
+          ))}
+        </div>
+      ) : (
+        <p class="min-h-[1.5em] text-2xl leading-tight text-black sm:text-3xl md:text-4xl">
+          {middleText || "\u00A0"}
+        </p>
+      )}
       <a
         href={detailHref}
         class="inline-flex w-fit items-center justify-center text-base leading-none text-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
       >
-        <span
-          class="bg-black [box-decoration-break:clone] px-3 py-3 [-webkit-box-decoration-break:clone]"
-        >
+        <span class="bg-black [box-decoration-break:clone] px-3 py-3 [-webkit-box-decoration-break:clone]">
           {bottomText}
         </span>
       </a>
-      {
-        hasCarousel ? (
-          <div
-            class="general-box-bars mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8"
-            data-general-box-bars="true"
-            data-image-count={imageCount}
-          >
-            {Array.from({ length: 4 }).map((_, index) => (
-              <span
-                class="general-box-bar block w-12 sm:w-16 md:w-20"
-                data-carousel-bar={index}
-                data-active={index === 0 ? "true" : "false"}
-                data-empty={index >= imageCount ? "true" : "false"}
-              />
-            ))}
-          </div>
-        ) : (
-          <div class="mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8">
-            <span class="block h-px w-12 bg-black sm:w-16 md:w-20" />
-            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
-            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
-            <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
-          </div>
-        )
-      }
+      {hasCarousel ? (
+        <div
+          class="general-box-bars mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8"
+          data-general-box-bars="true"
+          data-image-count={imageCount}
+        >
+          {Array.from({ length: 4 }).map((_, index) => (
+            <span
+              class="general-box-bar block w-12 sm:w-16 md:w-20"
+              data-carousel-bar={index}
+              data-active={index === 0 ? "true" : "false"}
+              data-empty={index >= imageCount ? "true" : "false"}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="mt-4 flex gap-2 sm:gap-3 md:mx-4 md:mt-8">
+          <span class="block h-px w-12 bg-black sm:w-16 md:w-20" />
+          <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+          <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+          <span class="block h-px w-12 bg-neutral-600 sm:w-16 md:w-20" />
+        </div>
+      )}
     </div>
   </div>
 </div>

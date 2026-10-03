@@ -112,97 +112,91 @@ const externalLinks: MenuLink[] = [
       style="transition: transform 300ms ease-in-out;"
     >
       <ul class="flex flex-col gap-y-8">
-        {
-          categories.map((category) => (
-            <li>
-              <button
-                type="button"
-                class="font-hakushu text-[1.75rem] text-white"
-                data-submenu-open
-                aria-controls={`mobile-menu-sub-${category.id}`}
-                aria-expanded="false"
-              >
-                {category.title}
-              </button>
-            </li>
-          ))
-        }
+        {categories.map((category) => (
+          <li>
+            <button
+              type="button"
+              class="font-hakushu text-[1.75rem] text-white"
+              data-submenu-open
+              aria-controls={`mobile-menu-sub-${category.id}`}
+              aria-expanded="false"
+            >
+              {category.title}
+            </button>
+          </li>
+        ))}
       </ul>
       <ul class="mt-14 flex flex-col gap-y-8">
-        {
-          externalLinks.map((external) => (
-            <li>
-              <a
-                href={external.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-hakushu inline-flex items-center gap-x-3 text-[1.75rem] text-white"
+        {externalLinks.map((external) => (
+          <li>
+            <a
+              href={external.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-hakushu inline-flex items-center gap-x-3 text-[1.75rem] text-white"
+            >
+              {external.title}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+                class="h-[0.65em] w-[0.65em]"
               >
-                {external.title}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  class="h-[0.65em] w-[0.65em]"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  />
-                </svg>
-              </a>
-            </li>
-          ))
-        }
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                />
+              </svg>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
-    {
-      categories.map((category) => (
-        <div
-          id={`mobile-menu-sub-${category.id}`}
-          class="absolute inset-0 overflow-y-auto px-6 py-12"
-          style="transition: transform 300ms ease-in-out; transform: translateX(100%);"
-          data-submenu
+    {categories.map((category) => (
+      <div
+        id={`mobile-menu-sub-${category.id}`}
+        class="absolute inset-0 overflow-y-auto px-6 py-12"
+        style="transition: transform 300ms ease-in-out; transform: translateX(100%);"
+        data-submenu
+      >
+        <button
+          type="button"
+          class="font-hakushu flex items-center gap-x-4 text-[1.75rem] text-white"
+          data-submenu-back
+          aria-label={`${category.title}のメニューを閉じる`}
         >
-          <button
-            type="button"
-            class="font-hakushu flex items-center gap-x-4 text-[1.75rem] text-white"
-            data-submenu-back
-            aria-label={`${category.title}のメニューを閉じる`}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            aria-hidden="true"
+            class="h-6 w-6"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              aria-hidden="true"
-              class="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5 8.25 12l7.5-7.5"
-              />
-            </svg>
-            {category.title}
-          </button>
-          <ul class="mt-10 flex flex-col gap-y-7 pl-18">
-            {category.items.map((item) => (
-              <li>
-                <a href={item.link} class="font-hakushu text-2xl text-white">
-                  {item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 19.5 8.25 12l7.5-7.5"
+            />
+          </svg>
+          {category.title}
+        </button>
+        <ul class="mt-10 flex flex-col gap-y-7 pl-18">
+          {category.items.map((item) => (
+            <li>
+              <a href={item.link} class="font-hakushu text-2xl text-white">
+                {item.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
 </nav>
 
