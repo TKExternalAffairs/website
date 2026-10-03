@@ -15,7 +15,7 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/react": "^4.4.2",
     "@astrojs/ts-plugin": "^1.10.12",
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.3.0",
