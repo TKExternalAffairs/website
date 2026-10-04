@@ -54,7 +54,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Upload to FTPS
-        uses: SamKirkland/FTP-Deploy-Action@3a9c65ae0fc12ac924ccef8afc26941cc43aad0b # v4.0.0
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.0.0
         with:
           server: ${{ secrets.FTPS_HOST_TKSPECIAL }}
           username: ${{ secrets.FTPS_USER_TKSPECIAL }}
@@ -91,7 +91,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Upload to FTPS
-        uses: SamKirkland/FTP-Deploy-Action@3a9c65ae0fc12ac924ccef8afc26941cc43aad0b # v4.0.0
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.0.0
         with:
           server: ${{ secrets.FTPS_HOST_SPECIALTEST }}
           username: ${{ secrets.FTPS_USER_SPECIALTEST }}
