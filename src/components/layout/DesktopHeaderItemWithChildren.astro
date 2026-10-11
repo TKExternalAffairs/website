@@ -1,6 +1,6 @@
 ---
 interface Props {
-  /**  Headerの中で一意であれば良い */
+  /** Headerの中で一意であれば良い */
   id: string;
   title: string;
 }
@@ -8,37 +8,117 @@ interface Props {
 const { id, title } = Astro.props;
 ---
 
-<li id=`header-item-${id}__container`>
+<li class="desktop-menu relative" data-desktop-menu data-open="false">
   <button
-    id=`header-item-${id}__btn`
-    class="font-hakushu z-200 cursor-pointer text-xl"
+    id={`header-item-${id}__btn`}
+    type="button"
+    class="font-hakushu flex cursor-pointer items-center gap-2 rounded-lg px-5 py-3 text-xl text-white transition-colors duration-200 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+    aria-controls={`header-item-${id}__entry-container`}
+    aria-expanded="false"
   >
     {title}
+    <svg
+      class="menu-chevron h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"
+      ></path>
+    </svg>
   </button>
-  <ul
-    id=`header-item-${id}__entry-container`
-    class="font-hakushu absolute z-10 flex flex-col gap-4 rounded-b-xl border border-white bg-gray-900 opacity-0 transition-opacity duration-1000 ease-in"
+  <div
+    class="desktop-menu-panel absolute top-full left-0 z-10 min-w-56 pt-2"
+    inert
+    aria-hidden="true"
   >
-    <span class="before:py-3"></span>
-    <slot />
-    <span class="after:py-3"></span>
-  </ul>
+    <ul
+      id={`header-item-${id}__entry-container`}
+      aria-labelledby={`header-item-${id}__btn`}
+      class="font-hakushu flex flex-col rounded-xl border border-white/15 bg-black p-3 shadow-2xl"
+    >
+      <slot />
+    </ul>
+  </div>
 </li>
 
-<script define:vars={{ id }} is:inline>
-  // TODO: is:inlineを乱用しすぎているかもしれない
-  const btn = document.getElementById(`header-item-${id}__btn`);
-  const container = document.getElementById(`hedaer-item-${id}__container`);
-  const entryContainer = document.getElementById(
-    `header-item-${id}__entry-container`,
-  );
+<style>
+  .desktop-menu-panel {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 180ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 180ms;
+  }
 
-  btn.addEventListener("mouseenter", () => {
-    entryContainer.classList.remove("opacity-0");
-  });
+  .desktop-menu[data-open="true"] .desktop-menu-panel {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-  // TODO: 当たり判定が微妙かも
-  entryContainer.addEventListener("mouseleave", () => {
-    entryContainer.classList.add("opacity-0");
-  });
+  .desktop-menu[data-open="true"] > button {
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .menu-chevron {
+    transition: transform 180ms ease;
+  }
+
+  .desktop-menu[data-open="true"] .menu-chevron {
+    transform: rotate(180deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .desktop-menu-panel,
+    .menu-chevron {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-desktop-menu]")
+    .forEach((container) => {
+      const button = container.querySelector<HTMLButtonElement>("button")!;
+      const panel = container.querySelector<HTMLElement>(
+        ".desktop-menu-panel",
+      )!;
+      let closeTimer: ReturnType<typeof setTimeout>;
+
+      function setOpen(open: boolean) {
+        clearTimeout(closeTimer);
+        container.dataset.open = String(open);
+        button.setAttribute("aria-expanded", String(open));
+        panel.setAttribute("aria-hidden", String(!open));
+        panel.inert = !open;
+      }
+
+      container.addEventListener("mouseenter", () => setOpen(true));
+      container.addEventListener("mouseleave", () => {
+        closeTimer = setTimeout(() => {
+          if (!container.contains(document.activeElement)) setOpen(false);
+        }, 120);
+      });
+      container.addEventListener("focusin", () => setOpen(true));
+      container.addEventListener("focusout", (event) => {
+        if (!container.contains(event.relatedTarget as Node | null))
+          setOpen(false);
+      });
+      button.addEventListener("click", () => setOpen(true));
+      container.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          button.focus();
+          setOpen(false);
+        }
+      });
+      document.addEventListener("pointerdown", (event) => {
+        if (!container.contains(event.target as Node)) setOpen(false);
+      });
+    });
 </script>

@@ -12,7 +12,7 @@ const { link, title, outlined = false } = Astro.props;
   <a
     href={link}
     class:list={[
-      "font-hakushu m-2 p-3 text-xl text-white",
+      "font-hakushu m-2 inline-flex rounded-lg p-3 text-xl text-white transition-colors duration-200 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white",
       outlined && "outline",
     ]}
   >
