@@ -10,11 +10,11 @@ const image = await getImage({ src: bgRawImage, format: "svg" });
 ---
 
 <header
-  class="relative hidden min-h-15 items-center justify-between bg-repeat px-8 py-6 lg:flex"
+  class="relative z-50 hidden min-h-15 items-center justify-between bg-repeat px-8 py-6 lg:flex"
   style=`background-image: url(${image.src});`
 >
   <HomeLogo />
-  <nav>
+  <nav aria-label="メインナビゲーション">
     <ul class="flex flex-row items-center gap-x-2">
       <DesktopHeaderItemWithChildren id="groups" title="各班紹介">
         <DesktopHeaderItemEntry title="一覧" link="/groups" />
@@ -36,5 +36,3 @@ const image = await getImage({ src: bgRawImage, format: "svg" });
     </ul>
   </nav>
 </header>
-
-<script is:inline></script>
