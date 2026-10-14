@@ -6,8 +6,11 @@ interface Props {
 const { title, link } = Astro.props;
 ---
 
-<li class="px-5">
-  <a href={link} class="text-xl">
+<li>
+  <a
+    href={link}
+    class="block px-5 py-3 text-xl text-white transition-colors duration-200 hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-2 focus-visible:outline-white"
+  >
     {title}
   </a>
 </li>
