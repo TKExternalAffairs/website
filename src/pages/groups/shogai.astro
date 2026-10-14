@@ -1,6 +1,18 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import Title from "../../components/layout/Title.astro";
 ---
 
-<Layout title="渉外事務局" description="高三渉外事務局の紹介ページです。" />
+<Layout title="渉外事務局" description="高三渉外事務局の紹介ページです。">
+  <Title title="渉外事務局" />
+  <section class="voyage-container voyage-section">
+    <div class="voyage-empty">
+      <p class="voyage-eyebrow">COMING SOON</p>
+      <h2>ただいま準備中です</h2>
+      <p>渉外事務局の詳しいご案内は、公開までお待ちください。</p>
+      <a class="voyage-outline-link" href="/kyousan/onegai/">
+        ご協賛について <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Layout>

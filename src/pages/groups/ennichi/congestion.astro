@@ -1,0 +1,26 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Title from "../../../components/layout/Title.astro";
+import CongestionBoard from "../../../components/voyage/CongestionBoard.astro";
+import { ennichiAreas } from "../../../data/visitor";
+---
+
+<Layout
+  title="縁日班混雑度"
+  description="縁日班の各部門の混雑状況をご案内します。混雑情報は現在配信準備中です。"
+>
+  <Title title="縁日班混雑度" />
+  <section class="voyage-container voyage-section">
+    <div class="voyage-section-heading">
+      <p class="voyage-eyebrow">ENNICHI / CONGESTION</p>
+      <h2>次は、どこへ行こう。</h2>
+      <p>部門ごとの混雑状況をご案内します。</p>
+    </div>
+    <CongestionBoard areas={ennichiAreas} />
+    <div class="voyage-detail-action">
+      <a class="voyage-outline-link" href="/groups/ennichi/">
+        縁日班の紹介へ <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Layout>

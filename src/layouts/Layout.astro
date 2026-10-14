@@ -4,6 +4,10 @@ import Footer from "../components/layout/Footer.astro";
 import MobileHeader from "../components/layout/MobileHeader.astro";
 import type { ArticleProp, OgpType } from "../lib/ogp-types";
 import BaseLayout from "./BaseLayout.astro";
+import VoyageHeader from "../components/voyage/Header.astro";
+import VoyageFooter from "../components/voyage/Footer.astro";
+import { isVoyagePath } from "../lib/voyage";
+import "../styles/voyage.css";
 
 interface Props {
   title?: string;
@@ -17,10 +21,22 @@ interface Props {
 ---
 
 <BaseLayout {...(Astro.props satisfies Props)}>
-  <MobileHeader />
-  <DesktopHeader />
-  <main>
-    <slot />
-  </main>
-  <Footer />
+  {isVoyagePath(Astro.url.pathname) ? (
+    <div id="top" class="voyage-site">
+      <VoyageHeader />
+      <main id="main-content">
+        <slot />
+      </main>
+      <VoyageFooter />
+    </div>
+  ) : (
+    <>
+      <MobileHeader />
+      <DesktopHeader />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </>
+  )}
 </BaseLayout>

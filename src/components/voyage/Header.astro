@@ -1,0 +1,151 @@
+---
+import { groups, visitorLinks } from "../../data/groups";
+const path = Astro.url.pathname;
+---
+
+<a class="voyage-skip" href="#main-content">
+  本文へ移動
+</a>
+<header class="voyage-header">
+  <a class="voyage-brand" href="/" aria-label="筑駒文化祭 高三特別班 ホーム">
+    <span class="voyage-brand__number">75th</span>
+    <span>
+      筑駒文化祭<span class="voyage-brand__sub">高三特別班</span>
+    </span>
+  </a>
+  <nav class="voyage-desktop-nav" aria-label="メインナビゲーション">
+    <a href="/groups/" aria-current={path === "/groups/" ? "page" : undefined}>
+      各班紹介
+    </a>
+    <a href="/#visit">混雑度・メニュー</a>
+    <a
+      href="/kyousan/onegai/"
+      aria-current={path.startsWith("/kyousan/") ? "page" : undefined}
+    >
+      ご協賛について
+    </a>
+  </nav>
+  <button
+    class="voyage-menu-button"
+    type="button"
+    data-voyage-menu-open
+    aria-haspopup="dialog"
+    aria-controls="voyage-menu"
+    aria-expanded="false"
+  >
+    <span class="voyage-menu-lines" aria-hidden="true"></span>
+    <span>MENU</span>
+  </button>
+</header>
+<dialog
+  id="voyage-menu"
+  class="voyage-menu"
+  aria-labelledby="voyage-menu-title"
+>
+  <div class="voyage-menu__head">
+    <h2 id="voyage-menu-title">
+      航海のご案内<span>NAVIGATION</span>
+    </h2>
+    <button
+      class="voyage-menu-close"
+      type="button"
+      data-voyage-menu-close
+      aria-label="メニューを閉じる"
+    >
+      閉じる <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <nav class="voyage-menu__columns" aria-label="サイト内のご案内">
+    <div>
+      <a class="voyage-menu-home" href="/">
+        トップページ <span aria-hidden="true">↗</span>
+      </a>
+      <h3>各班紹介</h3>
+      <ul>
+        {groups.map((group) => (
+          <li>
+            <a href={`/groups/${group.id}/`}>
+              {group.title}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="voyage-menu-all" href="/groups/">
+        各班紹介をすべて見る →
+      </a>
+    </div>
+    <div>
+      <h3>混雑度・メニュー</h3>
+      <ul>
+        {visitorLinks.map((link) => (
+          <li>
+            <a href={link.href}>
+              {link.title}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <h3>その他のご案内</h3>
+      <ul>
+        <li>
+          <a href="/news/">
+            お知らせ<span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="/kyousan/onegai/">
+            ご協賛について<span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://tsukukoma.bunkasai.info/">
+            文化祭公式ホームページ<span aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform">
+            お問い合わせ<span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</dialog>
+<noscript>
+  <nav class="voyage-noscript" aria-label="追加ナビゲーション">
+    <a href="/groups/">各班紹介</a>
+    {visitorLinks.map((link) => (
+      <a href={link.href}>{link.title}</a>
+    ))}
+    <a href="/kyousan/onegai/">ご協賛について</a>
+    <a href="/news/">お知らせ</a>
+  </nav>
+</noscript>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("#voyage-menu");
+  const opener = document.querySelector<HTMLButtonElement>(
+    "[data-voyage-menu-open]",
+  );
+  if (dialog && opener) {
+    let previousOverflow = "";
+    opener.addEventListener("click", () => {
+      previousOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = "hidden";
+      opener.setAttribute("aria-expanded", "true");
+    });
+    dialog
+      .querySelector("[data-voyage-menu-close]")
+      ?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("close", () => {
+      document.body.style.overflow = previousOverflow;
+      opener.setAttribute("aria-expanded", "false");
+      opener.focus({ preventScroll: true });
+    });
+    dialog
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", () => dialog.close()));
+  }
+</script>
