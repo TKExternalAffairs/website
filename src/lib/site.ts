@@ -4,7 +4,7 @@ export const SITE_ENVIRONMENTS = ["production", "development"] as const;
 
 export type SiteEnvironment = (typeof SITE_ENVIRONMENTS)[number];
 
-export const SITE_NAME = "高三特別班";
+export const SITE_NAME = "筑駒文化祭 高3特別班";
 
 export const currentSiteEnvironment: SiteEnvironment =
   process.env.SITE_ENV === "development" ? "development" : "production";

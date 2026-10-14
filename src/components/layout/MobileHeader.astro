@@ -3,88 +3,482 @@ import menuOpenImage from "../../assets/SVG/hamburger_open.svg";
 import menuCloseImage from "../../assets/SVG/hamburger_close.svg";
 import bgRawImage from "../../assets/SVG/header_background_partial.svg";
 import HomeLogo from "./HomeLogo.astro";
-import MobileMenuSection from "./MobileMenuSection.astro";
-import MobileMenuItem from "./MobileMenuItem.astro";
 import { getImage } from "astro:assets";
 import MobileHeaderButton from "./MobileHeaderButton.astro";
 
 const bgImage = await getImage({ src: bgRawImage });
+
+type MenuLink = {
+  title: string;
+  link: string;
+};
+
+type MenuCategoryBase = {
+  id: string;
+  title: string;
+};
+
+type MenuCategoryWithSubmenu = MenuCategoryBase & {
+  kind: "submenu";
+  items: MenuLink[];
+};
+
+type MenuCategoryWithLink = MenuCategoryBase & {
+  kind: "link";
+  link: string;
+};
+
+type MenuCategoryHidden = MenuCategoryBase & {
+  kind: "hidden";
+};
+
+type MenuCategory =
+  MenuCategoryWithSubmenu | MenuCategoryWithLink | MenuCategoryHidden;
+
+function isSubmenuCategory(
+  category: MenuCategory,
+): category is MenuCategoryWithSubmenu {
+  return category.kind === "submenu";
+}
+
+const categories: MenuCategory[] = [
+  {
+    id: "groups",
+    kind: "submenu",
+    title: "各班紹介",
+    items: [
+      { title: "ステージ班", link: "/groups/stage" },
+      { title: "縁日班", link: "/groups/ennichi" },
+      { title: "食品班", link: "/groups/shokuhin" },
+      { title: "喫茶班", link: "/groups/kissa" },
+      { title: "コント班", link: "/groups/konto" },
+      { title: "対話班", link: "/groups/taiwa" },
+      { title: "渉外事務局", link: "/groups/shogai" },
+      { title: "お土産部門", link: "/groups/omiyage" },
+    ],
+  },
+  {
+    id: "news",
+    kind: "link",
+    title: "お知らせ",
+    link: "/news",
+  },
+  {
+    id: "kyousan",
+    kind: "link",
+    title: "ご協賛について",
+    link: "/kyousan/onegai",
+  },
+  {
+    id: "menu",
+    kind: "hidden",
+    title: "メニュー",
+  },
+  {
+    id: "timetable",
+    kind: "hidden",
+    title: "タイムテーブル",
+  },
+  {
+    id: "goannai",
+    kind: "hidden",
+    title: "ご案内",
+  },
+];
+
+const externalLinks: MenuLink[] = [
+  {
+    title: "お問い合わせ",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform",
+  },
+  {
+    title: "公式ホームページ",
+    link: "https://tsukukoma.bunkasai.info",
+  },
+];
 ---
 
-<header
-  class="relative flex justify-between bg-repeat p-4 lg:hidden"
-  ,
-  style=`background-image: url(${bgImage.src});`
->
-  <HomeLogo />
-  <MobileHeaderButton
-    id="mobile-global-menu-open"
-    imageSrc={menuOpenImage}
-    ariaControls="mobile-global-menu"
-    ariaExpanded="false"
-    ariaLabel="メニューを開く"
-  />
-</header>
-<nav
-  id="mobile-global-menu"
-  class="fixed top-0 right-0 z-100 h-full w-[75%] transform flex-col bg-gray-900"
-  style="transition: transform 300ms ease-in-out; transform: translateX(100%);"
->
-  <MobileHeaderButton
-    id="mobile-global-menu-close"
-    className="hidden self-end"
-    imageSrc={menuCloseImage}
-    ariaControls="mobile-global-menu"
-    ariaExpanded="true"
-    ariaLabel="メニューを閉じる"
-  />
-  <ul>
-    {/* TODO: リンクは後で変える */}
-    <MobileMenuSection className="my-3" title="各班紹介">
-      <MobileMenuItem title="一覧" link="/groups" />
-      <MobileMenuItem title="ステージ班" link="/groups/stage" />
-      <MobileMenuItem title="縁日班" link="/groups/ennichi" />
-      <MobileMenuItem title="食品班" link="/groups/shokuhin" />
-      <MobileMenuItem title="喫茶班" link="/groups/kissa" />
-      <MobileMenuItem title="コント班" link="/groups/konto" />
-      <MobileMenuItem title="対話班" link="/groups/taiwa" />
-      <MobileMenuItem title="渉外事務局" link="/groups/shogai" />
-      <MobileMenuItem title="お土産部門" link="/groups/omiyage" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="ご協賛について">
-      <MobileMenuItem title="ご協賛のお願い" link="/kyousan/onegai" />
-      <MobileMenuItem title="協賛企業一覧" link="/kyousan/ichiran" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="メニュー">
-      <MobileMenuItem title="食品班" link="/menu/syokuhin" />
-      <MobileMenuItem title="喫茶班" link="/menu/kissa" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="タイムテーブル">
-      <MobileMenuItem title="ステージ班" link="/timetable/stage" />
-    </MobileMenuSection>
-    <MobileMenuSection className="my-3" title="ご案内">
-      <MobileMenuItem title="マップ" link="/goannai/map" />
-    </MobileMenuSection>
-  </ul>
-</nav>
+<div class="mobile-header-shell lg:hidden" data-mobile-header data-open="false">
+  <header
+    class="mobile-header relative z-101 flex min-h-13 items-center justify-between bg-repeat p-4"
+    style=`background-image: url(${bgImage.src});`
+  >
+    <HomeLogo />
+    <MobileHeaderButton
+      id="mobile-global-menu-toggle"
+      imageSrc={menuOpenImage}
+      closeImageSrc={menuCloseImage}
+      ariaControls="mobile-global-menu"
+      ariaExpanded="false"
+      ariaLabel="メニューを開く"
+    />
+  </header>
+  <nav
+    id="mobile-global-menu"
+    class="mobile-global-menu fixed inset-x-0 bottom-0 z-100 flex flex-col bg-black"
+    aria-label="メインナビゲーション"
+    aria-hidden="true"
+    inert
+  >
+    <div class="relative flex-1 overflow-hidden">
+      <div
+        id="mobile-menu-main"
+        class="mobile-menu-panel absolute inset-0 overflow-y-auto overscroll-contain px-12 py-10"
+      >
+        <ul class="flex flex-col gap-y-8">
+          {categories
+            .filter((category) => category.kind !== "hidden")
+            .map((category) => (
+              <li>
+                {isSubmenuCategory(category) ? (
+                  <button
+                    type="button"
+                    class="font-hakushu flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg py-1 text-left text-[1.75rem] text-white transition-colors hover:text-white/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    data-submenu-open
+                    aria-controls={`mobile-menu-sub-${category.id}`}
+                    aria-expanded="false"
+                  >
+                    {category.title}
+                    <svg
+                      class="h-5 w-5 shrink-0 text-white/50"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="m9 5 7 7-7 7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                ) : (
+                  <a
+                    href={category.link}
+                    class="font-hakushu block rounded-lg py-1 text-[1.75rem] text-white transition-colors hover:text-white/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  >
+                    {category.title}
+                  </a>
+                )}
+              </li>
+            ))}
+        </ul>
+        <ul class="mt-14 flex flex-col gap-y-8">
+          {externalLinks.map((external) => (
+            <li>
+              <a
+                href={external.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-hakushu inline-flex items-center gap-x-3 text-[1.75rem] text-white"
+              >
+                {external.title}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="h-[0.65em] w-[0.65em]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  />
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {categories.filter(isSubmenuCategory).map((category) => (
+        <div
+          id={`mobile-menu-sub-${category.id}`}
+          class="mobile-menu-panel absolute inset-0 overflow-y-auto overscroll-contain px-6 py-10"
+          aria-hidden="true"
+          inert
+          data-submenu
+        >
+          <button
+            type="button"
+            class="font-hakushu flex cursor-pointer items-center gap-x-4 rounded-lg py-1 text-[1.75rem] text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            data-submenu-back
+            aria-label={`${category.title}のメニューを閉じる`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              aria-hidden="true"
+              class="h-6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
+            </svg>
+            {category.title}
+          </button>
+          <ul class="mt-10 flex flex-col gap-y-7 pl-18">
+            {category.items.map((item) => (
+              <li>
+                <a
+                  href={item.link}
+                  class="font-hakushu block rounded-lg py-2 text-2xl text-white transition-colors hover:text-white/70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </nav>
+</div>
 
-<script is:inline>
-  const openButton = document.getElementById("mobile-global-menu-open");
-  const closeButton = document.getElementById("mobile-global-menu-close");
-  const menu = document.getElementById("mobile-global-menu");
+<style>
+  .mobile-header-shell {
+    --mobile-header-height: 72px;
+    height: var(--mobile-header-height);
+  }
 
-  openButton.addEventListener("click", () => {
-    menu.classList.add("flex");
-    menu.style.transform = "translateX(0%)";
-    openButton.classList.add("hidden");
-    closeButton.classList.remove("hidden");
+  .mobile-header-shell[data-open="true"] .mobile-header {
+    position: fixed;
+    inset: 0 0 auto;
+  }
+
+  .mobile-global-menu {
+    top: var(--mobile-header-height);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition:
+      opacity 200ms ease,
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s 280ms;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  [data-open="true"] .mobile-global-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .mobile-menu-panel {
+    transition:
+      opacity 180ms ease,
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s 280ms;
+  }
+
+  [data-submenu] {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  [data-submenu][data-active="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0s;
+  }
+
+  #mobile-menu-main[data-inactive="false"] {
+    transition-delay: 0s;
+  }
+
+  #mobile-menu-main[data-inactive="true"] {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-global-menu,
+    .mobile-menu-panel {
+      transition: none;
+      transform: none;
+    }
+    [data-submenu],
+    #mobile-menu-main[data-inactive="true"] {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const shell = document.querySelector<HTMLElement>("[data-mobile-header]")!;
+  const header = shell.querySelector<HTMLElement>("header")!;
+  const toggle = shell.querySelector<HTMLButtonElement>(
+    "#mobile-global-menu-toggle",
+  )!;
+  const menu = shell.querySelector<HTMLElement>("#mobile-global-menu")!;
+  const mainPanel = shell.querySelector<HTMLElement>("#mobile-menu-main")!;
+  const submenus = shell.querySelectorAll<HTMLElement>("[data-submenu]");
+  const submenuButtons = shell.querySelectorAll<HTMLButtonElement>(
+    "[data-submenu-open]",
+  );
+  const desktopViewport = window.matchMedia("(min-width: 64rem)");
+  let activeButton: HTMLButtonElement | null = null;
+  let previousOverflow = "";
+  let backgroundElements: { element: HTMLElement; inert: boolean }[] = [];
+
+  function focusPanel(element: HTMLElement | null | undefined) {
+    // Newly visible panels need a rendering frame before they can take focus.
+    requestAnimationFrame(() => {
+      if (
+        shell.dataset.open === "true" &&
+        element &&
+        !element.closest("[inert]")
+      ) {
+        element.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  // Use the actual header height so the menu never overlaps or animates the logo.
+  new ResizeObserver(() => {
+    if (header.offsetHeight) {
+      shell.style.setProperty(
+        "--mobile-header-height",
+        `${header.offsetHeight}px`,
+      );
+    }
+  }).observe(header);
+
+  function resetPanels() {
+    mainPanel.dataset.inactive = "false";
+    mainPanel.inert = false;
+    mainPanel.setAttribute("aria-hidden", "false");
+    submenus.forEach((submenu) => {
+      submenu.dataset.active = "false";
+      submenu.inert = true;
+      submenu.setAttribute("aria-hidden", "true");
+    });
+    submenuButtons.forEach((button) =>
+      button.setAttribute("aria-expanded", "false"),
+    );
+    activeButton = null;
+  }
+
+  function setOpen(open: boolean) {
+    if (open === (shell.dataset.open === "true")) return;
+    if (open) {
+      resetPanels();
+      previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      // Keep keyboard and assistive navigation inside the open menu and header.
+      let ancestor: HTMLElement = shell;
+      while (ancestor.parentElement && ancestor !== document.body) {
+        Array.from(ancestor.parentElement.children).forEach((sibling) => {
+          if (
+            sibling !== ancestor &&
+            sibling instanceof HTMLElement &&
+            !["SCRIPT", "STYLE"].includes(sibling.tagName)
+          ) {
+            backgroundElements.push({ element: sibling, inert: sibling.inert });
+            sibling.inert = true;
+          }
+        });
+        ancestor = ancestor.parentElement;
+      }
+    } else {
+      backgroundElements.forEach(({ element, inert }) => {
+        element.inert = inert;
+      });
+      backgroundElements = [];
+      document.body.style.overflow = previousOverflow;
+      // Move focus before hiding the panel that may currently contain it.
+      toggle.focus({ preventScroll: true });
+    }
+    shell.dataset.open = String(open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute(
+      "aria-label",
+      open ? "メニューを閉じる" : "メニューを開く",
+    );
+    menu.inert = !open;
+    menu.setAttribute("aria-hidden", String(!open));
+    if (open) focusPanel(submenuButtons[0]);
+  }
+
+  toggle.addEventListener("click", () =>
+    setOpen(shell.dataset.open !== "true"),
+  );
+
+  submenuButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const submenu = document.getElementById(
+        button.getAttribute("aria-controls")!,
+      );
+      if (!submenu) return;
+      activeButton = button;
+      button.setAttribute("aria-expanded", "true");
+      submenu.dataset.active = "true";
+      submenu.inert = false;
+      submenu.setAttribute("aria-hidden", "false");
+      toggle.focus({ preventScroll: true });
+      focusPanel(
+        submenu.querySelector<HTMLButtonElement>("[data-submenu-back]"),
+      );
+      mainPanel.dataset.inactive = "true";
+      mainPanel.inert = true;
+      mainPanel.setAttribute("aria-hidden", "true");
+    });
   });
 
-  closeButton.addEventListener("click", () => {
-    menu.style.transform = "translateX(100%)";
-    menu.classList.remove("flex");
-    // TODO: closeButtonが消えるときのアニメーションが不自然
-    closeButton.classList.add("hidden");
-    openButton.classList.remove("hidden");
+  function goBack() {
+    const button = activeButton;
+    toggle.focus({ preventScroll: true });
+    resetPanels();
+    focusPanel(button);
+  }
+
+  shell.querySelectorAll("[data-submenu-back]").forEach((button) => {
+    button.addEventListener("click", goBack);
   });
+
+  shell.addEventListener("keydown", (event) => {
+    if (shell.dataset.open !== "true") return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      if (activeButton) goBack();
+      else setOpen(false);
+    }
+    if (event.key === "Tab") {
+      const focusable = Array.from(
+        shell.querySelectorAll<HTMLElement>("a[href], button"),
+      ).filter(
+        (element) =>
+          !element.closest("[inert]") && element.getClientRects().length > 0,
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+  });
+
+  desktopViewport.addEventListener("change", () => {
+    if (desktopViewport.matches) setOpen(false);
+  });
+  window.addEventListener("pagehide", () => setOpen(false));
 </script>

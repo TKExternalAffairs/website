@@ -1,10 +1,11 @@
 ---
-title: Welcome
-description: Initial news post
-pubDate: 2026-03-25
-updatedDate: 2026-03-25
+title: 高3特別班HP開設のお知らせ
+pubDate: 2026-05-13
+updatedDate: 2026-05-13
 tags:
   - announcement
 ---
 
-This is the first news entry.
+ご覧いただきましてありがとうございます。
+筑駒文化祭高3特別班公式Webサイトを開設いたしました。
+本Webサイトでは、来場者の方向けに高3特別班に関する情報をお届けしてまいります。

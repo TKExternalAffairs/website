@@ -1,23 +1,296 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import shutokoLogo from "../../assets/sponsors/shutoko.jpg";
+import blueqatLogo from "../../assets/sponsors/blueqat.png";
+import kinujoLogo from "../../assets/sponsors/kinujo.png";
+
+import cloLogo from "../../assets/sponsors/cio.png";
+import musashikyoujyoLogo from "../../assets/sponsors/musashikyoujyo.jpg";
+import blackdeckerLogo from "../../assets/sponsors/blackdecker.jpg";
+import wakaiLogo from "../../assets/sponsors/wakai.jpg";
+import aladdinLogo from "../../assets/sponsors/aladdin.png";
+import gyokuchoLogo from "../../assets/sponsors/gyokucho.png";
+import ctpLogo from "../../assets/sponsors/ctp.png";
+import yondemyLogo from "../../assets/sponsors/yondemy.png";
+import janomeLogo from "../../assets/sponsors/JANOME_RGB.png";
+import lihitlabLogo from "../../assets/sponsors/lihitlab.jpg";
+import wacomLogo from "../../assets/sponsors/wacom_black.webp";
+import hinodewashiLogo from "../../assets/sponsors/hinodewashi.jpeg";
+import atcoderLogo from "../../assets/sponsors/atcoder.png";
+import preferredLogo from "../../assets/sponsors/preferred.webp";
+import threeMLogo from "../../assets/sponsors/3m.jpg";
+import strikeLogo from "../../assets/sponsors/strike.png";
+import seraClinicLogo from "../../assets/sponsors/sera-clinic.png";
+import tonkanLogo from "../../assets/sponsors/tonkan.png";
+import arcSystemWorksLogo from "../../assets/sponsors/arc-system-works.png";
+import eCafeSupplyLogo from "../../assets/sponsors/e-cafe.jpeg";
 
 type SponsorLogo = {
-  image: string;
+  image: ImageMetadata;
   alt: string;
+  href: string;
 };
 
-const sponsorLarge: SponsorLogo[] = [];
-const sponsorSmall: SponsorLogo[] = [];
+const sponsorLarge: SponsorLogo[] = [
+  {
+    image: shutokoLogo,
+    alt: "首都高速道路株式会社",
+    href: "https://www.shutoko.co.jp/",
+  },
+  {
+    image: blackdeckerLogo,
+    alt: "ポップリベット・ファスナー株式会社",
+    href: "https://blackanddecker-jp.com/",
+  },
+  {
+    image: janomeLogo,
+    alt: "JANOME",
+    href: "https://www.janome.co.jp/",
+  },
+  {
+    image: atcoderLogo,
+    alt: "AtCoder株式会社",
+    href: "https://atcoder.jp/",
+  },
+  {
+    image: preferredLogo,
+    alt: "株式会社Preferred Networks",
+    href: "https://www.preferred.jp/ja/",
+  },
+  {
+    image: strikeLogo,
+    alt: "株式会社ストライク",
+    href: "https://www.strike.co.jp/",
+  },
+  {
+    image: seraClinicLogo,
+    alt: "池尻大橋せらクリニック",
+    href: "https://sera-clinic.com/",
+  },
+];
+
+const sponsorSmall: SponsorLogo[] = [
+  {
+    image: blueqatLogo,
+    alt: "blueqat株式会社",
+    href: "https://blueqat.co.jp/",
+  },
+  {
+    image: kinujoLogo,
+    alt: "株式会社KINUJO",
+    href: "https://kinujo.jp/",
+  },
+  {
+    image: wakaiLogo,
+    alt: "若井産業株式会社",
+    href: "https://www.wakaisangyo.co.jp/",
+  },
+  {
+    image: musashikyoujyoLogo,
+    alt: "武蔵境自動車教習所",
+    href: "https://musasisakai-ds.co.jp/",
+  },
+  {
+    image: cloLogo,
+    alt: "株式会社CIO",
+    href: "https://connectinternationalone.co.jp/",
+  },
+  {
+    image: aladdinLogo,
+    alt: "日本エー・アイ・シー株式会社",
+    href: "https://aladdin-aic.com/",
+  },
+  {
+    image: gyokuchoLogo,
+    alt: "玉鳥産業株式会社",
+    href: "https://www.gyokucho.co.jp/",
+  },
+  {
+    image: ctpLogo,
+    alt: "ケンブリッジ・テクノロジー・パートナーズ株式会社",
+    href: "https://www.ctp.co.jp/",
+  },
+  {
+    image: yondemyLogo,
+    alt: "株式会社Yondemy",
+    href: "https://corp.yondemy.com/",
+  },
+  {
+    image: lihitlabLogo,
+    alt: "株式会社LIHIT LAB.",
+    href: "https://www.lihit-lab.com/company/",
+  },
+  {
+    image: wacomLogo,
+    alt: "株式会社ワコム",
+    href: "https://www.wacom.com/ja-jp",
+  },
+  {
+    image: hinodewashiLogo,
+    alt: "ヒノデワシ株式会社",
+    href: "https://www.hinodewashi.co.jp/",
+  },
+  {
+    image: threeMLogo,
+    alt: "3Mジャパングループ",
+    href: "https://www.3mcompany.jp/3M/ja_JP/company-jp/",
+  },
+  {
+    image: tonkanLogo,
+    alt: "TONKAN",
+    href: "https://const-career.com/tonkan/",
+  },
+  {
+    image: arcSystemWorksLogo,
+    alt: "アークシステムワークス株式会社",
+    href: "https://www.arcsystemworks.jp/",
+  },
+  {
+    image: eCafeSupplyLogo,
+    alt: "e-カフェサプライ株式会社",
+    href: "https://www.e-cafeshop.com/",
+  },
+];
+
 const sponsorTextOnly: string[] = [];
+
+const sponsorCashOnly: string[] = [
+  "blueqat株式会社",
+  "武蔵境自動車教習所",
+  "ケンブリッジ・テクノロジー・パートナーズ株式会社",
+  "株式会社Yondemy",
+  "AtCoder株式会社",
+  "株式会社ストライク",
+  "株式会社Preferred Networks",
+  "株式会社キャリア・ナビゲーション",
+  "池尻大橋せらクリニック",
+  "アークシステムワークス株式会社",
+];
+
+const sponsorGoodsOnly: string[] = [
+  "ポップリベット・ファスナー株式会社",
+  "若井産業株式会社",
+  "玉鳥産業株式会社",
+  "株式会社ワコム",
+  "首都高速道路株式会社",
+  "株式会社KINUJO",
+  "株式会社ジャノメ",
+  "株式会社CIO",
+  "日本エー・アイ・シー株式会社",
+  "ヒノデワシ株式会社",
+  "株式会社LIHIT LAB.",
+  "スリーエム ジャパン株式会社",
+  "e-カフェサプライ株式会社",
+];
 ---
 
 <Layout title="協賛のお願い" description="高三特別班の協賛に関するご案内です。">
-  <Title title="ご協賛のお願い" heroImage="/images/kyousan-hero.png" />
+  <Title title="協賛企業一覧" heroImage="/images/kyousan-hero.png" />
 
-  <section
-    class="mx-auto w-full max-w-5xl px-4 py-12 text-sm leading-8 text-gray-100 sm:px-6 sm:text-base lg:px-8"
-  >
+  <section id="sponsors" class="bg-[#e9e9e9] py-12 text-black">
+    <div class="mx-auto w-full max-w-425 px-6">
+      <div class="text-center">
+        <p class="mx-auto max-w-4xl text-[20px] leading-9">
+          以下の企業の皆様より、第75回筑駒文化祭へのご支援を賜りました。
+          <br />
+          ここに深く御礼申し上げます。
+        </p>
+      </div>
+
+      <div class="mt-16 space-y-10">
+        {sponsorLarge.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+            {sponsorLarge.map((sponsor) => (
+              <a
+                href={sponsor.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-50 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
+              >
+                <Image
+                  src={sponsor.image}
+                  alt={sponsor.alt}
+                  class="block max-h-full max-w-full object-contain object-center"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+
+        {sponsorSmall.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
+            {sponsorSmall.map((sponsor) => (
+              <a
+                href={sponsor.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-25 w-75 items-center justify-center border-4 border-black bg-white p-3 transition hover:opacity-80"
+              >
+                <Image
+                  src={sponsor.image}
+                  alt={sponsor.alt}
+                  class="block max-h-full max-w-full object-contain object-center"
+                />
+              </a>
+            ))}
+          </div>
+        )}
+
+        {sponsorTextOnly.length > 0 && (
+          <div class="px-12 pt-12">
+            <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
+              {sponsorTextOnly.map((name) => (
+                <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
+                  ・{name}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+  <section class="bg-[#e9e9e9] py-20 text-black">
+    <div class="mx-auto w-full max-w-5xl border-4 bg-white px-12">
+      <div class="my-14 grid gap-12 lg:grid-cols-2">
+        <section>
+          <h3 class="font-hakushu text-3xl font-bold tracking-widest">
+            協賛金協賛
+          </h3>
+          <ul class="mt-6 grid gap-x-8 gap-y-2">
+            {sponsorCashOnly.map((name) => (
+              <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                {name}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="font-hakushu text-3xl font-bold tracking-widest">
+            物品協賛
+          </h3>
+          <ul class="mt-6 grid gap-x-8 gap-y-2">
+            {sponsorGoodsOnly.map((name) => (
+              <li class="ml-5 list-disc text-sm leading-7 sm:text-base">
+                {name}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto w-full max-w-5xl px-4 py-16 text-sm leading-8 text-gray-100 sm:px-6 sm:text-base lg:px-8">
+    <div class="mb-12 text-center">
+      <h2 class="font-hakushu text-5xl font-bold tracking-widest">
+        ご協賛のお願い
+      </h2>
+    </div>
     <div class="space-y-8">
       <p>
         平素は筑駒文化祭の運営につきまして、格別のご理解とご協力を賜り、厚く御礼申し上げます。
@@ -63,19 +336,13 @@ const sponsorTextOnly: string[] = [];
         <p class="font-hakushu text-base font-bold sm:text-lg">
           筑波大学附属駒場中・高等学校
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           高三特別班　渉外事務局
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           顧問　早川 和彦
         </p>
-        <p
-          class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg"
-        >
+        <p class="font-hakushu text-base font-bold whitespace-nowrap sm:text-lg">
           事務局長　中河 颯太
         </p>
       </div>
@@ -90,54 +357,6 @@ const sponsorTextOnly: string[] = [];
         >
           お問い合わせフォーム
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="sponsors" class="bg-[#e9e9e9] py-20 text-black">
-    <div class="mx-auto w-full max-w-[1700px] px-6">
-      <div class="text-center">
-        <h2
-          class="text-5xl"
-          style="font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif; font-weight: 700; letter-spacing: 0.12em;"
-        >
-          協賛企業一覧
-        </h2>
-        <p class="mx-auto mt-8 max-w-4xl text-[20px] leading-9">
-          以下の企業の皆様より、第75回筑駒文化祭へのご支援を賜りました。ここに深く御礼申し上げます。
-        </p>
-      </div>
-
-      <div class="mt-16 space-y-10">
-        {
-          sponsorSmall.length > 0 && (
-            <div class="flex flex-wrap justify-center gap-x-8 gap-y-8">
-              {sponsorSmall.map((sponsor) => (
-                <div class="flex h-[100px] w-[300px] items-center justify-center border-[4px] border-black bg-white">
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.alt}
-                    class="max-h-full max-w-full object-contain p-3"
-                  />
-                </div>
-              ))}
-            </div>
-          )
-        }
-
-        {
-          sponsorTextOnly.length > 0 && (
-            <div class="px-12 pt-12">
-              <div class="flex flex-wrap items-center gap-x-16 gap-y-6">
-                {sponsorTextOnly.map((name) => (
-                  <p style="font-family: 'Yu Gothic Medium', 'Yu Gothic', YuGothic, sans-serif; font-size: 30px; line-height: 1;">
-                    ・{name}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )
-        }
       </div>
     </div>
   </section>
