@@ -1,0 +1,18 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import MenuPage from "../../../components/voyage/MenuPage.astro";
+import { foodMenu, showMenuCongestion } from "../../../data/visitor";
+---
+
+<Layout
+  title="食品班メニュー"
+  description="食品班のメニューをご案内します。商品・価格は現在準備中です。"
+>
+  <MenuPage
+    title="食品班メニュー"
+    team="食品班"
+    teamId="shokuhin"
+    items={foodMenu}
+    showCongestion={showMenuCongestion.shokuhin}
+  />
+</Layout>

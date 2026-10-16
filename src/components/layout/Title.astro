@@ -4,19 +4,49 @@ interface Props {
   heroImage?: string;
 }
 
+import { isVoyagePath } from "../../lib/voyage";
 const { title, heroImage } = Astro.props;
 ---
 
-<section class="relative flex h-128 items-center justify-center overflow-hidden rounded-lg bg-gray-950">
-  {heroImage && (
+{isVoyagePath(Astro.url.pathname) ? (
+  <section
+    class:list={[
+      "voyage-page-title",
+      { "voyage-page-title--photo": !!heroImage },
+    ]}
+  >
+    {heroImage && (
+      <img class="voyage-page-title__photo" src={heroImage} alt="" />
+    )}
+    <div class="voyage-page-title__inner">
+      <nav class="voyage-breadcrumb" aria-label="パンくず">
+        <a href="/">TOP</a>
+        <span aria-hidden="true">/</span>
+        <span>{title}</span>
+      </nav>
+      <p class="voyage-eyebrow">THE 75TH TSUKUKOMA SCHOOL FESTIVAL</p>
+      <h1>{title}</h1>
+      <span class="voyage-page-title__line" aria-hidden="true"></span>
+    </div>
     <img
-      src={heroImage}
+      class="voyage-page-title__ship"
+      src="/images/voyage/voyage-ship.svg"
       alt=""
       aria-hidden="true"
-      class="absolute inset-0 h-full w-full object-cover opacity-40"
     />
-  )}
-  <h1 class="font-hakushu relative z-10 text-center text-3xl tracking-[0.2em] [writing-mode:vertical-lr] sm:text-4xl">
-    {title}
-  </h1>
-</section>
+  </section>
+) : (
+  <section class="relative flex h-128 items-center justify-center overflow-hidden rounded-lg bg-gray-950">
+    {heroImage && (
+      <img
+        src={heroImage}
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 h-full w-full object-cover opacity-40"
+      />
+    )}
+    <h1 class="font-hakushu relative z-10 text-center text-3xl tracking-[0.2em] [writing-mode:vertical-lr] sm:text-4xl">
+      {title}
+    </h1>
+  </section>
+)}

@@ -1,0 +1,159 @@
+---
+import { groups, visitorLinks } from "../../data/groups";
+const path = Astro.url.pathname;
+const mainLinks = [
+  { href: "/", english: "TOP", title: "トップ", current: path === "/" },
+  {
+    href: "/groups/",
+    english: "GROUP",
+    title: "各班紹介",
+    current: path.startsWith("/groups/"),
+  },
+  { href: "/#visit", english: "MENU", title: "混雑度・メニュー" },
+  {
+    href: "/kyousan/onegai/",
+    english: "SPONSORS",
+    title: "ご協賛について",
+    current: path.startsWith("/kyousan/"),
+  },
+  {
+    href: "https://tsukukoma.bunkasai.info/",
+    english: "OFFICIAL ↗",
+    title: "文化祭公式サイト",
+  },
+];
+---
+
+<a class="voyage-skip" href="#main-content">
+  本文へ移動
+</a>
+<header class="voyage-header">
+  <button
+    class="voyage-menu-button"
+    type="button"
+    data-voyage-menu-open
+    aria-haspopup="dialog"
+    aria-controls="voyage-menu"
+    aria-expanded="false"
+    aria-label="メニューを開く"
+  >
+    <picture>
+      <source
+        media="(aspect-ratio < 4/3)"
+        srcset="/images/voyage/menu-button-mobile.webp"
+        width="304"
+        height="283"
+      />
+      <img
+        src="/images/voyage/menu-button.webp"
+        width="211"
+        height="180"
+        alt=""
+      />
+    </picture>
+  </button>
+</header>
+<dialog id="voyage-menu" class="voyage-menu" aria-label="サイトメニュー">
+  <div class="voyage-menu-panel">
+    <div class="voyage-menu__head">
+      <button
+        class="voyage-menu-close"
+        type="button"
+        data-voyage-menu-close
+        aria-label="メニューを閉じる"
+      >
+        <svg viewBox="0 0 74 74" aria-hidden="true">
+          <path d="M1 1 73 73M73 1 1 73" />
+        </svg>
+      </button>
+    </div>
+    <nav class="voyage-menu-primary" aria-label="メインナビゲーション">
+      {mainLinks.map((link) => (
+        <a href={link.href} aria-current={link.current ? "page" : undefined}>
+          <span class="voyage-menu-english">{link.english}</span>
+          <span>{link.title}</span>
+        </a>
+      ))}
+    </nav>
+    <nav class="voyage-menu__columns" aria-label="サイト内のご案内">
+      <div>
+        <h3>各班紹介</h3>
+        <ul>
+          {groups.map((group) => (
+            <li>
+              <a href={`/groups/${group.id}/`}>
+                {group.title}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3>混雑度・メニュー</h3>
+        <ul>
+          {visitorLinks.map((link) => (
+            <li>
+              <a href={link.href}>
+                {link.title}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <h3>その他のご案内</h3>
+        <ul>
+          <li>
+            <a href="/news/">
+              お知らせ<span aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScsHTXduQxnxs4hnpr29Zb6e_swytknrjQmu8agCn63ujmZcw/viewform">
+              お問い合わせ<span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</dialog>
+<noscript>
+  <nav class="voyage-noscript" aria-label="追加ナビゲーション">
+    <a href="/groups/">各班紹介</a>
+    {visitorLinks.map((link) => (
+      <a href={link.href}>{link.title}</a>
+    ))}
+    <a href="/kyousan/onegai/">ご協賛について</a>
+    <a href="/news/">お知らせ</a>
+  </nav>
+</noscript>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("#voyage-menu");
+  const opener = document.querySelector<HTMLButtonElement>(
+    "[data-voyage-menu-open]",
+  );
+  if (dialog && opener) {
+    let previousOverflow = "";
+    opener.addEventListener("click", () => {
+      previousOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = "hidden";
+      opener.setAttribute("aria-expanded", "true");
+    });
+    dialog
+      .querySelector("[data-voyage-menu-close]")
+      ?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      document.body.style.overflow = previousOverflow;
+      opener.setAttribute("aria-expanded", "false");
+      opener.focus({ preventScroll: true });
+    });
+    dialog
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", () => dialog.close()));
+  }
+</script>

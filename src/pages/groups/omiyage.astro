@@ -1,6 +1,18 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import Title from "../../components/layout/Title.astro";
 ---
 
-<Layout title="お土産部門" description="高三お土産部門の紹介ページです。" />
+<Layout title="お土産部門" description="高三お土産部門の紹介ページです。">
+  <Title title="お土産部門" />
+  <section class="voyage-container voyage-section">
+    <div class="voyage-empty">
+      <p class="voyage-eyebrow">COMING SOON</p>
+      <h2>ただいま準備中です</h2>
+      <p>お土産部門の詳しいご案内は、公開までお待ちください。</p>
+      <a class="voyage-outline-link" href="/groups/">
+        各班紹介へ戻る <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Layout>
