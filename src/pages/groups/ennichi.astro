@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import { groupSocialLinks, ennichiVideoLinks } from "../../lib/socialLinks";
 import attractionImage from "../../assets/Webp/groups/ennichi/ennichi_atrk.webp";
 import dagashiImage from "../../assets/Webp/groups/ennichi/ennichi_dgs.webp";
 import titleImage from "../../assets/Webp/groups/ennichi/ennichi_title.webp";
@@ -10,6 +12,7 @@ import yaguraImage from "../../assets/Webp/groups/ennichi/ennichi_ygr.webp";
 
 <Layout title="縁日班" description="高三特別班 縁日班の紹介ページです。">
   <Title heroImage={titleImage.src} title="縁日班" />
+  <SocialLinks title="縁日班の公式SNS" links={groupSocialLinks.ennichi} />
 
   <GroupDetailBox
     title="Welcome to Ennichi!"
@@ -49,4 +52,5 @@ import yaguraImage from "../../assets/Webp/groups/ennichi/ennichi_ygr.webp";
       "縁日班駄菓子部門では、昨年に引き続き今年もポップコーンを販売予定です！！味は当日のお楽しみ！チケット1枚で、出来立てのポップコーンはいかが？",
     ]}
   />
+  <SocialLinks title="紹介動画" links={ennichiVideoLinks} />
 </Layout>

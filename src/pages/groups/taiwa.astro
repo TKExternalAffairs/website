@@ -2,11 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import { groupSocialLinks, taiwaVideoLinks } from "../../lib/socialLinks";
 import titleImage from "../../assets/Webp/groups/タイトル画像.webp";
 ---
 
 <Layout title="対話班" description="高三特別班 対話班の紹介ページです。">
   <Title heroImage={titleImage.src} title="対話班" />
+  <SocialLinks title="対話班の公式SNS" links={groupSocialLinks.taiwa} />
 
   <GroupDetailBox
     title="コンセプト"
@@ -29,4 +32,5 @@ import titleImage from "../../assets/Webp/groups/タイトル画像.webp";
       "詳細なタイムテーブル、および企画内容は更新をお待ちください。",
     ]}
   />
+  <SocialLinks title="紹介動画" links={taiwaVideoLinks} />
 </Layout>

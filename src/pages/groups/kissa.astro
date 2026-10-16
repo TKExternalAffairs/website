@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import { groupSocialLinks } from "../../lib/socialLinks";
 import coffeeImage from "../../assets/Webp/groups/kissa/kissa_1.webp";
 import foodImage from "../../assets/Webp/groups/kissa/kissa_2.webp";
 import titleImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
@@ -9,6 +11,7 @@ import titleImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
 
 <Layout title="喫茶班" description="高三特別班 喫茶班の紹介ページです。">
   <Title heroImage={titleImage.src} title="喫茶班" />
+  <SocialLinks title="喫茶班の公式SNS" links={groupSocialLinks.kissa} />
 
   <GroupDetailBox
     title="喫茶班とは"

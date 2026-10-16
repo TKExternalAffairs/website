@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import logoImage from "../../assets/SVG/logo.svg";
 import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
+import SocialLinks from "../SocialLinks.astro";
+import { festivalSocialLinks } from "../../lib/socialLinks";
 ---
 
 {/* FIXME: border-doubleが効いてなさそう */}
@@ -22,6 +24,13 @@ import shogaiLogoImage from "../../assets/SVG/shogai_logo.svg";
           &#12306;154-0001 東京都世田谷区池尻4-7-1 筑波大学附属駒場高等学校
         </p>
       </address>
+    </div>
+    <div class="mx-auto w-full max-w-5xl px-4 md:px-12">
+      <SocialLinks
+        title="文化祭全体の公式SNS"
+        links={festivalSocialLinks}
+        compact
+      />
     </div>
     <!-- 設計・制作 -->
     <div class="flex flex-col items-center gap-3">

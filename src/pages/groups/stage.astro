@@ -2,6 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import {
+  groupSocialLinks,
+  stageProjectLinks,
+  stageTimetableLinks,
+} from "../../lib/socialLinks";
 import stageImage from "../../assets/Webp/groups/stageImage.webp";
 ---
 
@@ -10,6 +16,7 @@ import stageImage from "../../assets/Webp/groups/stageImage.webp";
   description="高三特別班 ステージ班の紹介ページです。"
 >
   <Title heroImage={stageImage.src} title="ステージ班" />
+  <SocialLinks title="ステージ班の公式SNS" links={groupSocialLinks.stage} />
 
   <GroupDetailBox
     title="ステージ班とは"
@@ -34,6 +41,8 @@ import stageImage from "../../assets/Webp/groups/stageImage.webp";
     ]}
   />
 
+  <SocialLinks title="ミスター筑駒2026" links={stageProjectLinks} />
+
   <GroupDetailBox
     title="最後に"
     imageSrc={stageImage.src}
@@ -44,4 +53,5 @@ import stageImage from "../../assets/Webp/groups/stageImage.webp";
       "文化祭当日は、ぜひ本校へお越しいただき、ステージ班の企画をご観覧いただけますと幸いです。",
     ]}
   />
+  <SocialLinks title="タイムテーブル" links={stageTimetableLinks} />
 </Layout>

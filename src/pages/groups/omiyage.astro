@@ -1,6 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import { groupSocialLinks } from "../../lib/socialLinks";
 ---
 
-<Layout title="お土産部門" description="高三お土産部門の紹介ページです。" />
+<Layout title="お土産部門" description="高三お土産部門の紹介ページです。">
+  <Title title="お土産部門" />
+  <SocialLinks title="お土産部門の公式SNS" links={groupSocialLinks.omiyage} />
+</Layout>
