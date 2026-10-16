@@ -1,0 +1,178 @@
+---
+import Layout from "../../layouts/VoyageGames.astro";
+import GameArtwork from "../../components/games/GameArtwork.astro";
+import attractionImage from "../../assets/Webp/groups/ennichi/ennichi_atrk.webp";
+import { congestionCatalog as catalog } from "../../lib/congestion-catalog";
+---
+
+<Layout
+  title="ゲーム・混雑情報"
+  description="縁日班アトラク部門のゲーム紹介、プレイ時間、現在の混雑状況をご案内します。"
+  noIndex={catalog.demo || catalog.environment !== "production"}
+>
+  <section class="voyage-hero" aria-labelledby="games-title">
+    <div class="voyage-hero-inner">
+      <div class="voyage-hero-copy">
+        <p class="voyage-section-label">縁日班 アトラク部門</p>
+        <h1 id="games-title">ゲーム・<br />混雑情報</h1>
+        <p>
+          ゲームの紹介とプレイ時間、<br
+          />現地スタッフが確認した混雑状況をご案内します。
+        </p>
+        <a class="voyage-link" href="#game-list"
+          >ゲーム一覧を見る <span aria-hidden="true">↓</span></a
+        >
+      </div>
+      <img
+        class="voyage-ship"
+        src="/assets/voyage/ship.webp"
+        alt=""
+        aria-hidden="true"
+        width="976"
+        height="910"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+  <aside class="voyage-guide" aria-label="アトラク部門のご案内">
+    <div class="voyage-guide-inner">
+      <img
+        src={attractionImage.src}
+        alt="縁日班アトラク部門の会場"
+        width={attractionImage.width}
+        height={attractionImage.height}
+      />
+      <div><span>会場</span><p>ピロティ・アトラク部門</p></div>
+      <div><span>プレイ時間</span><p>待ち時間は含みません</p></div>
+      <a href="/groups/ennichi/"
+        >縁日班の紹介へ <span aria-hidden="true">→</span></a
+      >
+    </div>
+  </aside>
+  <div class="voyage-wave" aria-hidden="true"></div>
+
+  <div class="games-page" data-games-page>
+    {
+      catalog.demo && (
+        <aside class="games-demo" aria-label="プレビューについて">
+          <p>
+            <strong>プレビュー</strong>
+            ゲーム名・所要時間・混雑は例示です。
+          </p>
+          <a href="/staff/congestion/?game=rhythm">スタッフ画面を試す</a>
+        </aside>
+      )
+    }
+
+    <section id="game-list" aria-labelledby="list-title">
+      <div class="games-section-heading">
+        <h2 id="list-title">ゲーム一覧</h2>
+        <div class="games-fetch">
+          <p id="congestion-summary" role="status">
+            {
+              catalog.games.length
+                ? "混雑情報を確認しています"
+                : "混雑情報は未配信です"
+            }
+          </p>
+          <button
+            id="congestion-refresh"
+            type="button"
+            hidden={catalog.games.length === 0}>情報を更新</button
+          >
+        </div>
+      </div>
+
+      <div class="games-legend" aria-label="混雑状況の目安">
+        <span data-level="low"><i aria-hidden="true"></i>すいている</span>
+        <span data-level="normal"><i aria-hidden="true"></i>ふつう</span>
+        <span data-level="high"><i aria-hidden="true"></i>こんでいる</span>
+        <small>現地スタッフが確認して更新します</small>
+      </div>
+
+      <noscript>
+        <p class="games-notice">
+          混雑情報の取得にはJavaScriptが必要です。現在の状況は現地スタッフにお尋ねください。
+        </p>
+      </noscript>
+
+      <div class="games-grid">
+        {
+          catalog.games.map((game, index) => (
+            <article class="game-card" id={game.id} data-game-id={game.id}>
+              <div class="game-art">
+                {game.image ? (
+                  <img src={game.image} alt={game.name} loading="lazy" />
+                ) : (
+                  <GameArtwork index={index} />
+                )}
+              </div>
+              <div class="game-content">
+                <h3>{game.name}</h3>
+                <p class="game-description">{game.description}</p>
+                <dl class="game-details">
+                  <div>
+                    <dt>プレイ時間</dt>
+                    <dd>
+                      <strong>
+                        {game.play_minutes_min === game.play_minutes_max
+                          ? game.play_minutes_min
+                          : `${game.play_minutes_min}〜${game.play_minutes_max}`}
+                      </strong>{" "}
+                      分
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>場所</dt>
+                    <dd>{game.location}</dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="game-live">
+                <div>
+                  <small>現在の混雑</small>
+                  <span
+                    class="congestion-badge"
+                    data-congestion-level="unknown"
+                  >
+                    未確認
+                  </span>
+                </div>
+                <p data-observed-time>現地確認の情報をお待ちください</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        catalog.games.length === 0 && (
+          <div class="games-empty">
+            <h3>ゲーム情報は準備中です</h3>
+            <p>
+              ゲームの紹介とプレイ時間は、決まり次第こちらでお知らせします。
+            </p>
+          </div>
+        )
+      }
+
+      <p class="games-notice">
+        混雑状況は確認時点の目安です。情報が古いとき・取得できないときは、現地スタッフにお尋ねください。
+      </p>
+    </section>
+
+    <div class="games-bottom">
+      <a href="/groups/ennichi/">縁日班の紹介へ</a>
+    </div>
+  </div>
+
+  <script
+    is:inline
+    id="congestion-catalog"
+    type="application/json"
+    set:html={JSON.stringify(catalog).replace(/</g, "\\u003c")}
+  />
+  <script>
+    import "../../scripts/congestion-public";
+  </script>
+</Layout>

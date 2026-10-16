@@ -1,0 +1,42 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import "../styles/games.css";
+
+interface Props {
+  title: string;
+  description: string;
+  noIndex?: boolean;
+}
+---
+
+<BaseLayout {...Astro.props}>
+  <div class="voyage-site">
+    <a class="voyage-skip" href="#games-main">本文へ</a>
+    <header class="voyage-header">
+      <div class="voyage-header-inner">
+        <a class="voyage-brand" href="/" aria-label="高三特別班 ホーム">
+          <img
+            src="/assets/voyage/voyage-logo.webp"
+            alt="Voyage"
+            width="800"
+            height="310"
+          />
+          <span>第75回 筑駒文化祭<br />高三特別班</span>
+        </a>
+        <nav aria-label="ページナビゲーション">
+          <a href="/">ホーム</a>
+          <a href="/groups/ennichi/">縁日班</a>
+          <a href="/games/" aria-current="page">ゲーム・混雑情報</a>
+        </nav>
+      </div>
+    </header>
+    <main id="games-main"><slot /></main>
+    <footer class="voyage-footer">
+      <div>
+        <p>第75回 筑駒文化祭 高三特別班</p>
+        <p>筑波大学附属駒場高等学校</p>
+      </div>
+      <small>Designed and Produced by 高三特別班 渉外事務局</small>
+    </footer>
+  </div>
+</BaseLayout>

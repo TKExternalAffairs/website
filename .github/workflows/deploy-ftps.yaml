@@ -50,6 +50,9 @@ jobs:
           SITE_BASE: /
         run: npm run build
 
+      - name: Test congestion workflow
+        run: npm run test:congestion
+
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
@@ -61,6 +64,13 @@ jobs:
           password: ${{ secrets.FTPS_PASS_TKSPECIAL }}
           local-dir: dist/
           server-dir: ${{ secrets.FTPS_PATH_TKSPECIAL }}
+          # Runtime files are owned by the venue PC and must survive a site deploy.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            live/**
+            **/live/**
 
   deploy-development:
     if: (github.event_name == 'push' && github.ref_name == 'dev') || (github.event_name == 'workflow_dispatch' && inputs.target == 'development')
@@ -87,6 +97,9 @@ jobs:
           SITE_BASE: /
         run: npm run build
 
+      - name: Test congestion workflow
+        run: npm run test:congestion
+
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
@@ -98,3 +111,9 @@ jobs:
           password: ${{ secrets.FTPS_PASS_SPECIALTEST }}
           local-dir: dist/
           server-dir: ${{ secrets.FTPS_PATH_SPECIALTEST }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            live/**
+            **/live/**

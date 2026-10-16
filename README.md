@@ -56,5 +56,24 @@ npm run convert:images
 
 - `master` は本番サイト `tkspecial.bunkasai.info`、`dev` はテストサイト `specialtest.bunkasai.info` に対応します。
 - デプロイ workflow は `.github/workflows/deploy-ftps.yaml` です。
-- push で自動デプロイし、FTPS 経由で各公開先へ `dist/` を同期します。
+- push で自動デプロイし、各公開先へ `dist/` を同期します。workflow は「Deploy via FTPS」という名前ですが、`protocol` は未指定です。実際の接続方式・ホストの FTPS 対応は運営側で確認してください。
 - GitHub Secrets に `FTPS_HOST_TKSPECIAL`、`FTPS_USER_TKSPECIAL`、`FTPS_PASS_TKSPECIAL`、`FTPS_PATH_TKSPECIAL`、`FTPS_HOST_SPECIALTEST`、`FTPS_USER_SPECIALTEST`、`FTPS_PASS_SPECIALTEST`、`FTPS_PATH_SPECIALTEST` を登録してください。
+
+## 縁日ゲーム・混雑情報
+
+Node 24 を使用します。Astroなどの依存関係は、取り込んだ最新の `master` の指定を維持しています。
+
+```powershell
+npm ci
+npm run congestion:preview
+```
+
+公開画面のデモは <http://127.0.0.1:8787/games/>、スタッフ画面は <http://127.0.0.1:8787/staff/congestion/?game=rhythm> です。3択で保存し、15秒周期でデモの公開情報へ反映します。このプレビューはPC内限定で、外部ホストには転送しません。`quit` で終了します。
+
+本番のゲームと日時は未登録です。例示データは通常の `npm run build` に入りません。正式情報を `src/data/games.ts` と `src/data/congestion-event.ts` に登録すると、`/games/` とPC用カタログが同じ情報から生成されます。
+
+- [実装仕様](docs/congestion/architecture.md)
+- [実装・検証記録](docs/congestion/implementation-plan.md)
+- [PCの準備、当日の起動、停止、復旧、QR](tools/congestion/README.md)
+
+`npm run check` / `npm run test:congestion` / `npm run build` で検証できます。`/live/` は通常デプロイから除外し、実行時JSONを `public/` や `dist/` に置くとカタログ出力でエラーになります。

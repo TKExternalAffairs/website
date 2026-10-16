@@ -13,6 +13,7 @@ const STATIC_PATHS = [
   "/news/",
   "/groups/",
   "/groups/ennichi/",
+  "/games/",
   "/groups/kissa/",
   "/groups/konto/",
   "/groups/omiyage/",

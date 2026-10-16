@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>混雑状況を更新 | 縁日スタッフ</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="/staff/congestion/" aria-label="縁日スタッフ画面">
+        <img
+          src="./voyage/voyage-logo.webp"
+          alt="Voyage 高三特別班"
+          width="800"
+          height="310"
+        />
+      </a>
+      <div class="header-status">
+        <span class="staff-label">縁日班 スタッフ用</span>
+        <span class="connection" id="connection">PCに接続中</span>
+      </div>
+    </header>
+    <main>
+      <div id="demo" class="demo" hidden>
+        操作体験用のデモです。実際の混雑情報は更新しません。<a
+          href="/games/"
+          target="_blank"
+          rel="noopener"
+          >公開ページを確認</a
+        >
+      </div>
+      <div class="staff-heading">
+        <div>
+          <p class="staff-section">縁日班 アトラク部門</p>
+          <h1>混雑状況の更新</h1>
+          <p class="intro">現地の列を確認して、3つから選んでください。</p>
+        </div>
+        <img
+          src="./voyage/ship.webp"
+          alt=""
+          aria-hidden="true"
+          width="976"
+          height="910"
+        />
+      </div>
+      <section class="game-selection">
+        <label for="game">更新するゲーム</label
+        ><select id="game" disabled>
+          <option value="">読み込み中…</option>
+        </select>
+        <p id="location"></p>
+      </section>
+      <section class="current" aria-labelledby="current-title">
+        <div>
+          <h2 id="current-title">PCに保存されている混雑</h2>
+          <strong id="current-level" data-level="unknown">未確認</strong>
+        </div>
+        <p id="observed">現地確認の情報をお待ちください</p>
+      </section>
+      <p class="acceptance" id="acceptance" role="status">
+        受付状態を確認しています
+      </p>
+      <div class="choices" aria-label="現地で確認した混雑状況を選択">
+        <button type="button" data-level="low" aria-pressed="false" disabled>
+          <span class="choice-icon" aria-hidden="true">○</span
+          ><span
+            ><strong>すいている</strong><small>列に余裕があります</small></span
+          ><span class="check" aria-hidden="true"></span>
+        </button>
+        <button type="button" data-level="normal" aria-pressed="false" disabled>
+          <span class="choice-icon" aria-hidden="true">◎</span
+          ><span
+            ><strong>ふつう</strong><small>ほどよく並んでいます</small></span
+          ><span class="check" aria-hidden="true"></span>
+        </button>
+        <button type="button" data-level="high" aria-pressed="false" disabled>
+          <span class="choice-icon" aria-hidden="true">●</span
+          ><span
+            ><strong>こんでいる</strong
+            ><small>列が混み合っています</small></span
+          ><span class="check" aria-hidden="true"></span>
+        </button>
+      </div>
+      <section class="results" aria-label="保存と公開反映">
+        <div>
+          <span class="step">1</span>
+          <div>
+            <h2>PCへの保存</h2>
+            <p id="save-result" role="status">選択すると保存します</p>
+          </div>
+        </div>
+        <div>
+          <span class="step">2</span>
+          <div>
+            <h2>公開サイトへの反映</h2>
+            <p id="publication" role="status">確認中</p>
+          </div>
+        </div>
+      </section>
+      <button id="reload" class="reload" type="button">現在の状態を確認</button>
+      <p class="note">
+        同じ状況を選び直しても、新しい現地確認として保存します。<br />通信が戻ったときに、以前の選択を自動で送り直すことはありません。
+      </p>
+      <noscript
+        ><p class="acceptance">
+          操作にはJavaScriptを有効にしてください。
+        </p></noscript
+      >
+    </main>
+    <footer>第75回 筑駒文化祭 高三特別班 <span>スタッフ用</span></footer>
+  </body>
+</html>

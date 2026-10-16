@@ -7,7 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/export-congestion-catalog.mjs",
+    "congestion:start": "node tools/congestion/cli.mjs",
+    "congestion:preview": "node tools/congestion/preview.mjs",
+    "congestion:export": "node scripts/export-congestion-catalog.mjs",
+    "test:congestion": "node --test tools/congestion/test/*.test.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
@@ -23,6 +27,8 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.3.5",
+    "basic-ftp": "6.2.3",
+    "qrcode": "1.5.4",
     "react": "^19.2.3",
     "react-dom": "^19.3.0",
     "tailwindcss": "^4.1.18"

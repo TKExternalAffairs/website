@@ -1,0 +1,130 @@
+---
+interface Props {
+  index: number;
+}
+const { index } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 320 180"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <path
+    d="M0 150H320M0 120H320M0 90H320M0 60H320M0 30H320M40 0V180M80 0V180M120 0V180M160 0V180M200 0V180M240 0V180M280 0V180"
+    stroke="currentColor"
+    opacity=".08"></path>
+  <circle cx="160" cy="90" r="65" stroke="currentColor" opacity=".18"></circle>
+  {
+    index % 6 === 0 && (
+      <g
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <>
+          <path d="M143 112V48L200 37V100M143 64L200 53" />
+          <ellipse cx="128" cy="114" rx="15" ry="11" fill="currentColor" />
+          <ellipse cx="185" cy="102" rx="15" ry="11" fill="currentColor" />
+          <path
+            d="M96 55V75M86 65H106M222 117V137M212 127H232"
+            stroke-width="2"
+          />
+        </>
+      </g>
+    )
+  }
+  {
+    index % 6 === 1 && (
+      <g stroke="currentColor" stroke-width="4" stroke-linejoin="round">
+        <>
+          <path d="M160 47L182 94L209 121H174L160 108L146 121H111L138 94Z" />
+          <path
+            d="M152 131L160 145L168 131M105 39V55M214 50V66M127 24V36M194 23V35M88 87V99M235 94V106"
+            stroke-linecap="round"
+          />
+          <path d="M154 79H166V93H154Z" fill="currentColor" />
+        </>
+      </g>
+    )
+  }
+  {
+    index % 6 === 2 && (
+      <g
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <>
+          <circle cx="160" cy="90" r="45" />
+          <circle cx="160" cy="90" r="31" />
+          <circle cx="160" cy="90" r="10" />
+          <path d="M130 81L150 86M170 86L190 81M160 100V122M84 60H106M72 90H98M84 120H106M214 60H236M222 90H248M214 120H236" />
+        </>
+      </g>
+    )
+  }
+  {
+    index % 6 === 3 && (
+      <g stroke="currentColor" stroke-width="4" stroke-linejoin="round">
+        <>
+          <rect
+            x="99"
+            y="42"
+            width="68"
+            height="94"
+            rx="7"
+            transform="rotate(-15 99 42)"
+          />
+          <rect
+            x="153"
+            y="40"
+            width="68"
+            height="94"
+            rx="7"
+            transform="rotate(12 153 40)"
+            fill="var(--art-bg)"
+          />
+          <path d="M177 65L191 86L177 107L163 86Z" fill="currentColor" />
+          <path d="M113 57L119 66M202 119L207 124" />
+        </>
+      </g>
+    )
+  }
+  {
+    index % 6 === 4 && (
+      <g stroke="currentColor" stroke-width="4" stroke-linejoin="round">
+        <>
+          <path d="M121 28H199L217 148H103Z" />
+          <circle cx="160" cy="62" r="12" />
+          <circle cx="136" cy="90" r="7" />
+          <circle cx="185" cy="91" r="7" />
+          <path
+            d="M121 119L149 131M199 119L171 131"
+            stroke-width="8"
+            stroke-linecap="round"
+          />
+          <circle cx="172" cy="107" r="4" fill="currentColor" />
+        </>
+      </g>
+    )
+  }
+  {
+    index % 6 === 5 && (
+      <g
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      >
+        <>
+          <path d="M132 96L117 80Q111 69 120 65Q125 62 132 69L145 83L138 44Q137 34 145 33Q152 32 154 42L163 79V31Q163 21 171 23Q178 25 178 34L176 80L185 48Q189 38 196 42Q202 46 198 56L188 94Q201 82 207 89Q213 95 203 106L182 133Q177 140 164 140H153Q142 140 137 127Z" />
+          <path d="M100 107L90 113M216 42L225 34M117 35L110 26" />
+        </>
+      </g>
+    )
+  }
+</svg>

@@ -1,0 +1,583 @@
+.voyage-site {
+  --voyage-navy: #1b2f68;
+  --voyage-teal: #007e8d;
+  --voyage-line: #b9c9db;
+  --voyage-muted: #4c617e;
+  --voyage-paper: #e2e8f2;
+  min-height: 100vh;
+  background: var(--voyage-paper) url("/assets/voyage/paper.webp") center /
+    cover no-repeat;
+  color: var(--voyage-navy);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  line-height: 1.8;
+}
+.voyage-site a:focus-visible,
+.voyage-site button:focus-visible {
+  outline: 3px solid #00aebb;
+  outline-offset: 5px;
+}
+.voyage-site h1,
+.voyage-site h2,
+.voyage-site h3 {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-weight: 600;
+}
+.voyage-skip {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 10;
+  padding: 10px 18px;
+  background: white;
+}
+.voyage-skip:focus {
+  top: 12px;
+}
+.voyage-header {
+  background: var(--voyage-navy);
+  color: white;
+}
+.voyage-header-inner {
+  width: 88%;
+  max-width: 1200px;
+  margin: auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.voyage-brand {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.voyage-brand img {
+  width: 154px;
+  height: auto;
+}
+.voyage-brand > span {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+.voyage-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 13px;
+}
+.voyage-header nav a {
+  padding: 10px 0;
+  border-bottom: 1px solid transparent;
+}
+.voyage-header nav a:hover,
+.voyage-header nav a[aria-current] {
+  color: #b9f5f4;
+  border-bottom-color: #44c6cc;
+}
+.voyage-hero {
+  overflow: hidden;
+  background: #e2e8f2;
+}
+.voyage-hero-inner {
+  position: relative;
+  width: 88%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  min-height: 490px;
+}
+.voyage-hero-copy {
+  position: relative;
+  z-index: 1;
+  padding: 48px 0 56px;
+  width: 53%;
+}
+.voyage-section-label {
+  color: var(--voyage-teal);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  margin: 0 0 16px;
+}
+.voyage-hero h1 {
+  font-size: clamp(38px, 4.6vw, 62px);
+  line-height: 1.45;
+  letter-spacing: 0.13em;
+  margin-bottom: 20px;
+}
+.voyage-hero-copy > p:not(.voyage-section-label) {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--voyage-muted);
+}
+.voyage-link {
+  display: inline-flex;
+  gap: 32px;
+  align-items: center;
+  border-bottom: 1px solid var(--voyage-teal);
+  color: var(--voyage-teal);
+  padding: 8px 0;
+  margin-top: 24px;
+  font-size: 14px;
+}
+.voyage-link:hover {
+  color: var(--voyage-navy);
+}
+.voyage-ship {
+  position: absolute;
+  width: 56%;
+  height: auto;
+  right: calc((100% - 100vw) / 2);
+  top: -12%;
+  pointer-events: none;
+}
+.voyage-guide {
+  background: var(--voyage-navy);
+  color: white;
+}
+.voyage-guide-inner {
+  width: 88%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 28px 0 0;
+  display: grid;
+  grid-template-columns: 128px 1fr 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+.voyage-guide img {
+  width: 128px;
+  height: 76px;
+  object-fit: cover;
+  border: 1px solid #6b83ae;
+}
+.voyage-guide-inner > div > span {
+  color: #b7e4ed;
+  font-size: 12px;
+}
+.voyage-guide p {
+  font-size: 14px;
+  margin-top: 4px;
+}
+.voyage-guide a {
+  border-bottom: 1px solid #8ec5d5;
+  padding: 8px 0;
+  font-size: 13px;
+}
+.voyage-guide a > span {
+  margin-left: 20px;
+}
+.voyage-wave {
+  height: clamp(80px, 11vw, 145px);
+  background: url("/assets/voyage/wave.webp") center bottom / 100% 100%
+    no-repeat;
+}
+.games-page {
+  width: 88%;
+  max-width: 1200px;
+  margin: 28px auto 0;
+  padding-bottom: 64px;
+}
+.games-demo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 12px 18px;
+  margin-bottom: 40px;
+  border: 1px solid #a9c4d3;
+  background: #f8fbfddd;
+  color: #445c79;
+  font-size: 12px;
+}
+.games-demo strong {
+  color: var(--voyage-teal);
+  margin-right: 14px;
+}
+.games-demo a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+#game-list {
+  scroll-margin-top: 28px;
+}
+.games-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.games-section-heading h2 {
+  color: var(--voyage-teal);
+  font-size: 32px;
+  letter-spacing: 0.12em;
+}
+.games-fetch {
+  text-align: right;
+  color: var(--voyage-muted);
+  font-size: 12px;
+}
+.games-fetch button,
+.games-bottom a {
+  display: inline-block;
+  border: 1px solid var(--voyage-teal);
+  padding: 8px 18px;
+  color: var(--voyage-teal);
+  background: #ffffff70;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.games-fetch button {
+  margin-top: 8px;
+}
+.games-fetch button[hidden] {
+  display: none;
+}
+.games-fetch button:hover,
+.games-bottom a:hover {
+  background: var(--voyage-teal);
+  color: white;
+}
+.games-fetch button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.games-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  align-items: center;
+  border-top: 1px solid var(--voyage-line);
+  border-bottom: 1px solid var(--voyage-line);
+  padding: 16px 0;
+  margin-bottom: 28px;
+  font-size: 13px;
+}
+.games-legend span,
+.congestion-badge {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.games-legend i,
+.congestion-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+.games-legend small {
+  margin-left: auto;
+  color: var(--voyage-muted);
+  font-size: 12px;
+}
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.game-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--voyage-line);
+  background: #fafdffeb;
+  box-shadow: 0 5px 18px #1b2f6808;
+}
+.game-art {
+  --art-bg: #1b2f68;
+  --art-color: #80d7df;
+  background: var(--art-bg);
+  color: var(--art-color);
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+}
+.game-art > svg,
+.game-art > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-content {
+  flex: 1;
+  padding: 24px;
+}
+.game-content h3 {
+  font-size: 25px;
+  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+}
+.game-description {
+  font-size: 14px;
+  color: var(--voyage-muted);
+}
+.game-details {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #d4dfe9;
+  margin-top: 22px;
+  padding-top: 16px;
+  font-size: 13px;
+}
+.game-details > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 8px;
+}
+.game-details dt {
+  color: #516881;
+}
+.game-details dd strong {
+  font-size: 18px;
+}
+.game-live {
+  border-top: 1px solid #c9d9e4;
+  padding: 16px 20px;
+  background: #edf4f7;
+}
+.game-live > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.game-live small {
+  font-size: 12px;
+  color: #455f7c;
+}
+.congestion-badge {
+  color: #465e78;
+  font-size: 13px;
+  font-weight: 700;
+}
+.games-legend [data-level="low"],
+.congestion-badge[data-congestion-level="low"] {
+  color: #166747;
+}
+.games-legend [data-level="normal"],
+.congestion-badge[data-congestion-level="normal"] {
+  color: #856000;
+}
+.games-legend [data-level="high"],
+.congestion-badge[data-congestion-level="high"] {
+  color: #a1363f;
+}
+.game-live > p {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--voyage-muted);
+}
+.games-notice {
+  margin-top: 24px;
+  color: var(--voyage-muted);
+  font-size: 13px;
+}
+.games-empty {
+  border: 1px solid var(--voyage-line);
+  padding: 56px 24px;
+  text-align: center;
+  background: #fafdffdf;
+}
+.games-empty h3 {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+.games-empty p {
+  font-size: 14px;
+  color: var(--voyage-muted);
+}
+.games-bottom {
+  text-align: center;
+  margin-top: 40px;
+}
+.voyage-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px max(6%, calc((100% - 1200px) / 2));
+  background: #74658e;
+  color: #fff;
+}
+.voyage-footer p:first-child {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 16px;
+}
+.voyage-footer p + p,
+.voyage-footer small {
+  font-size: 11px;
+}
+@media (min-width: 1600px) {
+  .voyage-hero-inner {
+    min-height: 530px;
+  }
+}
+@media (max-width: 1000px) {
+  .voyage-brand {
+    gap: 16px;
+  }
+  .voyage-brand > span {
+    font-size: 11px;
+  }
+  .voyage-header nav {
+    gap: 16px;
+    font-size: 12px;
+  }
+  .voyage-guide-inner {
+    grid-template-columns: 100px 1fr 1fr;
+    gap: 20px;
+  }
+  .voyage-guide img {
+    width: 100px;
+    height: 68px;
+  }
+  .voyage-guide a {
+    grid-column: 2 / 4;
+    width: fit-content;
+  }
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .voyage-ship {
+    top: 2%;
+    width: 62%;
+  }
+}
+@media (max-width: 700px) {
+  .voyage-header-inner {
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 0 10px;
+  }
+  .voyage-brand {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .voyage-brand img {
+    width: 138px;
+  }
+  .voyage-brand > span {
+    text-align: right;
+  }
+  .voyage-header nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .voyage-header nav a {
+    padding: 4px 0;
+  }
+  .voyage-hero-inner {
+    width: 90%;
+    min-height: 0;
+    display: block;
+    padding: 230px 0 34px;
+  }
+  .voyage-ship {
+    width: 300px;
+    height: auto;
+    top: -38px;
+    right: -30px;
+    opacity: 1;
+  }
+  .voyage-hero-copy {
+    width: 100%;
+    padding: 0;
+  }
+  .voyage-section-label {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .voyage-hero h1 {
+    font-size: 36px;
+    line-height: 1.45;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+  .voyage-hero h1 br {
+    display: none;
+  }
+  .voyage-hero-copy > p:not(.voyage-section-label) {
+    font-size: 13px;
+  }
+  .voyage-link {
+    margin-top: 18px;
+  }
+  .voyage-guide-inner {
+    width: 90%;
+    grid-template-columns: 88px 1fr;
+    padding-top: 24px;
+    gap: 16px 20px;
+  }
+  .voyage-guide img {
+    width: 88px;
+    height: 102px;
+    grid-row: span 2;
+  }
+  .voyage-guide p {
+    font-size: 13px;
+    margin: 0;
+  }
+  .voyage-guide a {
+    grid-column: 1 / -1;
+    justify-self: end;
+    font-size: 12px;
+  }
+  .voyage-wave {
+    height: 74px;
+  }
+  .games-page {
+    width: 90%;
+    margin-top: 20px;
+    padding-bottom: 40px;
+  }
+  .games-demo {
+    margin-bottom: 28px;
+  }
+  .games-section-heading h2 {
+    font-size: 28px;
+  }
+  .games-fetch {
+    text-align: left;
+  }
+  .games-legend {
+    gap: 8px 20px;
+  }
+  .games-legend small {
+    width: 100%;
+    margin: 0;
+  }
+  .games-grid {
+    gap: 24px;
+  }
+  .game-content {
+    padding: 22px;
+  }
+  .voyage-footer {
+    padding: 24px 5%;
+  }
+}
+@media (max-width: 560px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .voyage-site * {
+    transition: none !important;
+  }
+}
