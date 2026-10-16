@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import Title from "../../components/layout/Title.astro";
 import SocialLinks from "../../components/SocialLinks.astro";
+import SocialFeedSection from "../../components/SocialFeedSection.astro";
+import { groupSocialFeeds } from "../../lib/socialFeeds";
 import { groupSocialLinks } from "../../lib/socialLinks";
 ---
 
@@ -11,4 +13,5 @@ import { groupSocialLinks } from "../../lib/socialLinks";
     title="渉外事務局・高三特別班の公式SNS"
     links={groupSocialLinks.shogai}
   />
+  <SocialFeedSection accounts={groupSocialFeeds.shogai} />
 </Layout>

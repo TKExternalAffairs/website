@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
 import SocialLinks from "../../components/SocialLinks.astro";
+import SocialFeedSection from "../../components/SocialFeedSection.astro";
+import { groupSocialFeeds } from "../../lib/socialFeeds";
 import { groupSocialLinks } from "../../lib/socialLinks";
 import coffeeImage from "../../assets/Webp/groups/kissa/kissa_1.webp";
 import foodImage from "../../assets/Webp/groups/kissa/kissa_2.webp";
@@ -45,4 +47,5 @@ import titleImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
       "試行錯誤の末出来上がった、努力の結晶をご提供します。",
     ]}
   />
+  <SocialFeedSection accounts={groupSocialFeeds.kissa} />
 </Layout>
