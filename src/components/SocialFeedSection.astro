@@ -70,17 +70,22 @@ function formatDate(value: string) {
         </header>
 
         <div class="social-feed__body">
-          {account.platform === "instagram" && (
-            <iframe
-              class="social-feed__instagram"
-              src={account.embedUrl}
-              title={`${account.context ?? account.detail ?? account.label} のInstagramの公開投稿`}
-              width="540"
-              height="620"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-            />
-          )}
+          {account.platform === "instagram" &&
+            (account.isPrivate ? (
+              <p class="social-feed__message">
+                このアカウントは非公開です。投稿はInstagramでご確認ください。
+              </p>
+            ) : (
+              <iframe
+                class="social-feed__instagram"
+                src={account.embedUrl}
+                title={`${account.context ?? account.detail ?? account.label} のInstagramの公開投稿`}
+                width="540"
+                height="620"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              />
+            ))}
 
           {account.platform === "youtube" && (
             <>

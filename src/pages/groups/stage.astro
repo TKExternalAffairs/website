@@ -7,6 +7,7 @@ import SocialFeedSection from "../../components/SocialFeedSection.astro";
 import { groupSocialFeeds } from "../../lib/socialFeeds";
 import {
   groupSocialLinks,
+  stageMySweetLinks,
   stageProjectLinks,
   stageTimetableLinks,
 } from "../../lib/socialLinks";
@@ -19,6 +20,7 @@ import stageImage from "../../assets/Webp/groups/stageImage.webp";
 >
   <Title heroImage={stageImage.src} title="ステージ班" />
   <SocialLinks title="ステージ班の公式SNS" links={groupSocialLinks.stage} />
+  <SocialLinks title="MySweet筑駒2026" links={stageMySweetLinks} />
 
   <GroupDetailBox
     title="ステージ班とは"

@@ -1,5 +1,6 @@
 import {
   groupSocialLinks,
+  stageMySweetLinks,
   stageProjectLinks,
   type SocialLink,
 } from "./socialLinks";
@@ -8,13 +9,14 @@ type FeedBase = Pick<SocialLink, "label" | "href" | "detail"> & {
   context?: string;
 };
 
-export type SocialFeedAccount = FeedBase & (
-  | { platform: "instagram"; embedUrl: string }
-  | { platform: "x"; handle: string }
-  | { platform: "youtube"; playlistId: string }
-  | { platform: "mastodon"; server: string; username: string }
-  | { platform: "note"; rssUrl: string }
-);
+export type SocialFeedAccount = FeedBase &
+  (
+    | { platform: "instagram"; embedUrl: string; isPrivate?: boolean }
+    | { platform: "x"; handle: string }
+    | { platform: "youtube"; playlistId: string }
+    | { platform: "mastodon"; server: string; username: string }
+    | { platform: "note"; rssUrl: string }
+  );
 
 export const groupSocialFeeds = {
   ennichi: [
@@ -56,6 +58,13 @@ export const groupSocialFeeds = {
       platform: "instagram",
       context: "ミスター筑駒2026",
       embedUrl: "https://www.instagram.com/mr_tsukukoma_2026/embed/",
+    },
+    {
+      ...stageMySweetLinks[0],
+      platform: "instagram",
+      context: "MySweet筑駒2026",
+      embedUrl: "https://www.instagram.com/my_sweet_tk/embed/",
+      isPrivate: true,
     },
   ],
   kissa: [

@@ -151,6 +151,15 @@ export const stageProjectLinks: SocialLink[] = [
   },
 ];
 
+export const stageMySweetLinks: SocialLink[] = [
+  {
+    platform: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/my_sweet_tk/",
+    detail: "@my_sweet_tk",
+  },
+];
+
 export const stageTimetableLinks: SocialLink[] = [
   {
     platform: "x",
