@@ -59,6 +59,8 @@
 
 ## 4. 文字
 
+特別班の名称は「高三特別班」の日本語表記を基本にします。以前の `The 12th Grade Special Teams` は使用しません。英語の補助表記には文化祭名を使い、別の英訳を新しく定義する場合は関係者と確認します。
+
 | 要素                       | 書体・設定                                                                         |
 | -------------------------- | ---------------------------------------------------------------------------------- |
 | 日本語の大見出し・タイトル | `Yu Mincho`、`Hiragino Mincho ProN`、`Noto Serif JP`、`serif` の順にフォールバック |
@@ -107,7 +109,7 @@ PCの段組みを単純に縮小せず、スマホでは縦に並べて読み順
 
 ## 6. 素材
 
-公開用の原案素材は `public/images/voyage/` にあります。AI原本はリポジトリに含めていません。
+公開用の原案素材は `public/images/voyage/` にあります。AI原本はリポジトリに含めていません。MENUのPC・縦画面用画像（`menu-button.webp`、`menu-button-mobile.webp`）は、[文実テストサイト](http://2026test.bunkasai.info/)で配信されている素材を使用しています。フォントの配信設定は流用せず、既存の端末フォントを使います。
 
 | 素材                  | 用途                                           |
 | --------------------- | ---------------------------------------------- |
@@ -124,17 +126,17 @@ PCの段組みを単純に縮小せず、スマホでは縦に並べて読み順
 
 ## 7. 共通部品
 
-| 参照先                                                               | 役割・編集するときの考え方                                         |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Layout.astro](src/layouts/Layout.astro)                             | 適用範囲を判定し、Voyageのヘッダー・本文・フッターを組み立てる     |
-| [Header.astro](src/components/voyage/Header.astro)                   | ロゴ、PCナビゲーション、全画面メニュー。リンクのまとまりを維持する |
-| [Footer.astro](src/components/voyage/Footer.astro)                   | 学校名・住所・制作表記・公式サイトへのリンク                       |
-| [Title.astro](src/components/layout/Title.astro)                     | 下層のタイトル帯。対象外ページでは既存表示を維持する               |
-| [GroupIntroBox.astro](src/components/GroupIntroBox.astro)            | 写真・英字・班名・矢印をまとめたリンクカード                       |
-| [GroupDetailBox.astro](src/components/GroupDetailBox.astro)          | 班紹介の見出し・本文・写真                                         |
-| [Countdown.astro](src/components/Countdown.astro)                    | 有機的な水色の面と開催までの残り時間                               |
-| [MenuPage.astro](src/components/voyage/MenuPage.astro)               | 食品・喫茶の共通メニューと準備中表示                               |
-| [CongestionBoard.astro](src/components/voyage/CongestionBoard.astro) | 部門別の状態・待ち時間・更新時刻・再取得操作                       |
+| 参照先                                                               | 役割・編集するときの考え方                                     |
+| -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Layout.astro](src/layouts/Layout.astro)                             | 適用範囲を判定し、Voyageのヘッダー・本文・フッターを組み立てる |
+| [Header.astro](src/components/voyage/Header.astro)                   | 右上に固定したしずく形MENUと、右側に開くメニューパネル         |
+| [Footer.astro](src/components/voyage/Footer.astro)                   | 学校名・住所・制作表記・公式サイトへのリンク                   |
+| [Title.astro](src/components/layout/Title.astro)                     | 下層のタイトル帯。対象外ページでは既存表示を維持する           |
+| [GroupIntroBox.astro](src/components/GroupIntroBox.astro)            | 写真・英字・班名・矢印をまとめたリンクカード                   |
+| [GroupDetailBox.astro](src/components/GroupDetailBox.astro)          | 班紹介の見出し・本文・写真                                     |
+| [Countdown.astro](src/components/Countdown.astro)                    | 有機的な水色の面と開催までの残り時間                           |
+| [MenuPage.astro](src/components/voyage/MenuPage.astro)               | 食品・喫茶の共通メニューと準備中表示                           |
+| [CongestionBoard.astro](src/components/voyage/CongestionBoard.astro) | 部門別の状態・待ち時間・更新時刻・再取得操作                   |
 
 カードは写真の角を対角に丸め、本文部分には余白を持たせます。標準の各班カードはPCで画像比率1.65、角丸22px/2pxを使っています。ページごとに似たカードを新設する前に、既存の共通部品で表せるかを確認します。
 
@@ -156,7 +158,9 @@ PCの段組みを単純に縮小せず、スマホでは縦に並べて読み順
 
 ## 9. 操作と動き
 
-メニューはネイティブの`dialog`を使い、開いている間は背後のスクロールを止めます。閉じるボタンとEscapeで閉じられ、閉じた後は開くボタンへフォーカスを戻します。JavaScriptが無効でも主要リンクをたどれる案内を用意しています。
+ヘッダーは [2026年度の文実テストサイト](http://2026test.bunkasai.info/) を参考にします（2026年10月16日確認）。通常時は右上に固定したしずく形MENUだけを表示し、PC・スマホとも、押すと右上から明るい灰色のパネルを開きます。背景を暗くせず、背後のビジュアルを残します。英語と日本語を併記した主要リンクの下に、各班・混雑度・メニューへの直接リンクをまとめます。パネルが画面を超える場合は内部をスクロールします。
+
+メニューはネイティブの`dialog`を使い、開いている間は背後のスクロールを止めます。閉じるボタン・パネル外のクリック・Escapeで閉じられ、閉じた後は開くボタンへフォーカスを戻します。JavaScriptが無効でも主要リンクをたどれる案内を用意しています。
 
 キーボード操作時のフォーカス枠を残し、スマホのメニューリンクは高さ44px以上を確保します。混雑情報の手動更新結果は読み上げ対象にもします。重要なリンクや情報をホバー時だけ表示しません。
 
