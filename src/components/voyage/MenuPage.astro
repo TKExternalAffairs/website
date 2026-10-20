@@ -1,0 +1,119 @@
+---
+import Title from "../layout/Title.astro";
+import CongestionBoard from "./CongestionBoard.astro";
+import type { MenuItem } from "../../data/visitor";
+interface Props {
+  title: string;
+  team: string;
+  teamId: string;
+  items: MenuItem[];
+  image?: string;
+  showCongestion?: boolean;
+}
+const {
+  title,
+  team,
+  teamId,
+  items,
+  image,
+  showCongestion = false,
+} = Astro.props;
+const categories = [...new Set(items.map((item) => item.category))];
+const availability = {
+  planned: "販売予定",
+  available: "販売中",
+  "sold-out": "売り切れ",
+  paused: "販売休止",
+};
+---
+
+<Title title={title} />
+<section class="voyage-container voyage-section">
+  <div class="voyage-section-heading">
+    <p class="voyage-eyebrow">{teamId === "kissa" ? "CAFÉ" : "FOOD"} MENU</p>
+    <h2 class="voyage-menu-heading">
+      {teamId === "kissa" ? (
+        "ほっと、ひと息。"
+      ) : (
+        <>
+          <span>文化祭に、</span>
+          <span>おいしい時間。</span>
+        </>
+      )}
+    </h2>
+    <p>{team}のメニューをご案内します。</p>
+  </div>
+  {showCongestion && <CongestionBoard areas={[{ id: teamId, name: team }]} />}
+  {items.length === 0 ? (
+    <div
+      class:list={[
+        "voyage-menu-empty",
+        { "voyage-menu-empty--photo": !!image },
+      ]}
+    >
+      {image && <img src={image} alt={`${team}の紹介写真`} loading="lazy" />}
+      <div>
+        <span class="voyage-eyebrow">MENU COMING SOON</span>
+        <h2>
+          メニューは
+          <br />
+          ただいま準備中です
+        </h2>
+        <p>
+          商品・価格などの詳細は、
+          <br />
+          公開までお待ちください。
+        </p>
+        <span class="voyage-empty-rule" aria-hidden="true"></span>
+      </div>
+    </div>
+  ) : (
+    <>
+      <nav class="voyage-menu-categories" aria-label="メニューの分類">
+        {categories.map((category, i) => (
+          <a href={`#category-${i}`}>{category}</a>
+        ))}
+      </nav>
+      {categories.map((category, i) => (
+        <section id={`category-${i}`} class="voyage-menu-category">
+          <h2>{category}</h2>
+          <div class="voyage-product-grid">
+            {items
+              .filter((item) => item.category === category)
+              .map((item) => (
+                <article class="voyage-product" id={item.id}>
+                  {item.image && (
+                    <img src={item.image} alt={item.name} loading="lazy" />
+                  )}
+                  <div>
+                    <span class="voyage-product__availability">
+                      {availability[item.availability]}
+                    </span>
+                    <h3>{item.name}</h3>
+                    <p class="voyage-product__price">{item.priceLabel}</p>
+                    {item.description && <p>{item.description}</p>}
+                    {item.allergens && (
+                      <p class="voyage-product__allergens">
+                        アレルギー情報：{item.allergens}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              ))}
+          </div>
+        </section>
+      ))}
+      <p class="voyage-menu-note">
+        販売状況は変更になる場合があります。最新の状況は現地でご確認ください。アレルギーについては、購入前に係員へご確認ください。
+      </p>
+    </>
+  )}
+  <div class="voyage-detail-action">
+    <a class="voyage-outline-link" href={`/groups/${teamId}/`}>
+      {team}の紹介へ <span aria-hidden="true">→</span>
+    </a>
+    <a class="voyage-text-link" href="/#visit">
+      混雑度・メニューのご案内へ
+    </a>
+  </div>
+</section>

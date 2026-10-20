@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "venues": {
+    "ennichi-yagura": { "status": "unknown", "updatedAt": null },
+    "ennichi-attractions": { "status": "unknown", "updatedAt": null },
+    "ennichi-dagashi": { "status": "unknown", "updatedAt": null },
+    "ennichi-garafuru": { "status": "unknown", "updatedAt": null },
+    "shokuhin": { "status": "unknown", "updatedAt": null },
+    "kissa": { "status": "unknown", "updatedAt": null }
+  }
+}

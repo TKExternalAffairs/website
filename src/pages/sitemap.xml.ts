@@ -22,6 +22,9 @@ const STATIC_PATHS = [
   "/groups/stage/",
   "/groups/taiwa/",
   "/kyousan/onegai/",
+  "/groups/ennichi/congestion/",
+  "/groups/shokuhin/menu/",
+  "/groups/kissa/menu/",
 ];
 
 export const GET: APIRoute = async () => {

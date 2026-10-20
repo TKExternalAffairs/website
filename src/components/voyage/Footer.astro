@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import shogaiLogo from "../../assets/SVG/shogai_logo.svg";
+---
+
+<footer class="voyage-footer">
+  <div class="voyage-footer__inner">
+    <a href="/" class="voyage-footer__brand">
+      Voyage<span>第75回 筑駒文化祭 高三特別班</span>
+    </a>
+    <address>
+      筑波大学附属駒場中・高等学校
+      <br />
+      〒154-0001 東京都世田谷区池尻4-7-1
+      <br />
+      <span>The 75th Tsukukoma School Festival</span>
+    </address>
+    <div class="voyage-footer__credit">
+      <span>Designed and Produced by</span>
+      <Image src={shogaiLogo} alt="高三特別班 渉外事務局" width={210} />
+    </div>
+  </div>
+  <div class="voyage-footer__bottom">
+    <a href="https://tsukukoma.bunkasai.info/">文化祭公式ホームページ ↗</a>
+    <small>© 第75回筑駒文化祭 高三特別班</small>
+    <a href="#top">PAGE TOP ↑</a>
+  </div>
+</footer>

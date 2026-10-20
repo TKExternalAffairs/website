@@ -1,0 +1,20 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import MenuPage from "../../../components/voyage/MenuPage.astro";
+import { cafeMenu, showMenuCongestion } from "../../../data/visitor";
+import coffee from "../../../assets/Webp/groups/kissa/kissa_1.webp";
+---
+
+<Layout
+  title="喫茶班メニュー"
+  description="喫茶班のメニューをご案内します。商品・価格は現在準備中です。"
+>
+  <MenuPage
+    title="喫茶班メニュー"
+    team="喫茶班"
+    teamId="kissa"
+    items={cafeMenu}
+    showCongestion={showMenuCongestion.kissa}
+    image={coffee.src}
+  />
+</Layout>

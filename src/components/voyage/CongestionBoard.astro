@@ -1,0 +1,146 @@
+---
+interface Props {
+  areas: { id: string; name: string; english?: string }[];
+}
+const { areas } = Astro.props;
+---
+
+<div class="voyage-status-board" data-status-board>
+  <div class="voyage-status-notice">
+    <span class="voyage-status-notice__icon" aria-hidden="true">
+      i
+    </span>
+    <p data-status-notice>
+      混雑情報は配信準備中です。最新の状況は現地でご確認ください。
+    </p>
+  </div>
+  <div class="voyage-status-grid">
+    {areas.map((area) => (
+      <article class="voyage-status-card" data-venue={area.id}>
+        <p class="voyage-eyebrow">{area.english ?? "CONGESTION"}</p>
+        <h2>{area.name}</h2>
+        <p class="voyage-status-badge" data-status="unknown">
+          <span aria-hidden="true"></span>
+          <span data-status-label>未配信</span>
+        </p>
+        <p class="voyage-status-wait" data-status-wait>
+          待ち時間：未配信
+        </p>
+        <p class="voyage-status-updated">
+          最終更新：<time data-status-updated>—</time>
+        </p>
+      </article>
+    ))}
+  </div>
+  <div class="voyage-status-controls">
+    <p>
+      配信時は約1分ごとに確認します。15分以上前の情報は「情報未更新」と表示します。
+    </p>
+    <button type="button" data-status-refresh>
+      最新情報を確認 <span aria-hidden="true">↻</span>
+    </button>
+  </div>
+  <p
+    class="voyage-status-feedback"
+    role="status"
+    aria-live="polite"
+    data-status-feedback
+  ></p>
+</div>
+<script>
+  import { getStatusView } from "../../lib/congestion";
+  document
+    .querySelectorAll<HTMLElement>("[data-status-board]")
+    .forEach((board) => {
+      const button = board.querySelector<HTMLButtonElement>(
+        "[data-status-refresh]",
+      )!;
+      const notice = board.querySelector<HTMLElement>("[data-status-notice]")!;
+      const feedback = board.querySelector<HTMLElement>(
+        "[data-status-feedback]",
+      )!;
+      const cards = Array.from(
+        board.querySelectorAll<HTMLElement>("[data-venue]"),
+      );
+      let running = false;
+      const refresh = async (manual = false) => {
+        if (running) return;
+        running = true;
+        button.disabled = true;
+        board.setAttribute("aria-busy", "true");
+        let payload: unknown = null;
+        try {
+          const response = await fetch("/data/festival-status.json", {
+            cache: "no-store",
+            signal: AbortSignal.timeout(10000),
+          });
+          if (!response.ok) throw new Error("Status unavailable");
+          payload = await response.json();
+        } catch {
+          /* Unknown state replaces old values rather than presenting them as live. */
+        }
+        const views = cards.map((card) => {
+          const view = getStatusView(payload, card.dataset.venue!);
+          card.querySelector<HTMLElement>("[data-status]")!.dataset.status =
+            view.status;
+          card.querySelector("[data-status-label]")!.textContent = view.label;
+          card.querySelector("[data-status-wait]")!.textContent =
+            view.waitMinutes === null
+              ? "待ち時間：未配信"
+              : `待ち時間の目安：約${view.waitMinutes}分`;
+          const time = card.querySelector<HTMLTimeElement>(
+            "[data-status-updated]",
+          )!;
+          time.textContent = view.updatedAt
+            ? new Date(view.updatedAt).toLocaleString("ja-JP", {
+                month: "numeric",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                timeZone: "Asia/Tokyo",
+              })
+            : "—";
+          if (view.updatedAt) time.dateTime = view.updatedAt;
+          else time.removeAttribute("datetime");
+          return view;
+        });
+        const current = views.filter(
+          (view) => view.reason === "current",
+        ).length;
+        notice.textContent =
+          current === views.length
+            ? "混雑状況・待ち時間は目安です。現地の案内を優先してください。"
+            : current
+              ? "一部の情報は未配信、または更新が止まっています。現地の案内もご確認ください。"
+              : views.every((view) => view.reason === "unpublished")
+                ? "混雑情報は配信準備中です。最新の状況は現地でご確認ください。"
+                : "最新の混雑情報を確認できません。現地の案内をご確認ください。";
+        if (manual)
+          feedback.textContent = current
+            ? "混雑情報を確認しました。"
+            : "確認しました。現在配信中の情報はありません。";
+        button.disabled = false;
+        board.removeAttribute("aria-busy");
+        running = false;
+      };
+      button.addEventListener("click", () => refresh(true));
+      const visibility = () => {
+        if (!document.hidden) void refresh();
+      };
+      let timer: ReturnType<typeof setInterval>;
+      const start = () => {
+        clearInterval(timer);
+        document.addEventListener("visibilitychange", visibility);
+        timer = setInterval(visibility, 60000);
+        void refresh();
+      };
+      window.addEventListener("pagehide", () => {
+        clearInterval(timer);
+        document.removeEventListener("visibilitychange", visibility);
+      });
+      window.addEventListener("pageshow", (event) => {
+        if (event.persisted) start();
+      });
+      start();
+    });
+</script>
