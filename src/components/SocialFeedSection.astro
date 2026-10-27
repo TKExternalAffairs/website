@@ -1,0 +1,520 @@
+---
+import SocialIcon from "./SocialIcon.astro";
+import type { SocialFeedAccount } from "../lib/socialFeeds";
+import { loadNoteFeed } from "../lib/noteFeed";
+
+interface Props {
+  accounts: SocialFeedAccount[];
+  title?: string;
+  description?: string;
+}
+
+const {
+  accounts,
+  title = "SNSの最新投稿",
+  description = "各公式アカウントの投稿や動画から、活動の様子をお届けします。",
+} = Astro.props;
+
+const feeds = await Promise.all(
+  accounts.map(async (account) => ({
+    account,
+    snapshot:
+      account.platform === "note" ? await loadNoteFeed(account.rssUrl) : null,
+  })),
+);
+
+function formatDate(value: string) {
+  return new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Tokyo",
+  }).format(new Date(value));
+}
+---
+
+<section class="social-feeds" aria-labelledby="social-updates-title">
+  <div class="social-feeds__intro">
+    <h2 id="social-updates-title" class="font-hakushu">
+      {title}
+    </h2>
+    <p>{description}</p>
+  </div>
+
+  <div
+    class:list={[
+      "social-feeds__grid",
+      { "social-feeds__grid--single": accounts.length === 1 },
+    ]}
+  >
+    {feeds.map(({ account, snapshot }) => (
+      <article
+        class="social-feed"
+        aria-label={`${account.context ?? ""} ${account.label} ${account.detail ?? ""}`.trim()}
+      >
+        <header class="social-feed__header">
+          <SocialIcon platform={account.platform} />
+          <div class="social-feed__account">
+            {account.context && (
+              <p class="social-feed__context">{account.context}</p>
+            )}
+            <h3>{account.label}</h3>
+            {account.detail && (
+              <p class="social-feed__handle">{account.detail}</p>
+            )}
+          </div>
+        </header>
+
+        <div class="social-feed__body">
+          {account.platform === "instagram" &&
+            (account.isPrivate ? (
+              <p class="social-feed__message">
+                このアカウントは非公開です。投稿はInstagramでご確認ください。
+              </p>
+            ) : (
+              <iframe
+                class="social-feed__instagram"
+                src={account.embedUrl}
+                title={`${account.context ?? account.detail ?? account.label} のInstagramの公開投稿`}
+                width="540"
+                height="620"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              />
+            ))}
+
+          {account.platform === "youtube" && (
+            <>
+              <div class="social-feed__video">
+                <iframe
+                  src={`https://www.youtube.com/embed/videoseries?list=${account.playlistId}&rel=0`}
+                  title={`${account.detail} の最新アップロード動画`}
+                  width="560"
+                  height="315"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="encrypted-media; picture-in-picture"
+                  allowfullscreen
+                />
+              </div>
+              <p class="social-feed__hint">
+                公開されているアップロード動画を再生できます。
+              </p>
+            </>
+          )}
+
+          {account.platform === "x" && (
+            <social-x-timeline
+              class="social-feed__live"
+              data-handle={account.handle}
+              data-state="idle"
+              aria-busy="true"
+            >
+              <div data-x-mount />
+              <p class="social-feed__message" data-feed-status role="status">
+                公開投稿を読み込んでいます…
+              </p>
+              <button
+                class="social-feed__retry"
+                type="button"
+                data-feed-retry
+                hidden
+              >
+                もう一度読み込む
+              </button>
+              <noscript>
+                <p class="social-feed__message">
+                  公開投稿は下のリンクからXでご覧いただけます。
+                </p>
+              </noscript>
+            </social-x-timeline>
+          )}
+
+          {account.platform === "mastodon" && (
+            <social-mastodon-feed
+              class="social-feed__live"
+              data-server={account.server}
+              data-username={account.username}
+              data-state="idle"
+              aria-busy="true"
+            >
+              <div data-mastodon-posts />
+              <p class="social-feed__message" data-feed-status role="status">
+                公開投稿を読み込んでいます…
+              </p>
+              <button
+                class="social-feed__retry"
+                type="button"
+                data-feed-retry
+                hidden
+              >
+                もう一度読み込む
+              </button>
+              <noscript>
+                <p class="social-feed__message">
+                  公開投稿は下のリンクからMastodonでご覧いただけます。
+                </p>
+              </noscript>
+            </social-mastodon-feed>
+          )}
+
+          {account.platform === "note" && snapshot && (
+            <div class="social-feed__articles">
+              {snapshot.status === "ok" ? (
+                <>
+                  {snapshot.entries.map((entry) => (
+                    <article class="social-feed__article">
+                      {entry.publishedAt && (
+                        <time datetime={entry.publishedAt}>
+                          {formatDate(entry.publishedAt)}
+                        </time>
+                      )}
+                      <h4>
+                        <a
+                          href={entry.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {entry.title}
+                          <span class="sr-only">（新しいタブで開きます）</span>
+                        </a>
+                      </h4>
+                      {entry.excerpt && <p>{entry.excerpt}</p>}
+                    </article>
+                  ))}
+                  <p class="social-feed__hint">
+                    {formatDate(snapshot.fetchedAt)}
+                    取得。記事はサイト更新時に反映されます。
+                  </p>
+                </>
+              ) : (
+                <p class="social-feed__message">
+                  {snapshot.status === "empty"
+                    ? "公開記事はまだありません。"
+                    : "記事を取得できませんでした。最新の記事はnoteでご覧ください。"}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+
+        <a
+          class="social-feed__more"
+          href={account.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            {account.label}で
+            {account.platform === "youtube"
+              ? "動画"
+              : account.platform === "note"
+                ? "記事"
+                : "投稿"}
+            を見る
+          </span>
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M14 4h6v6M20 4 10 14M10 4H4v16h16v-6" />
+          </svg>
+          <span class="sr-only">（新しいタブで開きます）</span>
+        </a>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  import "../scripts/socialFeeds";
+</script>
+
+<style>
+  .social-feeds {
+    width: 80%;
+    max-width: 72rem;
+    margin: 5rem auto;
+    padding-top: 2.5rem;
+    border-top: 1px solid #4b5563;
+  }
+
+  .social-feeds__intro {
+    margin-bottom: 2rem;
+  }
+
+  .social-feeds__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+  }
+
+  .social-feeds h2 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.5;
+  }
+
+  .social-feeds__intro > p:not(.social-feeds__eyebrow) {
+    margin: 0.75rem 0 0;
+    color: #d1d5db;
+    line-height: 1.8;
+  }
+
+  .social-feeds__intro > .social-feeds__notice {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+
+  .social-feeds__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .social-feeds__grid--single {
+    grid-template-columns: minmax(0, 40rem);
+    justify-content: center;
+  }
+
+  .social-feed {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #4b5563;
+    background: #0b0b0b;
+  }
+
+  .social-feed__header {
+    display: flex;
+    min-height: 6rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid #374151;
+  }
+
+  .social-feed__account {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .social-feed h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .social-feed__context {
+    margin: 0 0 0.25rem;
+    color: #d1d5db;
+    font-size: 0.75rem;
+  }
+
+  .social-feed__handle {
+    margin: 0.375rem 0 0;
+    color: #9ca3af;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .social-feed__body {
+    min-width: 0;
+    container-type: inline-size;
+  }
+
+  .social-feed :global(iframe) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+  }
+
+  .social-feed__instagram {
+    height: calc(66.667cqw + 14rem);
+    min-height: 28rem;
+    background: white;
+  }
+
+  .social-feed__video {
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  .social-feed__video iframe {
+    height: 100%;
+  }
+
+  .social-feed__live {
+    display: block;
+    padding: 1rem;
+  }
+
+  .social-feed__live[data-state="ready"] {
+    padding: 0;
+  }
+
+  .social-feed__message {
+    margin: 0;
+    padding: 1.5rem 1.25rem;
+    color: #d1d5db;
+    font-size: 0.875rem;
+    line-height: 1.8;
+  }
+
+  .social-feed__retry {
+    min-height: 44px;
+    margin: 0 1.25rem 1.25rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #6b7280;
+    color: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .social-feed__retry[hidden] {
+    display: none;
+  }
+
+  .social-feed__articles {
+    padding: 0 1.25rem;
+  }
+
+  .social-feed__article {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #374151;
+  }
+
+  .social-feed__article time,
+  .social-feed :global(.social-feed__post time) {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+
+  .social-feed h4 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .social-feed__article a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .social-feed__article > p {
+    margin: 0.5rem 0 0;
+    color: #d1d5db;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+  }
+
+  .social-feed__hint {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    line-height: 1.8;
+  }
+
+  .social-feed__articles > .social-feed__hint {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .social-feed__more {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid #374151;
+    color: inherit;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .social-feed__more:hover,
+  .social-feed__retry:hover {
+    background: rgb(255 255 255 / 8%);
+  }
+
+  .social-feed :global(a:focus-visible),
+  .social-feed__retry:focus-visible {
+    outline: 2px solid white;
+    outline-offset: -3px;
+  }
+
+  .social-feed :global(.social-feed__post) {
+    padding: 1.25rem;
+    border-bottom: 1px solid #374151;
+  }
+
+  .social-feed :global(.social-feed__post:last-child) {
+    border-bottom: 0;
+  }
+
+  .social-feed :global(.social-feed__post p) {
+    margin: 0.75rem 0;
+    color: #e5e7eb;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+
+  .social-feed :global(.social-feed__post a) {
+    color: inherit;
+    font-size: 0.8125rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .social-feed :global(.social-feed__media) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .social-feed :global(.social-feed__media img) {
+    display: block;
+    width: 100%;
+    max-height: 20rem;
+    object-fit: contain;
+    background: #171717;
+  }
+
+  .social-feed :global(.social-feed__post summary) {
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .social-feeds {
+      width: 90%;
+      margin: 3rem auto;
+    }
+
+    .social-feeds__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .social-feeds h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

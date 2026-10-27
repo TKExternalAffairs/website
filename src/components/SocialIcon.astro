@@ -1,0 +1,40 @@
+---
+import XIcon from "../assets/SVG/social/x.svg";
+import InstagramIcon from "../assets/SVG/social/instagram.svg";
+import YouTubeIcon from "../assets/SVG/social/youtube.svg";
+import MastodonIcon from "../assets/SVG/social/mastodon.svg";
+import NoteIcon from "../assets/SVG/social/note.svg";
+import type { SocialPlatform } from "../lib/socialLinks";
+
+interface Props {
+  platform: SocialPlatform;
+}
+
+const icons = {
+  x: XIcon,
+  instagram: InstagramIcon,
+  youtube: YouTubeIcon,
+  mastodon: MastodonIcon,
+  note: NoteIcon,
+};
+
+const Icon = icons[Astro.props.platform];
+---
+
+<Icon
+  class="social-icon"
+  width="24"
+  height="24"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+/>
+
+<style>
+  .social-icon {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+</style>

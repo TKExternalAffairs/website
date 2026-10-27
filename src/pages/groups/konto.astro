@@ -2,6 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import GroupDetailBox from "../../components/GroupDetailBox.astro";
 import Title from "../../components/layout/Title.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import SocialFeedSection from "../../components/SocialFeedSection.astro";
+import { groupSocialFeeds } from "../../lib/socialFeeds";
+import { groupSocialLinks } from "../../lib/socialLinks";
 import titleImage from "../../assets/Webp/groups/konto/konto_title.webp";
 ---
 
@@ -10,6 +14,7 @@ import titleImage from "../../assets/Webp/groups/konto/konto_title.webp";
   description="高三特別班 漫才・コント班の紹介ページです。"
 >
   <Title heroImage={titleImage.src} title="漫才・コント班" />
+  <SocialLinks title="漫才・コント班の公式SNS" links={groupSocialLinks.konto} />
 
   <GroupDetailBox
     title="活動内容"
@@ -43,4 +48,5 @@ import titleImage from "../../assets/Webp/groups/konto/konto_title.webp";
       "メールアドレス：tkf-conte-2026@tsukukoma-gafe.org",
     ]}
   />
+  <SocialFeedSection accounts={groupSocialFeeds.konto} />
 </Layout>
