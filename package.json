@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.3.0",
-    "astro": "^7.3.8",
+    "astro": "^7.4.2",
     "react": "^19.2.3",
     "react-dom": "^19.3.0",
     "rss-parser": "^3.13.0",
