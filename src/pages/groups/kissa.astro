@@ -47,5 +47,72 @@ import titleImage from "../../assets/Webp/groups/kissa/kissa_Title.webp";
       "試行錯誤の末出来上がった、努力の結晶をご提供します。",
     ]}
   />
+  <section class="special-thanks" aria-labelledby="special-thanks-title">
+    <h2 id="special-thanks-title" class="font-hakushu text-3xl sm:text-4xl">
+      Special Thanks
+    </h2>
+    <h3 class="special-thanks__school text-2xl font-bold sm:text-3xl">
+      東京栄養食糧専門学校様
+    </h3>
+    <p>
+      私たち喫茶班は皆様に安心してお召し上がりいただけるよう、衛生管理を徹底しております。
+      食材の取り扱いから全ての調理工程、提供に至るまで細心の注意を払い、調理器具や調理環境の清潔状態の維持にも努めております。
+    </p>
+    <p>
+      しかし、私たち生徒だけでは知識も経験も不足しているため、より安全で質の高い食事を提供するために、専門家の方々から学ぶ必要があると考えました。
+    </p>
+    <p>
+      そこで、今年は東京栄養食糧専門学校様にご依頼をし、各メニューの調理計画書を添削していただくだけでなく、実際に試作会にお呼びして下処理から提供までの全ての工程を確認していただき、専門的な視点から多くの貴重な助言をいただきました。
+    </p>
+    <p>
+      ご多忙の中、私たちの活動にご協力いただきました東京栄養食糧専門学校の皆様に、心より感謝申し上げます。
+    </p>
+  </section>
   <SocialFeedSection accounts={groupSocialFeeds.kissa} />
 </Layout>
+
+<style>
+  .special-thanks {
+    width: 80%;
+    margin: 3rem auto;
+  }
+
+  .special-thanks h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .special-thanks h2::before {
+    content: "";
+    width: 0.4em;
+    height: 1.1em;
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
+
+  .special-thanks__school {
+    margin: 1.5rem 0;
+    overflow-wrap: anywhere;
+  }
+
+  .special-thanks p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .special-thanks p + p {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .special-thanks {
+      width: 90%;
+      margin: 2rem auto;
+    }
+
+    .special-thanks h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
