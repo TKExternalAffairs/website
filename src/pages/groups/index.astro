@@ -8,6 +8,7 @@ import stageImage from "../../assets/Webp/groups/stageImage.webp";
 import introDuctImage from "../../assets/Webp/groups/タイトル画像.webp";
 import Title from "../../components/layout/Title.astro";
 import shougaiImage from "../../assets/Webp/groups/特別班渉外事務局.webp";
+import shokuhinImage from "../../assets/Webp/groups/shokuhin/shokuhin_title.webp";
 ---
 
 <Layout title="各班紹介" description="高三特別班の各班を紹介します。">
@@ -27,7 +28,7 @@ import shougaiImage from "../../assets/Webp/groups/特別班渉外事務局.webp
   />
 
   <GroupIntroBox
-    imageSrc=""
+    imageSrc={shokuhinImage.src}
     imageAlt="食品班のイメージ画像"
     middleText="高三食品班"
     detailHref="/groups/shokuhin"

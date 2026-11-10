@@ -1,6 +1,115 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import GroupIntroBox from "../../components/GroupIntroBox.astro";
+import GroupDetailBox from "../../components/GroupDetailBox.astro";
+import Title from "../../components/layout/Title.astro";
+import titleImage from "../../assets/Webp/groups/shokuhin/shokuhin_title.webp";
+import activityImage from "../../assets/Webp/groups/shokuhin/shokuhin_activity.webp";
+import accessImage from "../../assets/Webp/groups/shokuhin/shokuhin_access.webp";
 ---
 
-<Layout title="食品班" description="高三食品班の紹介ページです。" />
+<Layout
+  title="食品班"
+  description="高三特別班 食品班の紹介ページです。今年の5つのメニューや活動内容、会場へのアクセスをご案内します。"
+>
+  <Title heroImage={titleImage.src} title="食品班" />
+
+  <GroupDetailBox
+    title="今年のメニュー"
+    imageSrc={titleImage.src}
+    imageAlt="食品班の模擬店に集まる来場者の皆さん"
+    paragraphs={[
+      "食品班は、文化祭で来場者の皆さんに「おいしい」と「楽しい」を届けることを目標に活動しています。今年はつくこまぜそば、蓮根キーマカレー、ちくわお好み焼き、カボチャのポタージュ、いちごのクレープの計5メニューを販売し、試作や衛生管理、大量調理などの練習を重ねながら、一人ひとりが協力して準備を進めてきました。",
+      "メニュー班の垣根を越えて意見を出し合い、より良い模擬店を目指しています。文化祭当日は、多くのお客様に安心して食べていただけるよう、食材の管理や調理手順を徹底し、安全でおいしい商品を提供します。",
+      "また、料理だけでなく、明るい接客や活気のある雰囲気づくりにも力を入れ、食品班ならではの温かいおもてなしを大切にしています。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="活動内容"
+    imageSrc={activityImage.src}
+    imageAlt="5つのメニューの看板を掲げた食品班の模擬店"
+    paragraphs={[
+      "食品班の活動は、調理だけではなく、仕入れや会計、装飾など多くの役割によって成り立っています。それぞれが責任を持って自分の仕事を果たし、困ったときには互いに支え合いながら準備を進めてきました。仲間と協力して一つの模擬店を作り上げる経験は、文化祭ならではの大きな魅力です。",
+      "ご来場いただいた皆様に「また食べたい」「来てよかった」と思っていただけるよう、食品班一同、心を込めてお迎えします。ぜひ私たちの模擬店へ足を運び、こだわりのメニューと文化祭ならではの雰囲気を楽しんでください。皆様のご来店を心よりお待ちしております。",
+    ]}
+  />
+
+  <GroupDetailBox
+    title="アクセス"
+    imageSrc={accessImage.src}
+    imageAlt="食品班の販売会場となる中庭"
+    paragraphs={[
+      "校門を入って縁日班ブースを通り抜け、オレンジ館（体育館）方向に曲がります。",
+      "曲がった直後にある下駄箱を抜けた先で食品を提供しています。",
+      "※現金での販売は行っていません。縁日班チケットブースにてチケットをお買い求めください。",
+    ]}
+  />
+
+  <section class="special-thanks" aria-labelledby="special-thanks-title">
+    <h2 id="special-thanks-title" class="font-hakushu text-3xl sm:text-4xl">
+      Special Thanks
+    </h2>
+    <h3 class="special-thanks__school text-2xl font-bold sm:text-3xl">
+      東京栄養食糧専門学校様
+    </h3>
+    <p>
+      私たち食品班は皆様に安心してお召し上がりいただけるよう、衛生管理を徹底しております。
+      食材の取り扱いから全ての調理工程、提供に至るまで細心の注意を払い、調理器具や調理環境の清潔状態の維持にも努めております。
+    </p>
+    <p>
+      しかし、私たち生徒だけでは知識も経験も不足しているため、より安全で質の高い食事を提供するために、専門家の方々から学ぶ必要があると考えました。
+    </p>
+    <p>
+      そこで、今年は東京栄養食糧専門学校様にご依頼をし、各メニューの調理計画書を添削していただくだけでなく、実際に試作会にお呼びして下処理から提供までの全ての工程を確認していただき、専門的な視点から多くの貴重な助言をいただきました。
+    </p>
+    <p>
+      ご多忙の中、私たちの活動にご協力いただきました東京栄養食糧専門学校の皆様に、心より感謝申し上げます。
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .special-thanks {
+    width: 80%;
+    margin: 3rem auto;
+  }
+
+  .special-thanks h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .special-thanks h2::before {
+    content: "";
+    width: 0.4em;
+    height: 1.1em;
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
+
+  .special-thanks__school {
+    margin: 1.5rem 0;
+    overflow-wrap: anywhere;
+  }
+
+  .special-thanks p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .special-thanks p + p {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .special-thanks {
+      width: 90%;
+      margin: 2rem auto;
+    }
+
+    .special-thanks h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
